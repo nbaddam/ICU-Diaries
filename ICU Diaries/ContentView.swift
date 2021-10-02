@@ -1,0 +1,69 @@
+//
+//  ContentView.swift
+//  ICU Diaries
+//
+//  Created by Nitya Baddam on 10/1/21.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    @State private var username: String = ""
+    @State private var password: String = ""
+    
+    var body: some View {
+        NavigationView {
+            VStack( alignment: .center,
+                    spacing: 10) {
+                WelcomeText()
+                
+                TextField(
+                    "Username",
+                     text: $username)
+                    .disableAutocorrection(true)
+                    .padding()
+                    .cornerRadius(2)
+                    .padding(.bottom, 5)
+                
+                SecureField("Password", text: $password)
+                    .padding()
+                    .cornerRadius(2)
+                    .padding(.bottom, 5)
+                
+                Button(action: {
+                    print("login")
+                }) {
+                    Text("LOGIN")
+                }
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(2)
+                
+                NavigationLink(destination: SignUpView()) {
+                    Text("Sign Up")
+                }
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(2)
+            }
+            .padding()
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+        }
+        
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+struct WelcomeText: View {
+    var body: some View {
+        Text("ICU Diaries")
+            .font(.largeTitle)
+            .fontWeight(.semibold)
+            .padding(.bottom, 20)
+    }
+}

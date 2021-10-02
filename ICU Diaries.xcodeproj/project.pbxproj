@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */; };
+		AF232EE827076C9000302D47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232EE727076C9000302D47 /* ContentView.swift */; };
+		AF232EEA27076C9100302D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF232EE927076C9100302D47 /* Assets.xcassets */; };
+		AF232EED27076C9100302D47 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF232EEC27076C9100302D47 /* Preview Assets.xcassets */; };
+		AF232EF827076C9100302D47 /* ICU_DiariesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232EF727076C9100302D47 /* ICU_DiariesTests.swift */; };
+		AF232F0327076C9100302D47 /* ICU_DiariesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F0227076C9100302D47 /* ICU_DiariesUITests.swift */; };
+		AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F1027076EFF00302D47 /* SignUpView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AF232EF427076C9100302D47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF232EDA27076C9000302D47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF232EE127076C9000302D47;
+			remoteInfo = "ICU Diaries";
+		};
+		AF232EFF27076C9100302D47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF232EDA27076C9000302D47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF232EE127076C9000302D47;
+			remoteInfo = "ICU Diaries";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AF232EE227076C9000302D47 /* ICU Diaries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ICU Diaries.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICU_DiariesApp.swift; sourceTree = "<group>"; };
+		AF232EE727076C9000302D47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AF232EE927076C9100302D47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AF232EEC27076C9100302D47 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AF232EEE27076C9100302D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF232EF327076C9100302D47 /* ICU DiariesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ICU DiariesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF232EF727076C9100302D47 /* ICU_DiariesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICU_DiariesTests.swift; sourceTree = "<group>"; };
+		AF232EF927076C9100302D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF232EFE27076C9100302D47 /* ICU DiariesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ICU DiariesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF232F0227076C9100302D47 /* ICU_DiariesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICU_DiariesUITests.swift; sourceTree = "<group>"; };
+		AF232F0427076C9100302D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF232F1027076EFF00302D47 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AF232EDF27076C9000302D47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF232EF027076C9100302D47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF232EFB27076C9100302D47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AF232ED927076C9000302D47 = {
+			isa = PBXGroup;
+			children = (
+				AF232EE427076C9000302D47 /* ICU Diaries */,
+				AF232EF627076C9100302D47 /* ICU DiariesTests */,
+				AF232F0127076C9100302D47 /* ICU DiariesUITests */,
+				AF232EE327076C9000302D47 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AF232EE327076C9000302D47 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF232EE227076C9000302D47 /* ICU Diaries.app */,
+				AF232EF327076C9100302D47 /* ICU DiariesTests.xctest */,
+				AF232EFE27076C9100302D47 /* ICU DiariesUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AF232EE427076C9000302D47 /* ICU Diaries */ = {
+			isa = PBXGroup;
+			children = (
+				AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */,
+				AF232EE727076C9000302D47 /* ContentView.swift */,
+				AF232F1027076EFF00302D47 /* SignUpView.swift */,
+				AF232EE927076C9100302D47 /* Assets.xcassets */,
+				AF232EEE27076C9100302D47 /* Info.plist */,
+				AF232EEB27076C9100302D47 /* Preview Content */,
+			);
+			path = "ICU Diaries";
+			sourceTree = "<group>";
+		};
+		AF232EEB27076C9100302D47 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				AF232EEC27076C9100302D47 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AF232EF627076C9100302D47 /* ICU DiariesTests */ = {
+			isa = PBXGroup;
+			children = (
+				AF232EF727076C9100302D47 /* ICU_DiariesTests.swift */,
+				AF232EF927076C9100302D47 /* Info.plist */,
+			);
+			path = "ICU DiariesTests";
+			sourceTree = "<group>";
+		};
+		AF232F0127076C9100302D47 /* ICU DiariesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AF232F0227076C9100302D47 /* ICU_DiariesUITests.swift */,
+				AF232F0427076C9100302D47 /* Info.plist */,
+			);
+			path = "ICU DiariesUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AF232EE127076C9000302D47 /* ICU Diaries */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF232F0727076C9100302D47 /* Build configuration list for PBXNativeTarget "ICU Diaries" */;
+			buildPhases = (
+				AF232EDE27076C9000302D47 /* Sources */,
+				AF232EDF27076C9000302D47 /* Frameworks */,
+				AF232EE027076C9000302D47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ICU Diaries";
+			productName = "ICU Diaries";
+			productReference = AF232EE227076C9000302D47 /* ICU Diaries.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AF232EF227076C9100302D47 /* ICU DiariesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF232F0A27076C9100302D47 /* Build configuration list for PBXNativeTarget "ICU DiariesTests" */;
+			buildPhases = (
+				AF232EEF27076C9100302D47 /* Sources */,
+				AF232EF027076C9100302D47 /* Frameworks */,
+				AF232EF127076C9100302D47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AF232EF527076C9100302D47 /* PBXTargetDependency */,
+			);
+			name = "ICU DiariesTests";
+			productName = "ICU DiariesTests";
+			productReference = AF232EF327076C9100302D47 /* ICU DiariesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AF232EFD27076C9100302D47 /* ICU DiariesUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF232F0D27076C9100302D47 /* Build configuration list for PBXNativeTarget "ICU DiariesUITests" */;
+			buildPhases = (
+				AF232EFA27076C9100302D47 /* Sources */,
+				AF232EFB27076C9100302D47 /* Frameworks */,
+				AF232EFC27076C9100302D47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AF232F0027076C9100302D47 /* PBXTargetDependency */,
+			);
+			name = "ICU DiariesUITests";
+			productName = "ICU DiariesUITests";
+			productReference = AF232EFE27076C9100302D47 /* ICU DiariesUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF232EDA27076C9000302D47 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					AF232EE127076C9000302D47 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					AF232EF227076C9100302D47 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = AF232EE127076C9000302D47;
+					};
+					AF232EFD27076C9100302D47 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = AF232EE127076C9000302D47;
+					};
+				};
+			};
+			buildConfigurationList = AF232EDD27076C9000302D47 /* Build configuration list for PBXProject "ICU Diaries" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AF232ED927076C9000302D47;
+			productRefGroup = AF232EE327076C9000302D47 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AF232EE127076C9000302D47 /* ICU Diaries */,
+				AF232EF227076C9100302D47 /* ICU DiariesTests */,
+				AF232EFD27076C9100302D47 /* ICU DiariesUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AF232EE027076C9000302D47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF232EED27076C9100302D47 /* Preview Assets.xcassets in Resources */,
+				AF232EEA27076C9100302D47 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF232EF127076C9100302D47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF232EFC27076C9100302D47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AF232EDE27076C9000302D47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
+				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,
+				AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF232EEF27076C9100302D47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF232EF827076C9100302D47 /* ICU_DiariesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF232EFA27076C9100302D47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF232F0327076C9100302D47 /* ICU_DiariesUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AF232EF527076C9100302D47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF232EE127076C9000302D47 /* ICU Diaries */;
+			targetProxy = AF232EF427076C9100302D47 /* PBXContainerItemProxy */;
+		};
+		AF232F0027076C9100302D47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF232EE127076C9000302D47 /* ICU Diaries */;
+			targetProxy = AF232EFF27076C9100302D47 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AF232F0527076C9100302D47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AF232F0627076C9100302D47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AF232F0827076C9100302D47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"ICU Diaries/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "ICU Diaries/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nitya.ICU-Diaries";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AF232F0927076C9100302D47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"ICU Diaries/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "ICU Diaries/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nitya.ICU-Diaries";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AF232F0B27076C9100302D47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "ICU DiariesTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nitya.ICU-DiariesTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ICU Diaries.app/ICU Diaries";
+			};
+			name = Debug;
+		};
+		AF232F0C27076C9100302D47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "ICU DiariesTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nitya.ICU-DiariesTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ICU Diaries.app/ICU Diaries";
+			};
+			name = Release;
+		};
+		AF232F0E27076C9100302D47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "ICU DiariesUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nitya.ICU-DiariesUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ICU Diaries";
+			};
+			name = Debug;
+		};
+		AF232F0F27076C9100302D47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "ICU DiariesUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nitya.ICU-DiariesUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ICU Diaries";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AF232EDD27076C9000302D47 /* Build configuration list for PBXProject "ICU Diaries" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF232F0527076C9100302D47 /* Debug */,
+				AF232F0627076C9100302D47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF232F0727076C9100302D47 /* Build configuration list for PBXNativeTarget "ICU Diaries" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF232F0827076C9100302D47 /* Debug */,
+				AF232F0927076C9100302D47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF232F0A27076C9100302D47 /* Build configuration list for PBXNativeTarget "ICU DiariesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF232F0B27076C9100302D47 /* Debug */,
+				AF232F0C27076C9100302D47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF232F0D27076C9100302D47 /* Build configuration list for PBXNativeTarget "ICU DiariesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF232F0E27076C9100302D47 /* Debug */,
+				AF232F0F27076C9100302D47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF232EDA27076C9000302D47 /* Project object */;
+}
