@@ -13,8 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack( alignment: .center,
-                    spacing: 10) {
+            VStack {
                 WelcomeText()
                 
                 TextField(
@@ -22,29 +21,29 @@ struct ContentView: View {
                      text: $username)
                     .disableAutocorrection(true)
                     .padding()
-                    .cornerRadius(2)
-                    .padding(.bottom, 5)
+                    .cornerRadius(5)
                 
                 SecureField("Password", text: $password)
                     .padding()
-                    .cornerRadius(2)
+                    .cornerRadius(5)
                     .padding(.bottom, 5)
                 
                 Button(action: {
                     print("login")
                 }) {
-                    Text("LOGIN")
+                    Text("Login")
+                        .foregroundColor(.white)
                 }
                 .padding()
                 .background(Color.blue)
                 .cornerRadius(2)
                 
-                NavigationLink(destination: SignUpView()) {
-                    Text("Sign Up")
+                HStack {
+                    Text("Don't have an account yet?")
+                    NavigationLink(destination: SignUpView()) {
+                        Text("Sign Up")
+                    }
                 }
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(2)
             }
             .padding()
             .textFieldStyle(RoundedBorderTextFieldStyle())
