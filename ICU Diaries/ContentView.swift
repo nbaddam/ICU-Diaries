@@ -17,7 +17,7 @@ struct ContentView: View {
                 WelcomeText()
                 
                 TextField(
-                    "Username",
+                    "Email",
                      text: $username)
                     .disableAutocorrection(true)
                     .padding()
@@ -34,7 +34,9 @@ struct ContentView: View {
                     Text("Login")
                         .foregroundColor(.white)
                 }
-                .padding()
+                .padding(10)
+                .padding(.leading, 15)
+                .padding(.trailing, 15)
                 .background(Color.blue)
                 .cornerRadius(2)
                 
@@ -44,6 +46,8 @@ struct ContentView: View {
                         Text("Sign Up")
                     }
                 }
+                
+                Spacer()
             }
             .padding()
             .textFieldStyle(RoundedBorderTextFieldStyle())
