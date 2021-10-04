@@ -10,9 +10,7 @@ import SwiftUI
 struct SignUpView: View {
     var body: some View {
         VStack{
-            Button(action: {
-                print("clicked")
-            }) {
+            NavigationLink(destination: Timeline()) {
                 Text("Patient")
             }
             Button(action: {

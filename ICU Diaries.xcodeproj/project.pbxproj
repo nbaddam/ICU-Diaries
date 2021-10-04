@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0395C42708D63000680E12 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2C0395C32708D63000680E12 /* GoogleSignIn */; };
+		2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0395C52708D8EB00680E12 /* Timeline.swift */; };
 		AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */; };
 		AF232EE827076C9000302D47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232EE727076C9000302D47 /* ContentView.swift */; };
 		AF232EEA27076C9100302D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF232EE927076C9100302D47 /* Assets.xcassets */; };
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C0395C52708D8EB00680E12 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		AF232EE227076C9000302D47 /* ICU Diaries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ICU Diaries.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICU_DiariesApp.swift; sourceTree = "<group>"; };
 		AF232EE727076C9000302D47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C0395C42708D63000680E12 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +104,7 @@
 				AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */,
 				AF232EE727076C9000302D47 /* ContentView.swift */,
 				AF232F1027076EFF00302D47 /* SignUpView.swift */,
+				2C0395C52708D8EB00680E12 /* Timeline.swift */,
 				AF232EE927076C9100302D47 /* Assets.xcassets */,
 				AF232EEE27076C9100302D47 /* Info.plist */,
 				AF232EEB27076C9100302D47 /* Preview Content */,
@@ -149,6 +154,9 @@
 			dependencies = (
 			);
 			name = "ICU Diaries";
+			packageProductDependencies = (
+				2C0395C32708D63000680E12 /* GoogleSignIn */,
+			);
 			productName = "ICU Diaries";
 			productReference = AF232EE227076C9000302D47 /* ICU Diaries.app */;
 			productType = "com.apple.product-type.application";
@@ -220,6 +228,9 @@
 				Base,
 			);
 			mainGroup = AF232ED927076C9000302D47;
+			packageReferences = (
+				2C0395C22708D63000680E12 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = AF232EE327076C9000302D47 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -262,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */,
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
 				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,
 				AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */,
@@ -578,6 +590,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2C0395C22708D63000680E12 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2C0395C32708D63000680E12 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C0395C22708D63000680E12 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF232EDA27076C9000302D47 /* Project object */;
 }
