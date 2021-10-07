@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>964144887953-03pf1in57b7uapkaj7fh5skaimjr3km5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.964144887953-03pf1in57b7uapkaj7fh5skaimjr3km5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyARDuuJMOoE_azPbjAy2xrXjHYAhEW_WNo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>964144887953</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nitya.ICU-Diaries</string>
+	<key>PROJECT_ID</key>
+	<string>icu-diaries-e25ff</string>
+	<key>STORAGE_BUCKET</key>
+	<string>icu-diaries-e25ff.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:964144887953:ios:fe6fd0fce67f8598c3a730</string>
+</dict>
+</plist>

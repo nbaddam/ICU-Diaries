@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E04099B270F6A02006CF444 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04099A270F6A02006CF444 /* Utilities.swift */; };
+		0E04099D270F6F54006CF444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E04099C270F6F54006CF444 /* GoogleService-Info.plist */; };
+		0E04099F270F6F62006CF444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E04099E270F6F62006CF444 /* GoogleService-Info.plist */; };
+		0E0409A1270F6FB9006CF444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E0409A0270F6FB9006CF444 /* GoogleService-Info.plist */; };
 		2C0395C42708D63000680E12 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2C0395C32708D63000680E12 /* GoogleSignIn */; };
 		2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0395C52708D8EB00680E12 /* Timeline.swift */; };
 		AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E04099A270F6A02006CF444 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		0E04099C270F6F54006CF444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0E04099E270F6F62006CF444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0E0409A0270F6FB9006CF444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2C0395C52708D8EB00680E12 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		AF232EE227076C9000302D47 /* ICU Diaries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ICU Diaries.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICU_DiariesApp.swift; sourceTree = "<group>"; };
@@ -78,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E0409A2270F87CB006CF444 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0E04099A270F6A02006CF444 /* Utilities.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		AF232ED927076C9000302D47 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +117,8 @@
 		AF232EE427076C9000302D47 /* ICU Diaries */ = {
 			isa = PBXGroup;
 			children = (
+				0E0409A2270F87CB006CF444 /* Helpers */,
+				0E04099C270F6F54006CF444 /* GoogleService-Info.plist */,
 				AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */,
 				AF232EE727076C9000302D47 /* ContentView.swift */,
 				AF232F1027076EFF00302D47 /* SignUpView.swift */,
@@ -123,6 +141,7 @@
 		AF232EF627076C9100302D47 /* ICU DiariesTests */ = {
 			isa = PBXGroup;
 			children = (
+				0E04099E270F6F62006CF444 /* GoogleService-Info.plist */,
 				AF232EF727076C9100302D47 /* ICU_DiariesTests.swift */,
 				AF232EF927076C9100302D47 /* Info.plist */,
 			);
@@ -132,6 +151,7 @@
 		AF232F0127076C9100302D47 /* ICU DiariesUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0E0409A0270F6FB9006CF444 /* GoogleService-Info.plist */,
 				AF232F0227076C9100302D47 /* ICU_DiariesUITests.swift */,
 				AF232F0427076C9100302D47 /* Info.plist */,
 			);
@@ -249,6 +269,7 @@
 			files = (
 				AF232EED27076C9100302D47 /* Preview Assets.xcassets in Resources */,
 				AF232EEA27076C9100302D47 /* Assets.xcassets in Resources */,
+				0E04099D270F6F54006CF444 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E04099F270F6F62006CF444 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E0409A1270F6FB9006CF444 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +299,7 @@
 				2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */,
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
 				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,
+				0E04099B270F6A02006CF444 /* Utilities.swift in Sources */,
 				AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

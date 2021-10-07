@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct ContentView: View {
     @State private var username: String = ""
     @State private var password: String = ""
+    @State private var isEmailValid : Bool = true
     
+    @available(iOS 15.0, *)
     var body: some View {
         NavigationView {
             VStack {
@@ -18,15 +21,35 @@ struct ContentView: View {
                 
                 TextField(
                     "Email",
-                     text: $username)
+                    text: $username,
+                    onEditingChanged: { (isChanged) in
+                        if !isChanged {
+                            if Utilities.isEmailValid(self.username) {
+                                self.isEmailValid = true
+                            } else {
+                                print("Invalid email entered: \(username)")
+                                self.isEmailValid = false
+                                self.username = ""
+                            }
+                        }
+                    })
                     .disableAutocorrection(true)
                     .padding()
                     .cornerRadius(5)
                 
-                SecureField("Password", text: $password)
+                if !self.isEmailValid {
+                    Text("Email is Not Valid")
+                        .font(.callout)
+                        .foregroundColor(Color.red)
+                }
+                
+                SecureField(
+                    "Password",
+                    text: $password)
                     .padding()
                     .cornerRadius(5)
                     .padding(.bottom, 5)
+                
                 
                 Button(action: {
                     print("login")
@@ -58,7 +81,11 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        if #available(iOS 15.0, *) {
+            ContentView()
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 
