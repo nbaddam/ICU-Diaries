@@ -69,6 +69,10 @@ struct ContentView: View {
                     }
                 }
                 
+                Button(action: {
+                    TimelineView
+                })
+                
                 Spacer()
             }
             .padding()
