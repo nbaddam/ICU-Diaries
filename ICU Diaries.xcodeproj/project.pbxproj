@@ -23,6 +23,7 @@
 		AF232EF827076C9100302D47 /* ICU_DiariesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232EF727076C9100302D47 /* ICU_DiariesTests.swift */; };
 		AF232F0327076C9100302D47 /* ICU_DiariesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F0227076C9100302D47 /* ICU_DiariesUITests.swift */; };
 		AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F1027076EFF00302D47 /* SignUpView.swift */; };
+		B30904462710B3460001A576 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30904452710B3460001A576 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		AF232F0427076C9100302D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF232F1027076EFF00302D47 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF6FD3FB824C317D60D2C2C7 /* Pods_ICU_DiariesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_DiariesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B30904452710B3460001A576 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BF463A9988424A7A364BD7C8 /* Pods-ICU Diaries-ICU DiariesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries-ICU DiariesUITests.release.xcconfig"; path = "Target Support Files/Pods-ICU Diaries-ICU DiariesUITests/Pods-ICU Diaries-ICU DiariesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F9CB8241083E21257490D247 /* Pods-ICU DiariesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU DiariesTests.debug.xcconfig"; path = "Target Support Files/Pods-ICU DiariesTests/Pods-ICU DiariesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FC1BEF664E93CE1A47579CFF /* Pods_ICU_Diaries_ICU_DiariesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_Diaries_ICU_DiariesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 				AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */,
 				AF232EE727076C9000302D47 /* ContentView.swift */,
 				AF232F1027076EFF00302D47 /* SignUpView.swift */,
+				B30904452710B3460001A576 /* LoginView.swift */,
 				2C0395C52708D8EB00680E12 /* Timeline.swift */,
 				AF232EE927076C9100302D47 /* Assets.xcassets */,
 				AF232EEE27076C9100302D47 /* Info.plist */,
@@ -185,7 +188,6 @@
 				F9CB8241083E21257490D247 /* Pods-ICU DiariesTests.debug.xcconfig */,
 				071A70B8CC81710418CE35BE /* Pods-ICU DiariesTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -445,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B30904462710B3460001A576 /* LoginView.swift in Sources */,
 				2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */,
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
 				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,

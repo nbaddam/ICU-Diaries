@@ -9,13 +9,27 @@ import SwiftUI
 
 @main
 struct ICU_DiariesApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
-            if #available(iOS 15.0, *) {
-                ContentView()
-            } else {
-                // Fallback on earlier versions
-            }
+            ContentView()
         }
     }
 }
+
+import UIKit
+import Firebase
+
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+var window: UIWindow?
+
+func application(_ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions:
+        [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+    }
+}
+

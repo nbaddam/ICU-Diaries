@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-@available(iOS 15.0, *)
+
 struct ContentView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var isEmailValid : Bool = true
     
-    @available(iOS 15.0, *)
     var body: some View {
         NavigationView {
             VStack {
@@ -81,11 +80,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        if #available(iOS 15.0, *) {
-            ContentView()
-        } else {
-            // Fallback on earlier versions
-        }
+        ContentView()
     }
 }
 
