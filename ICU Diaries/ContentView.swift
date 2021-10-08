@@ -52,6 +52,13 @@ struct ContentView: View {
                 
                 Button(action: {
                     print("login")
+                    if (loginUser(username, password)) {
+                        SignUpView()
+                    }
+                    else {
+                        print("you messed up")
+                    }
+                    
                 }) {
                     Text("Login")
                         .foregroundColor(.white)

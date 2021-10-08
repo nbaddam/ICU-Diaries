@@ -17,7 +17,7 @@ struct Timeline: View {
 
 struct Timeline_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        Timeline()
     }
 }
 
