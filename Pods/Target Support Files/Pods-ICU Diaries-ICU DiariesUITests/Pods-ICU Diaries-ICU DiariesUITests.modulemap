@@ -1,0 +1,6 @@
+framework module Pods_ICU_Diaries_ICU_DiariesUITests {
+  umbrella header "Pods-ICU Diaries-ICU DiariesUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
