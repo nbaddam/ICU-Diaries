@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import Foundation
+import FirebaseAuth
 
 
 struct ContentView: View {
-    @State private var username: String = ""
-    @State private var password: String = ""
-    @State private var isEmailValid : Bool = true
+    @State private var username = ""
+    @State private var password = ""
+    @State private var isEmailValid = true
+    @State private var isPresented = false
     
     var body: some View {
         NavigationView {
@@ -50,19 +53,13 @@ struct ContentView: View {
                     .padding(.bottom, 5)
                 
                 
-                Button(action: {
-                    print("login")
-                    if (loginUser(username, password)) {
-                        SignUpView()
-                    }
-                    else {
-                        print("you messed up")
-                    }
-                    
+                Button(action: { loginUser(username, password)
                 }) {
                     Text("Login")
                         .foregroundColor(.white)
                 }
+                .fullScreenCover(isPresented: $isPresented, content:
+                    FullScreenModalView.init)
                 .padding(10)
                 .padding(.leading, 15)
                 .padding(.trailing, 15)
@@ -83,6 +80,33 @@ struct ContentView: View {
         }
         
     }
+    
+    func loginUser(_ email: String,_ password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if error != nil { //there is an error with email or password
+                print("error with email/password")
+                //self.errorLabel.text = error!.localizedDescription - dont know what these 2 lines are for
+                //self.errorLabel.alpha = 1
+            }
+            else {
+                print("timeline?")
+                isPresented.toggle()
+            }
+        }
+    }
+}
+
+struct FullScreenModalView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        ZStack {
+            Color.primary.edgesIgnoringSafeArea(.all)
+            Button("Dismiss") {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -97,5 +121,13 @@ struct WelcomeText: View {
             .font(.largeTitle)
             .fontWeight(.semibold)
             .padding(.bottom, 20)
+    }
+}
+
+struct Timeline: View {
+    var body: some View {
+        VStack{
+            Text("Hello World")
+        }
     }
 }

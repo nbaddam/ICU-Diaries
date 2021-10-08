@@ -4,7 +4,7 @@
 //
 //  Created by Zaher Hage on 10/2/21.
 //
-
+/*
 import SwiftUI
 
 struct Timeline: View {
@@ -21,3 +21,4 @@ struct Timeline_Previews: PreviewProvider {
     }
 }
 
+*/
