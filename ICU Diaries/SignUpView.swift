@@ -12,7 +12,9 @@ import FirebaseAuth
 struct SignUpView: View {
     var body: some View {
         VStack{
-            NavigationLink(destination: Timeline()) {
+            Button(action: {
+                print("clicked")
+            }) {
                 Text("Patient")
             }
             Button(action: {

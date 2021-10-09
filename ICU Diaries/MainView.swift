@@ -8,21 +8,24 @@
 import SwiftUI
 
 struct MainView: View {
+    @State private var selection = 1
     var body: some View {
-        TabView {
+        TabView(selection: $selection) {
             DoctorMessageView()
                 .tabItem {
-                    Label("Inbox", systemImage: "list.dash")
+                    Label("Inbox", systemImage: "envelope")
                 }
+                .tag(0)
             TimelineView()
                 .tabItem {
-                    Label("Timeline", systemImage: "home")
+                    Label("Timeline", systemImage: "house")
                 }
-            
+                .tag(1)
             SettingsView()
                 .tabItem {
-                    Label("Order", systemImage: "square.and.pencil")
+                    Label("Order", systemImage: "gear")
                 }
+                .tag(2)
         }
     }
 }

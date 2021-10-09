@@ -69,11 +69,13 @@ struct ContentView: View {
                     }
                 }
                 
-                Button(action: {
-                    TimelineView
-                })
+                NavigationLink(destination: MainView()) {
+                    Text("Guest Login")
+                }
+
                 
                 Spacer()
+                
             }
             .padding()
             .textFieldStyle(RoundedBorderTextFieldStyle())
