@@ -7,7 +7,7 @@
 /*
 import SwiftUI
 
-struct Timeline: View {
+struct TimelineView: View {
     var body: some View {
         VStack{
             Text("Hello World")

@@ -12,7 +12,7 @@
 		0E04099F270F6F62006CF444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E04099E270F6F62006CF444 /* GoogleService-Info.plist */; };
 		0E0409A1270F6FB9006CF444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E0409A0270F6FB9006CF444 /* GoogleService-Info.plist */; };
 		2C0395C42708D63000680E12 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2C0395C32708D63000680E12 /* GoogleSignIn */; };
-		2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0395C52708D8EB00680E12 /* Timeline.swift */; };
+		2C0395C62708D8EB00680E12 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0395C52708D8EB00680E12 /* TimelineView.swift */; };
 		3CF44325A979807589AD7649 /* Pods_ICU_Diaries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4ABCDD40249C7E1A88AC87 /* Pods_ICU_Diaries.framework */; };
 		70FB99A8DA0F972DB2FF877F /* Pods_ICU_DiariesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6FD3FB824C317D60D2C2C7 /* Pods_ICU_DiariesTests.framework */; };
 		A5A420966A0BC43D3F2AAC17 /* Pods_ICU_Diaries_ICU_DiariesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1BEF664E93CE1A47579CFF /* Pods_ICU_Diaries_ICU_DiariesUITests.framework */; };
@@ -23,6 +23,9 @@
 		AF232EF827076C9100302D47 /* ICU_DiariesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232EF727076C9100302D47 /* ICU_DiariesTests.swift */; };
 		AF232F0327076C9100302D47 /* ICU_DiariesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F0227076C9100302D47 /* ICU_DiariesUITests.swift */; };
 		AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F1027076EFF00302D47 /* SignUpView.swift */; };
+		AF9BAEA22710B617000D2AE5 /* DoctorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9BAE9F2710B617000D2AE5 /* DoctorMessageView.swift */; };
+		AF9BAEA32710B617000D2AE5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9BAEA02710B617000D2AE5 /* SettingsView.swift */; };
+		AF9BAEA42710B617000D2AE5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9BAEA12710B617000D2AE5 /* MainView.swift */; };
 		B30904462710B3460001A576 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30904452710B3460001A576 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +53,7 @@
 		0E04099E270F6F62006CF444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E0409A0270F6FB9006CF444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26729F0EA491069DB1DDA800 /* Pods-ICU Diaries-ICU DiariesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries-ICU DiariesUITests.debug.xcconfig"; path = "Target Support Files/Pods-ICU Diaries-ICU DiariesUITests/Pods-ICU Diaries-ICU DiariesUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		2C0395C52708D8EB00680E12 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		2C0395C52708D8EB00680E12 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		58D57EE88B2E68E0A3809A1A /* Pods-ICU Diaries.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries.debug.xcconfig"; path = "Target Support Files/Pods-ICU Diaries/Pods-ICU Diaries.debug.xcconfig"; sourceTree = "<group>"; };
 		6A4ABCDD40249C7E1A88AC87 /* Pods_ICU_Diaries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_Diaries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E33F45ED48356ABBCF32409 /* Pods-ICU Diaries.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries.release.xcconfig"; path = "Target Support Files/Pods-ICU Diaries/Pods-ICU Diaries.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +71,9 @@
 		AF232F0427076C9100302D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF232F1027076EFF00302D47 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF6FD3FB824C317D60D2C2C7 /* Pods_ICU_DiariesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_DiariesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF9BAE9F2710B617000D2AE5 /* DoctorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorMessageView.swift; sourceTree = "<group>"; };
+		AF9BAEA02710B617000D2AE5 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AF9BAEA12710B617000D2AE5 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B30904452710B3460001A576 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BF463A9988424A7A364BD7C8 /* Pods-ICU Diaries-ICU DiariesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries-ICU DiariesUITests.release.xcconfig"; path = "Target Support Files/Pods-ICU Diaries-ICU DiariesUITests/Pods-ICU Diaries-ICU DiariesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F9CB8241083E21257490D247 /* Pods-ICU DiariesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU DiariesTests.debug.xcconfig"; path = "Target Support Files/Pods-ICU DiariesTests/Pods-ICU DiariesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,7 +148,10 @@
 				AF232EE727076C9000302D47 /* ContentView.swift */,
 				AF232F1027076EFF00302D47 /* SignUpView.swift */,
 				B30904452710B3460001A576 /* LoginView.swift */,
-				2C0395C52708D8EB00680E12 /* Timeline.swift */,
+				AF9BAE9F2710B617000D2AE5 /* DoctorMessageView.swift */,
+				AF9BAEA02710B617000D2AE5 /* SettingsView.swift */,
+				AF9BAEA12710B617000D2AE5 /* MainView.swift */,
+				2C0395C52708D8EB00680E12 /* TimelineView.swift */,
 				AF232EE927076C9100302D47 /* Assets.xcassets */,
 				AF232EEE27076C9100302D47 /* Info.plist */,
 				AF232EEB27076C9100302D47 /* Preview Content */,
@@ -448,11 +457,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B30904462710B3460001A576 /* LoginView.swift in Sources */,
-				2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */,
+				AF9BAEA32710B617000D2AE5 /* SettingsView.swift in Sources */,
+				AF9BAEA22710B617000D2AE5 /* DoctorMessageView.swift in Sources */,
+				2C0395C62708D8EB00680E12 /* TimelineView.swift in Sources */,
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
 				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,
 				0E04099B270F6A02006CF444 /* Utilities.swift in Sources */,
 				AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */,
+				AF9BAEA42710B617000D2AE5 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

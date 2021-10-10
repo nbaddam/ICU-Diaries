@@ -73,7 +73,13 @@ struct ContentView: View {
                     }
                 }
                 
+                NavigationLink(destination: MainView()) {
+                    Text("Guest Login")
+                }
+
+                
                 Spacer()
+                
             }
             .padding()
             .textFieldStyle(RoundedBorderTextFieldStyle())
