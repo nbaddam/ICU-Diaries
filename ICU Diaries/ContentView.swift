@@ -52,7 +52,8 @@ struct ContentView: View {
                     .cornerRadius(5)
                     .padding(.bottom, 5)
                 
-                NavigationLink(destination: Timeline().navigationBarBackButtonHidden(true), tag: true, selection: $isPresented) {
+                
+                NavigationLink(destination: MainView().navigationBarBackButtonHidden(true), tag: true, selection: $isPresented) {
                     EmptyView()
                 }
                 Text("Login")
@@ -77,58 +78,42 @@ struct ContentView: View {
                             print(password)
                             //print("success ", success)
                         }
-                        /*
-                        
-                        let valid = true
-                        print("valid ", valid)
-                        if valid == true {
-                            self.isPresented = true
-                            print("valid login info")
-                        }
-                        else {
-                            self.isPresented = false
-                            print("invalid login info")
- */
                     }
-                /*
-                NavigationLink(destination: Timeline(), isActive: $isPresented) {
-                    Button(action: {
-                        print(self.password)
-                        let valid = loginUser(username, password)
-                        print("valid ", valid)
-                        if valid == true {
-                            self.isPresented = true
-                            print("valid login info")
-                        }
-                        else {
-                            self.isPresented = false
-                            print("invalid login info")
-                        }
-                    }) {
-                        Text("Login")
-                            .foregroundColor(.white)
-                    }
-                    .padding(10)
-                    .padding(.leading, 15)
-                    .padding(.trailing, 15)
-                    .background(Color.blue)
-                    .cornerRadius(2)
-                }
-                */
+                
                 HStack {
                     Text("Don't have an account yet?")
                     NavigationLink(destination: SignUpView()) {
                         Text("Sign Up")
                     }
                 }
+                /*
+                NavigationLink(destination: MainView()) {
+                    Text("Guest Login")
+                }
+*/
                 
                 Spacer()
+                
             }
             .padding()
             .textFieldStyle(RoundedBorderTextFieldStyle())
         }
         
     }
+    /*
+    func loginUser(_ email: String,_ password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if error != nil { //there is an error with email or password
+                print("error with email/password")
+                //self.errorLabel.text = error!.localizedDescription - dont know what these 2 lines are for
+                //self.errorLabel.alpha = 1
+            }
+            else {
+                print("timeline?")
+                isPresented.toggle()
+            }
+        }
+    }*/
 }
 
 struct FullScreenModalView: View {

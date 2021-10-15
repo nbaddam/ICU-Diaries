@@ -24,6 +24,10 @@
 		AF232F0327076C9100302D47 /* ICU_DiariesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F0227076C9100302D47 /* ICU_DiariesUITests.swift */; };
 		AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F1027076EFF00302D47 /* SignUpView.swift */; };
 		B30904462710B3460001A576 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30904452710B3460001A576 /* LoginView.swift */; };
+		B3BFD43F2719DF7C00793D45 /* DoctorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFD43E2719DF7C00793D45 /* DoctorMessageView.swift */; };
+		B3BFD4412719DF8700793D45 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFD4402719DF8700793D45 /* SettingsView.swift */; };
+		B3BFD4432719DF8E00793D45 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFD4422719DF8E00793D45 /* MainView.swift */; };
+		B3BFD4452719DFB500793D45 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFD4442719DFB500793D45 /* FilterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +73,10 @@
 		AF232F1027076EFF00302D47 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF6FD3FB824C317D60D2C2C7 /* Pods_ICU_DiariesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_DiariesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30904452710B3460001A576 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B3BFD43E2719DF7C00793D45 /* DoctorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorMessageView.swift; sourceTree = "<group>"; };
+		B3BFD4402719DF8700793D45 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B3BFD4422719DF8E00793D45 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		B3BFD4442719DFB500793D45 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		BF463A9988424A7A364BD7C8 /* Pods-ICU Diaries-ICU DiariesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries-ICU DiariesUITests.release.xcconfig"; path = "Target Support Files/Pods-ICU Diaries-ICU DiariesUITests/Pods-ICU Diaries-ICU DiariesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F9CB8241083E21257490D247 /* Pods-ICU DiariesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU DiariesTests.debug.xcconfig"; path = "Target Support Files/Pods-ICU DiariesTests/Pods-ICU DiariesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FC1BEF664E93CE1A47579CFF /* Pods_ICU_Diaries_ICU_DiariesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_Diaries_ICU_DiariesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,7 +150,11 @@
 				AF232EE727076C9000302D47 /* ContentView.swift */,
 				AF232F1027076EFF00302D47 /* SignUpView.swift */,
 				B30904452710B3460001A576 /* LoginView.swift */,
+				B3BFD43E2719DF7C00793D45 /* DoctorMessageView.swift */,
+				B3BFD4402719DF8700793D45 /* SettingsView.swift */,
+				B3BFD4422719DF8E00793D45 /* MainView.swift */,
 				2C0395C52708D8EB00680E12 /* Timeline.swift */,
+				B3BFD4442719DFB500793D45 /* FilterView.swift */,
 				AF232EE927076C9100302D47 /* Assets.xcassets */,
 				AF232EEE27076C9100302D47 /* Info.plist */,
 				AF232EEB27076C9100302D47 /* Preview Content */,
@@ -448,10 +460,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B30904462710B3460001A576 /* LoginView.swift in Sources */,
+				B3BFD4432719DF8E00793D45 /* MainView.swift in Sources */,
+				B3BFD4412719DF8700793D45 /* SettingsView.swift in Sources */,
 				2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */,
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
+				B3BFD43F2719DF7C00793D45 /* DoctorMessageView.swift in Sources */,
 				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,
 				0E04099B270F6A02006CF444 /* Utilities.swift in Sources */,
+				B3BFD4452719DFB500793D45 /* FilterView.swift in Sources */,
 				AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

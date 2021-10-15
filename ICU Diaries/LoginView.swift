@@ -21,7 +21,7 @@ import FirebaseAuth
 //        }
 //    }
 //}
-
+/*
 func loginUser(_ email: String,_ password: String)->Bool {
     var success = false
     Auth.auth().signIn(withEmail: email, password: password) { result, error in
@@ -40,3 +40,4 @@ func loginUser(_ email: String,_ password: String)->Bool {
     }
     return success
 }
+*/
