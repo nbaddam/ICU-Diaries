@@ -11,7 +11,8 @@
 - Go to “Code”
 - Select “Open with XCode”
 
-### On XCode:
+### On XCode (yes, unfortunately you do need XCode to run this):
+- First ensure that your XCode version is atleast 9.3 (this is the earliest version our project supports)
 - Xcode will prompt you to choose a branch
 - Select “main” and hit “clone”
 - Choose a location to save it to and hit “clone”
@@ -29,4 +30,5 @@
 
 ### Troubleshooting:
 - If you get an error like “No such module ’Firebase Auth’”, close the project and open “ICU Diaries.xcworkspace” (not “ICU Diaries.xcodeproj”). Follow the steps again to build and select a simulator
-- Also try cleaning the build (using the shortcut ⇧⌘K) and then running the application again.
+- For any other errors, first try cleaning the build (using the shortcut ⇧⌘K) and then running the application again.
+- Additionally, try updating XCode to the msot recent version (13.0)
