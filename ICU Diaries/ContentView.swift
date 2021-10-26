@@ -73,7 +73,13 @@ struct ContentView: View {
                             }
                             else {
                                 print("valid login")
-                                self.isPresented = true
+                                if ((Auth.auth().currentUser?.isEmailVerified ?? false)) {
+                                    self.isPresented = true
+                                }
+                                else {
+                                    print("email is not verified")
+                                    self.isPresented = false
+                                }
                             }
                             print(password)
                             //print("success ", success)

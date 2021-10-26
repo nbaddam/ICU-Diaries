@@ -10,6 +10,7 @@ target 'ICU Diaries' do
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
 
   target 'ICU DiariesTests' do
     inherit! :search_paths

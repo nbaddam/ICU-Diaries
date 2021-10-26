@@ -84,7 +84,7 @@ struct SignUpPage: View {
                 .cornerRadius(5)
                 .padding(.bottom, 10)
             
-            NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), tag: true, selection: $isFormValid) {
+            NavigationLink(destination: VerificationView().navigationBarBackButtonHidden(true), tag: true, selection: $isFormValid) {
                 EmptyView()
             }
             Text("Sign Up")
@@ -164,6 +164,9 @@ struct SignUpPage: View {
                         else {
                             print("doc written succesfully")
                             isFormValid = true
+                            Auth.auth().currentUser?.sendEmailVerification { error in
+                              print("sending email verification")
+                            }
                         }
                     /*
                     (data: ["firstName":cleanFirst, "lastName":cleanLast, "uid":result!.user.uid]) { (error) in
