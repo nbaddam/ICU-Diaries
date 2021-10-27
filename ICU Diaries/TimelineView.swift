@@ -29,13 +29,13 @@ struct TimelineView: View {
                             Text("Can't wait to see you next week!")
                         }.padding()
                 GroupBox(
-                            label: Label("Dad", systemImage: "heart.fill")
+                            label: Label("Dad", systemImage: "book.fill")
                                 .foregroundColor(.red)
                         ) {
                             Text("You're doing great!")
                         }.padding()
                 GroupBox(
-                            label: Label("Amanda", systemImage: "heart.fill")
+                            label: Label("Amanda", systemImage: "house.fill")
                                 .foregroundColor(.red)
                         ) {
                             Text("Miss you so much!")
