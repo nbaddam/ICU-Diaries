@@ -82,7 +82,6 @@ struct ContentView: View {
                                 }
                             }
                             print(password)
-                            //print("success ", success)
                         }
                     }
                 
@@ -92,12 +91,6 @@ struct ContentView: View {
                         Text("Sign Up")
                     }
                 }
-                /*
-                NavigationLink(destination: MainView()) {
-                    Text("Guest Login")
-                }
-*/
-                
                 Spacer()
                 
             }
@@ -147,13 +140,5 @@ struct WelcomeText: View {
             .font(.largeTitle)
             .fontWeight(.semibold)
             .padding(.bottom, 20)
-    }
-}
-
-struct Timeline: View {
-    var body: some View {
-        VStack{
-            Text("Hello World")
-        }
     }
 }
