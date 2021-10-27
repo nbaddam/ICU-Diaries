@@ -10,23 +10,15 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-struct SignUpView: View {
-    var body: some View {
-        VStack{
-            NavigationLink(destination: SignUpPage()) {
-                Text("Patient")
-            }
-            NavigationLink(destination: SignUpPage()) {
-                Text("Clinician")
-            }
-            NavigationLink(destination: SignUpPage()) {
-                Text("Friends and Family")
-            }
-        }
-    }
+enum User: String, CaseIterable, Identifiable {
+    case patient
+    case clinician
+    case friendsandfamily
+
+    var id: String { self.rawValue }
 }
 
-struct SignUpPage: View {
+struct SignUpView: View {
     @State var email = ""
     @State var firstName = ""
     @State var lastName = ""
@@ -34,55 +26,75 @@ struct SignUpPage: View {
     @State var passwordConfirm = ""
     @State var isEmailValid = true
     @State var isFormValid: Bool? = false
+    @State var selectedUser = User.patient
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Email")
-            TextField(
-                "Email",
-                text: $email,
-                onEditingChanged: { (isChanged) in
-                    if !isChanged {
-                        if Utilities.isEmailValid(self.email) {
-                            self.isEmailValid = true
-                        } else {
-                            print("Invalid email entered: \(email)")
-                            self.isEmailValid = false
-                            self.email = ""
-                        }
-                    }
-                })
-                .disableAutocorrection(true)
-                .cornerRadius(5)
-                .padding(.bottom, 10)
-            
-            Text("Name")
-            HStack{
-                TextField(
-                    "First Name",
-                    text: $firstName)
-                    .disableAutocorrection(true)
-                    .cornerRadius(5)
-                
-                TextField(
-                    "Last Name",
-                    text: $lastName)
-                    .disableAutocorrection(true)
-                    .cornerRadius(5)
+            Group {
+            Text("I am a:")
+                Picker(selection: $selectedUser,
+                       label: Text("I am a:"),
+                       content: {
+                            Text("Patient").tag(User.patient)
+                            Text("Clinician").tag(User.clinician)
+                            Text("Friend or Family").tag(User.friendsandfamily)
+                        })
+                    .pickerStyle(.segmented)
             }
             .padding(.bottom, 10)
             
-            Text("Password")
-            SecureField(
-                "Password",
-                text: $password)
-                .cornerRadius(5)
+            Group {
+                Text("Email")
+                TextField(
+                    "Email",
+                    text: $email,
+                    onEditingChanged: { (isChanged) in
+                        if !isChanged {
+                            if Utilities.isEmailValid(self.email) {
+                                self.isEmailValid = true
+                            } else {
+                                print("Invalid email entered: \(email)")
+                                self.isEmailValid = false
+                                self.email = ""
+                            }
+                        }
+                    })
+                    .disableAutocorrection(true)
+                    .cornerRadius(5)
+                    .padding(.bottom, 10)
+            }
             
-            SecureField(
-                "Re-type Password",
-                text: $passwordConfirm)
-                .cornerRadius(5)
+            Group {
+                Text("Name")
+                HStack{
+                    TextField(
+                        "First Name",
+                        text: $firstName)
+                        .disableAutocorrection(true)
+                        .cornerRadius(5)
+                    
+                    TextField(
+                        "Last Name",
+                        text: $lastName)
+                        .disableAutocorrection(true)
+                        .cornerRadius(5)
+                }
                 .padding(.bottom, 10)
+            }
+            
+            Group {
+                Text("Password")
+                SecureField(
+                    "Password",
+                    text: $password)
+                    .cornerRadius(5)
+                
+                SecureField(
+                    "Re-type Password",
+                    text: $passwordConfirm)
+                    .cornerRadius(5)
+                    .padding(.bottom, 10)
+            }
             
             NavigationLink(destination: VerificationView().navigationBarBackButtonHidden(true), tag: true, selection: $isFormValid) {
                 EmptyView()
@@ -98,20 +110,6 @@ struct SignUpPage: View {
                     print("sign up clicked")
                     SignUpPressed()
                 }
-            /*
-            Button(action: {
-                SignUpPressed()
-            }) {
-                Text("sign-up")
-                    .foregroundColor(.white)
-            }
-            .padding(10)
-            .padding(.leading, 15)
-            .padding(.trailing, 15)
-            .background(Color.blue)
-            .cornerRadius(2)
- */
-            
         }
         .padding()
         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -155,7 +153,8 @@ struct SignUpPage: View {
                     db.collection("users").document(result!.user.uid).setData([
                         "firstName": cleanFirst,
                         "lastName": cleanLast,
-                        "uid": result!.user.uid
+                        "uid": result!.user.uid,
+                        "userType": self.selectedUser.rawValue
                     ]) {err in
                         if let err = err {
                             print("error writing doc")
