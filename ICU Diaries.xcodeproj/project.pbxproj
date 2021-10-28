@@ -11,9 +11,10 @@
 		0E04099D270F6F54006CF444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E04099C270F6F54006CF444 /* GoogleService-Info.plist */; };
 		0E04099F270F6F62006CF444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E04099E270F6F62006CF444 /* GoogleService-Info.plist */; };
 		0E0409A1270F6FB9006CF444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E0409A0270F6FB9006CF444 /* GoogleService-Info.plist */; };
-		0EBCEE802729CE990045BFEB /* EyeToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBCEE7F2729CE990045BFEB /* EyeToggleView.swift */; };
+		0E3982C1272AFC5900337CAB /* EyeToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3982C0272AFC5900337CAB /* EyeToggleView.swift */; };
 		2C0395C42708D63000680E12 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2C0395C32708D63000680E12 /* GoogleSignIn */; };
 		2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0395C52708D8EB00680E12 /* Timeline.swift */; };
+		2C72A63B2729DB5C009438EF /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C72A63A2729DB5C009438EF /* UploadView.swift */; };
 		3CF44325A979807589AD7649 /* Pods_ICU_Diaries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4ABCDD40249C7E1A88AC87 /* Pods_ICU_Diaries.framework */; };
 		70FB99A8DA0F972DB2FF877F /* Pods_ICU_DiariesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6FD3FB824C317D60D2C2C7 /* Pods_ICU_DiariesTests.framework */; };
 		A5A420966A0BC43D3F2AAC17 /* Pods_ICU_Diaries_ICU_DiariesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1BEF664E93CE1A47579CFF /* Pods_ICU_Diaries_ICU_DiariesUITests.framework */; };
@@ -55,9 +56,10 @@
 		0E04099C270F6F54006CF444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E04099E270F6F62006CF444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E0409A0270F6FB9006CF444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		0EBCEE7F2729CE990045BFEB /* EyeToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeToggleView.swift; sourceTree = "<group>"; };
+		0E3982C0272AFC5900337CAB /* EyeToggleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EyeToggleView.swift; path = "../../../../ICU-DiariesNew/ICU-Diaries/ICU Diaries/Helpers/EyeToggleView.swift"; sourceTree = "<group>"; };
 		26729F0EA491069DB1DDA800 /* Pods-ICU Diaries-ICU DiariesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries-ICU DiariesUITests.debug.xcconfig"; path = "Target Support Files/Pods-ICU Diaries-ICU DiariesUITests/Pods-ICU Diaries-ICU DiariesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C0395C52708D8EB00680E12 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		2C72A63A2729DB5C009438EF /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		58D57EE88B2E68E0A3809A1A /* Pods-ICU Diaries.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries.debug.xcconfig"; path = "Target Support Files/Pods-ICU Diaries/Pods-ICU Diaries.debug.xcconfig"; sourceTree = "<group>"; };
 		6A4ABCDD40249C7E1A88AC87 /* Pods_ICU_Diaries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_Diaries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E33F45ED48356ABBCF32409 /* Pods-ICU Diaries.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries.release.xcconfig"; path = "Target Support Files/Pods-ICU Diaries/Pods-ICU Diaries.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		0E0409A2270F87CB006CF444 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0E3982C0272AFC5900337CAB /* EyeToggleView.swift */,
 				0E04099A270F6A02006CF444 /* Utilities.swift */,
 				0EBCEE7F2729CE990045BFEB /* EyeToggleView.swift */,
 			);
@@ -157,6 +160,7 @@
 				B30904452710B3460001A576 /* LoginView.swift */,
 				B3B15D0327287A4B00C2F551 /* VerificationView.swift */,
 				B3BFD43E2719DF7C00793D45 /* DoctorMessageView.swift */,
+				2C72A63A2729DB5C009438EF /* UploadView.swift */,
 				B3BFD4402719DF8700793D45 /* SettingsView.swift */,
 				B3BFD4422719DF8E00793D45 /* MainView.swift */,
 				2C0395C52708D8EB00680E12 /* Timeline.swift */,
@@ -468,8 +472,10 @@
 				B30904462710B3460001A576 /* LoginView.swift in Sources */,
 				B3BFD4432719DF8E00793D45 /* MainView.swift in Sources */,
 				B3BFD4412719DF8700793D45 /* SettingsView.swift in Sources */,
+				2C72A63B2729DB5C009438EF /* UploadView.swift in Sources */,
 				2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */,
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
+				0E3982C1272AFC5900337CAB /* EyeToggleView.swift in Sources */,
 				B3BFD43F2719DF7C00793D45 /* DoctorMessageView.swift in Sources */,
 				0EBCEE802729CE990045BFEB /* EyeToggleView.swift in Sources */,
 				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,
@@ -636,6 +642,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ICU Diaries/Preview Content\"";
+				DEVELOPMENT_TEAM = X7ZH97JK3Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "ICU Diaries/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -658,6 +665,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ICU Diaries/Preview Content\"";
+				DEVELOPMENT_TEAM = X7ZH97JK3Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "ICU Diaries/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

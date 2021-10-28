@@ -24,7 +24,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 10){
+            VStack(spacing: 20) {
                 WelcomeText()
                 
                 TextField(
@@ -42,7 +42,7 @@ struct ContentView: View {
                         }
                     })
                     .disableAutocorrection(true)
-                    .padding(8)
+                    .padding(10)
                     .textFieldStyle(PlainTextFieldStyle())
                     .background(RoundedRectangle(cornerRadius: 8)
                                     .strokeBorder(
@@ -87,7 +87,7 @@ struct ContentView: View {
                     .offset(x: -4, y: -2)
                     
                 } // HStack
-                .padding(8)
+                .padding(10)
                 .textFieldStyle(PlainTextFieldStyle())
                 .background(RoundedRectangle(cornerRadius: 8)
                             .strokeBorder(
@@ -120,11 +120,11 @@ struct ContentView: View {
                     EmptyView()
                 }
                 Text("Login")
-                    .padding(10)
+                    .padding(12)
                     .padding(.leading, 15)
                     .padding(.trailing, 15)
                     .background(Color.blue)
-                    .cornerRadius(2)
+                    .cornerRadius(8)
                     .foregroundColor(.white)
                     .onTapGesture {
                         // unhighlight password box
@@ -149,7 +149,7 @@ struct ContentView: View {
                                     //self.errorLabel.alpha = 1
                                 } else {
                                     print("valid login")
-                                    // check if email is verfied 
+                                    // check if email is verfied
                                     if ((Auth.auth().currentUser?.isEmailVerified ?? false)) {
                                         self.isPresented = true
                                         successfulLogin = true
@@ -162,9 +162,10 @@ struct ContentView: View {
                                     }
                                 }
                                 print(password)
-                        }
-                    }
-                }
+                                
+                            } // Auth() end
+                        } // else
+                    } // on tap gesture end
                 
                 HStack {
                     Text("Don't have an account yet?")
@@ -172,12 +173,6 @@ struct ContentView: View {
                         Text("Sign Up")
                     }
                 }
-                /*
-                NavigationLink(destination: MainView()) {
-                    Text("Guest Login")
-                }
-*/
-                
                 Spacer()
                 
             }
@@ -200,6 +195,16 @@ struct ContentView: View {
             }
         }
     }*/
+    func getUserInfo() {
+        let user = Auth.auth().currentUser
+        if let user = user {
+          // The user's ID, unique to the Firebase project.
+          // Do NOT use this value to authenticate with your backend server,
+          // if you have one. Use getTokenWithCompletion:completion: instead.
+          let uid = user.uid
+          let email = user.email
+        }
+    }
 }
 
 struct FullScreenModalView: View {
@@ -227,13 +232,5 @@ struct WelcomeText: View {
             .font(.largeTitle)
             .fontWeight(.semibold)
             .padding(.bottom, 20)
-    }
-}
-
-struct Timeline: View {
-    var body: some View {
-        VStack{
-            Text("Hello World")
-        }
     }
 }
