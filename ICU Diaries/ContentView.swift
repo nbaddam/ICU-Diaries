@@ -16,8 +16,6 @@ struct ContentView: View {
     @State private var isEmailValid = true
     @State private var isPresented: Bool? = false
     
-    var userType: String
-    
     var body: some View {
         NavigationView {
             VStack {
