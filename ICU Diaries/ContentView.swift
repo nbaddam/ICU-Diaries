@@ -26,9 +26,8 @@ struct ContentView: View {
         NavigationView {
             VStack(spacing: 20) {
                 WelcomeText()
-                
                 TextField(
-                    "Email",
+                    EMAIL_LABEL,
                     text: $username,
                     onEditingChanged: { (isChanged) in
                         if !isChanged {
@@ -55,8 +54,9 @@ struct ContentView: View {
                     }
                 
                 if !self.isEmailValid {
-                    Text("Email is Not Valid")
-                        .font(.callout)
+                    Text(INVALID_EMAIL_ERR)
+                        .font(.system(size: 14))
+                        .fontWeight(.semibold)
                         .foregroundColor(Color.red)
                 }
                 
@@ -64,24 +64,25 @@ struct ContentView: View {
                     VStack {
                         if isSecured {
                             SecureField(
-                                "Password",
+                                PASSWORD_LABEL,
                                 text: $password)
                         
                         } else {
                             TextField(
-                                "Password",
+                                PASSWORD_LABEL,
                                 text: $password)
                         }
-                    }
+                        
+                    } // VStack
                     
                     Button(action: {
                         self.isSecured.toggle()
                     }) {
                         
                         if isSecured {
-                            EyeToggleView(name: "icons8-hide-30")
+                            EyeToggleView(name: CLOSED_EYE_IMAGE)
                         } else {
-                            EyeToggleView(name: "icons8-eye-30")
+                            EyeToggleView(name: OPEN_EYE_IMAGE)
                         }
                     }
                     .offset(x: -4, y: -2)
@@ -101,25 +102,30 @@ struct ContentView: View {
                 
                 if !successfulLogin {
                     if missingField {
-                        Text("Please Fill in all Fields.")
+                        Text(MISSING_FIELDS_ERR)
+                            .font(.system(size: 20))
+                            .fontWeight(.semibold)
                             .foregroundColor(Color.red)
-                            .font(.callout)
                     } else if !isVerified {
-                        Text("Please Check Inbox and Verify Account.")
+                        Text(UNVERIFIED_ACCOUNT_ERR)
+                            .font(.system(size: 14))
+                            .fontWeight(.semibold)
                             .foregroundColor(Color.red)
-                            .font(.callout)
                     } else {
-                        Text("Incorrect Email/Password. Try Again.")
+                        Text(INCORRECT_LOGIN_ERR)
+                            .font(.system(size: 14))
+                            .fontWeight(.semibold)
                             .foregroundColor(Color.red)
-                            .font(.callout)
                     }
                 }
+                
+                
                 
                 
                 NavigationLink(destination: MainView().navigationBarBackButtonHidden(true), tag: true, selection: $isPresented) {
                     EmptyView()
                 }
-                Text("Login")
+                Text(LOGIN_LABEL)
                     .padding(12)
                     .padding(.leading, 15)
                     .padding(.trailing, 15)
@@ -170,7 +176,7 @@ struct ContentView: View {
                 HStack {
                     Text("Don't have an account yet?")
                     NavigationLink(destination: SignUpView()) {
-                        Text("Sign Up")
+                        Text(SIGN_UP_LABEL)
                     }
                 }
                 Spacer()
@@ -228,9 +234,14 @@ struct ContentView_Previews: PreviewProvider {
 
 struct WelcomeText: View {
     var body: some View {
-        Text("ICU Diaries")
-            .font(.largeTitle)
-            .fontWeight(.semibold)
-            .padding(.bottom, 20)
+        HStack {
+            Text("ICU Diaries")
+                .font(.largeTitle)
+                .fontWeight(.semibold)
+            Image(systemName: BOOK)
+                .font(.system(size: 24))
+        }
+        .padding(.bottom, 20)
     }
 }
+
