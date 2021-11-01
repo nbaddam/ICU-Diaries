@@ -459,11 +459,27 @@ struct SignUpView: View {
                 else {
                     print("going to create user doc in database")
                     let db = Firestore.firestore()
+                    var code = NSString("")
+                    var unique = false
+                    if selectedUser == User.patient {
+                        //while (!unique) {
+                            code = randomStringWithLength(len: 6)
+                            //CheckUniqueCode(code: String(code)) {(valid) in
+                            ///    unique = valid
+                            //}
+                        }
+                    //}
+                    if (code != NSString("")) {
+                        db.collection("codes").document(code as String).setData([
+                            "patientUID": result!.user.uid])
+                    }
+                    db.collection("codes").document()
                     db.collection("users").document(result!.user.uid).setData([
                         "firstName": cleanFirst,
                         "lastName": cleanLast,
                         "uid": result!.user.uid,
-                        "userType": self.selectedUser.rawValue
+                        "userType": self.selectedUser.rawValue,
+                        "code": code
                     ]) {err in
                         if let err = err {
                             print("error writing doc")
@@ -501,3 +517,15 @@ struct SignUpView_Previews: PreviewProvider {
     }
 }
 
+func CheckUniqueCode(code: String, _ completion: @escaping (_ data: Bool) -> Void ) {
+    let dbRef = Firestore.firestore().collection("codes")
+    let codeRef = dbRef.document(code)
+    codeRef.getDocument { (document, error) in
+        guard let document = document, document.exists else {
+            print("document does not exist")
+            completion(true)
+            return
+        }
+        completion(false)
+    }
+}

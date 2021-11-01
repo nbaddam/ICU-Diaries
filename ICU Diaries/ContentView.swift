@@ -179,6 +179,9 @@ struct ContentView: View {
                         Text(SIGN_UP_LABEL)
                     }
                 }
+                NavigationLink(destination: ResetPasswordView()) {
+                    Text(RESET_PASS_LABEL)
+                }
                 Spacer()
                 
             }

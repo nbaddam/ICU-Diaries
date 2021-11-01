@@ -29,6 +29,8 @@
 		AF232F0327076C9100302D47 /* ICU_DiariesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F0227076C9100302D47 /* ICU_DiariesUITests.swift */; };
 		AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F1027076EFF00302D47 /* SignUpView.swift */; };
 		B30904462710B3460001A576 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30904452710B3460001A576 /* LoginView.swift */; };
+		B3B1230D27305E0A00076A21 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1230C27305E0A00076A21 /* ResetPasswordView.swift */; };
+		B3B1230F2730607D00076A21 /* AccessCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1230E2730607D00076A21 /* AccessCodeGenerator.swift */; };
 		B3B15D0427287A4B00C2F551 /* VerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B15D0327287A4B00C2F551 /* VerificationView.swift */; };
 		B3BFD43F2719DF7C00793D45 /* DoctorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFD43E2719DF7C00793D45 /* DoctorMessageView.swift */; };
 		B3BFD4412719DF8700793D45 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFD4402719DF8700793D45 /* SettingsView.swift */; };
@@ -84,6 +86,8 @@
 		AF232F1027076EFF00302D47 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF6FD3FB824C317D60D2C2C7 /* Pods_ICU_DiariesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_DiariesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30904452710B3460001A576 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B3B1230C27305E0A00076A21 /* ResetPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		B3B1230E2730607D00076A21 /* AccessCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessCodeGenerator.swift; sourceTree = "<group>"; };
 		B3B15D0327287A4B00C2F551 /* VerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationView.swift; sourceTree = "<group>"; };
 		B3BFD43E2719DF7C00793D45 /* DoctorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorMessageView.swift; sourceTree = "<group>"; };
 		B3BFD4402719DF8700793D45 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 		0E0409A2270F87CB006CF444 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B3B1230E2730607D00076A21 /* AccessCodeGenerator.swift */,
 				0E8118E2272C39F200677C35 /* ImageNameUtil.swift */,
 				0E8118E0272C39E600677C35 /* ErrorMessageUtil.swift */,
 				0E8118DE272C39DD00677C35 /* ButtonNameUtil.swift */,
@@ -163,6 +168,7 @@
 				0E0409A2270F87CB006CF444 /* Helpers */,
 				0E04099C270F6F54006CF444 /* GoogleService-Info.plist */,
 				AF232EE527076C9000302D47 /* ICU_DiariesApp.swift */,
+				B3B1230C27305E0A00076A21 /* ResetPasswordView.swift */,
 				AF232EE727076C9000302D47 /* ContentView.swift */,
 				AF232F1027076EFF00302D47 /* SignUpView.swift */,
 				B30904452710B3460001A576 /* LoginView.swift */,
@@ -481,6 +487,7 @@
 				B30904462710B3460001A576 /* LoginView.swift in Sources */,
 				B3BFD4432719DF8E00793D45 /* MainView.swift in Sources */,
 				B3BFD4412719DF8700793D45 /* SettingsView.swift in Sources */,
+				B3B1230F2730607D00076A21 /* AccessCodeGenerator.swift in Sources */,
 				2C72A63B2729DB5C009438EF /* UploadView.swift in Sources */,
 				2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */,
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
@@ -493,6 +500,7 @@
 				0E8118DF272C39DD00677C35 /* ButtonNameUtil.swift in Sources */,
 				0E8118E1272C39E600677C35 /* ErrorMessageUtil.swift in Sources */,
 				AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */,
+				B3B1230D27305E0A00076A21 /* ResetPasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,4 +23,4 @@ var FAIR_LABEL: String = "Fair"
 var STRONG_LABEL: String = "Strong"
 var REQUIRED_FIELD_LABEL = "Required Field"
 var ASTERICK_LABEL = "*"
-
+var RESET_PASS_LABEL = "Forgot Password?"
