@@ -53,7 +53,7 @@ struct VerificationView: View {
                         isVerified = true;
                     }
                 }
-            NavigationLink(destination: ContentView()) {
+            NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
                 Text("go back to login")
             }
 
