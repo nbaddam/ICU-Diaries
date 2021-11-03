@@ -26,6 +26,12 @@ struct MainView: View {
                     Label("Settings", systemImage: "gear")
                 }
                 .tag(2)
+            UploadView()
+                .tabItem {
+                    Label("Upload", systemImage: "gear")
+                }
+                .tag(3)
+            //show this only if user == friends and family
         }
     }
 }
