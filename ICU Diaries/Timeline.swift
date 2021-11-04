@@ -22,23 +22,12 @@ struct Timeline: View {
                 Divider()
                 Spacer()
                 GroupBox(
-                            label: Label("Mom", systemImage: "heart.fill")
-                                .foregroundColor(.red)
-                        ) {
-                            Text("Can't wait to see you next week!")
-                        }.padding()
-                GroupBox(
-                            label: Label("Dad", systemImage: "book.fill")
-                                .foregroundColor(.red)
-                        ) {
-                            Text("You're doing great!")
-                        }.padding()
-                GroupBox(
-                            label: Label("Amanda", systemImage: "house.fill")
-                                .foregroundColor(.red)
-                        ) {
-                            Text("Miss you so much!")
-                        }.padding()
+                    label: Label("Mom", systemImage: "heart.fill")
+                        .foregroundColor(.red)
+                    ) {
+                    Text("Can't wait to see you next week!")
+                    }.padding()
+                
                 Spacer()
                 Spacer()
             }

@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 struct MainView: View {
     @State private var selection = 1
+    
     var body: some View {
         TabView(selection: $selection) {
             DoctorMessageView()
@@ -34,7 +38,8 @@ struct MainView: View {
             //show this only if user == friends and family
         }
     }
-}
+    
+}//MainView
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {

@@ -60,7 +60,17 @@ struct VerificationView: View {
         }
     }
 }
-
+func getUserInfo() -> String {
+    let user = Auth.auth().currentUser
+    var uid = ""
+    if let user = user {
+      // The user's ID, unique to the Firebase project.
+      // Do NOT use this value to authenticate with your backend server,
+      // if you have one. Use getTokenWithCompletion:completion: instead.
+        uid = user.uid
+    }
+    return uid
+}
 struct VerificationText: View {
     var body: some View {
         Text("A verification email has just been sent to your email. Please click the link before proceeding to login")

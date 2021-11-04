@@ -119,9 +119,6 @@ struct ContentView: View {
                     }
                 }
                 
-                
-                
-                
                 NavigationLink(destination: MainView().navigationBarBackButtonHidden(true), tag: true, selection: $isPresented) {
                     EmptyView()
                 }
@@ -190,29 +187,17 @@ struct ContentView: View {
         }
         
     }
-    /*
-    func loginUser(_ email: String,_ password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if error != nil { //there is an error with email or password
-                print("error with email/password")
-                //self.errorLabel.text = error!.localizedDescription - dont know what these 2 lines are for
-                //self.errorLabel.alpha = 1
-            }
-            else {
-                print("timeline?")
-                isPresented.toggle()
-            }
-        }
-    }*/
-    func getUserInfo() {
+
+    func getUserInfo() -> String {
         let user = Auth.auth().currentUser
+        var uid = ""
         if let user = user {
           // The user's ID, unique to the Firebase project.
           // Do NOT use this value to authenticate with your backend server,
           // if you have one. Use getTokenWithCompletion:completion: instead.
-          let uid = user.uid
-          let email = user.email
+            uid = user.uid
         }
+        return uid
     }
 }
 

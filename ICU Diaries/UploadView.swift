@@ -12,6 +12,11 @@ import FirebaseFirestore
 
 struct UploadView: View {
     @State var message = ""
+    var uid = ""
+    init(){
+        let user = Auth.auth().currentUser
+        uid = user.uid
+    }
     var body: some View {
         VStack{
             Text("Message:")
@@ -34,7 +39,11 @@ struct UploadView: View {
                     //add to firebase
                     //clear textbox
                     print(message)
+                    print(uid)
+                    //Get family members code fcode
+                    //access collection("codes").fcode.
                     let db = Firestore.firestore()
+                    
                     db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
                         "message": message
                     ]) { err in
@@ -47,7 +56,8 @@ struct UploadView: View {
                 }//onTap
         }//Vstack
     }//body
-}
+    
+}//UploadView
 
 struct UploadView_Previews: PreviewProvider {
     static var previews: some View {
