@@ -12,11 +12,6 @@ import FirebaseFirestore
 
 struct UploadView: View {
     @State var message = ""
-    var uid = ""
-    init(){
-        let user = Auth.auth().currentUser
-        uid = user.uid
-    }
     var body: some View {
         VStack{
             Text("Message:")
@@ -36,10 +31,15 @@ struct UploadView: View {
                 .foregroundColor(.white)
                 .onTapGesture {
                     print("upload clicked")
+                    var uid = ""
+                    let user = Auth.auth().currentUser
+                    if let user = user {
+                        uid = user.uid
+                    }
+                    print(uid)
                     //add to firebase
                     //clear textbox
                     print(message)
-                    print(uid)
                     //Get family members code fcode
                     //access collection("codes").fcode.
                     let db = Firestore.firestore()
