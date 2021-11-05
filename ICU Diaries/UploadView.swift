@@ -36,13 +36,24 @@ struct UploadView: View {
                     if let user = user {
                         uid = user.uid
                     }
-                    print(uid)
                     //add to firebase
                     //clear textbox
                     print(message)
-                    //Get family members code fcode
-                    //access collection("codes").fcode.
                     let db = Firestore.firestore()
+                    //referece code here, need it to be defined to use
+                    let doc_ref = db.collection("codes").document(Auth.auth().currentUser!.code).collection("Messages")
+                    doc_ref.getDocuments(){ (querySnapshot, error) in
+                        if let error = error {
+                                print("Error getting documents: \(error)")
+                        } else {
+                                for document in querySnapshot!.documents {
+                                        print("\(document.documentID): \(document.data())")
+                                }
+                        }
+                    }
+                    
+                    
+                    
                     
                     db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
                         "message": message
@@ -52,7 +63,9 @@ struct UploadView: View {
                         } else {
                             print("Document successfully updated")
                         }
-                    }
+                    }//delete once i figure out adding to messages document
+                    
+                    message = "" //clear message after upload
                 }//onTap
         }//Vstack
     }//body
