@@ -31,41 +31,23 @@ struct UploadView: View {
                 .foregroundColor(.white)
                 .onTapGesture {
                     print("upload clicked")
-                    var uid = ""
-                    let user = Auth.auth().currentUser
-                    if let user = user {
-                        uid = user.uid
-                    }
-                    //add to firebase
-                    //clear textbox
-                    print(message)
                     let db = Firestore.firestore()
-                    //referece code here, need it to be defined to use
-                    let doc_ref = db.collection("codes").document(Auth.auth().currentUser!.code).collection("Messages")
-                    doc_ref.getDocuments(){ (querySnapshot, error) in
-                        if let error = error {
-                                print("Error getting documents: \(error)")
+                    let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
+                    docRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let testing = document.get("code")
+                            let uid = Auth.auth().currentUser!.uid
+                            let add_message = message
+                            let time = Timestamp().self
+                            db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
+                                                                                                                    ["Message": add_message,
+                                                                                                                     "Time": time,
+                                                                                                                     "UID": uid])
+                            message = ""
                         } else {
-                                for document in querySnapshot!.documents {
-                                        print("\(document.documentID): \(document.data())")
-                                }
+                            print("Document does not exist")
                         }
-                    }
-                    
-                    
-                    
-                    
-                    db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
-                        "message": message
-                    ]) { err in
-                        if let err = err {
-                            print("Error updating document: \(err)")
-                        } else {
-                            print("Document successfully updated")
-                        }
-                    }//delete once i figure out adding to messages document
-                    
-                    message = "" //clear message after upload
+                    }//get document
                 }//onTap
         }//Vstack
     }//body
@@ -78,3 +60,20 @@ struct UploadView_Previews: PreviewProvider {
             
     }
 }
+
+
+/*
+let db = Firestore.firestore()
+let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
+db.collection("codes").document(testing as! String).collection("Messages").getDocuments() { (querySnapshot, error) in
+    if let error = error {
+        print("Error getting documents: \(error)")
+    }
+    else {
+        for document in querySnapshot!.documents {
+//                                        print("\(document.documentID): \(document.data())")
+        }//prints all documents in the firebase
+    }//else
+}//get documents
+ 
+ */

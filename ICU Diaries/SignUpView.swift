@@ -477,8 +477,6 @@ struct SignUpView: View {
                     db.collection("users").document(result!.user.uid).setData([
                         "firstName": cleanFirst,
                         "lastName": cleanLast,
-                        //delete
-                        "message": "",
                         "uid": result!.user.uid,
                         "userType": self.selectedUser.rawValue,
                         "code": code
