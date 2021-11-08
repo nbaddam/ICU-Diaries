@@ -123,6 +123,8 @@ struct ContentView: View {
                     EmptyView()
                 }
                 Text(LOGIN_LABEL)
+                    .navigationBarTitle(Text(""), displayMode: .inline)
+                    .navigationBarHidden(true)
                     .padding(12)
                     .padding(.leading, 15)
                     .padding(.trailing, 15)

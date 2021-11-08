@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import UIKit
 
 enum User: String, CaseIterable, Identifiable {
     case patient
@@ -40,6 +41,18 @@ struct SignUpView: View {
     // secure passwords
     @State var isPasswordSecured: Bool = true
     @State var isConfirmSecured: Bool = true
+    @State var profileImage: Image? = nil
+    @State var pickedImage: Image? = nil
+    @State var showingActionSheet = false
+    @State var showingImagePicker = false
+    @State var imageData: Data = Data()
+    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    
+    func loadImage() {
+        guard let inputImage = pickedImage else {return}
+        print("assigning profile pic")
+        profileImage = inputImage
+    }
     
     var body: some View {
         ScrollView {
@@ -51,7 +64,9 @@ struct SignUpView: View {
                     .font(.system(size: 20))
             }
             .padding(.bottom, 20)
-            
+            .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+                ImagePicker(image: self.$pickedImage)
+            }
             
             VStack(alignment: .leading, spacing: 5) {
                 Group {
@@ -68,7 +83,35 @@ struct SignUpView: View {
                     }
                     .cornerRadius(8)
                     
-                    
+                    if profileImage != nil {
+                        profileImage!.resizable()
+                            .clipShape(Circle())
+                            .frame(width: 150, height: 150)
+                            .padding(.top, 20)
+                            .onTapGesture {
+                                self.showingActionSheet = true
+                            }
+                    } else {
+                        Image(systemName: "person.circle.fill").resizable()
+                            .clipShape(Circle())
+                            .frame(width: 100, height: 100)
+                            .padding(.top, 20)
+                            .onTapGesture {
+                                self.showingActionSheet = true
+                            }
+                    }
+                    Button(action:  {
+                        self.showingImagePicker = true
+                        
+                    }) {
+                        HStack {
+                            
+                            Text("Upload a Profile Picture")
+//                                .onTapGesture(perform: {
+//                                    self.sourceType = .photoLibrary
+//                            })
+                        }
+                    }
                     HStack {
                         Text("I am a:")
                         Text(ASTERICK_LABEL)
@@ -126,7 +169,7 @@ struct SignUpView: View {
                         }
                 } //Group
                 .padding(.bottom, 10)
-    
+
                 if !self.isEmailValid {
                     Text(INVALID_EMAIL_ERR)
                         .font(.system(size: 14))
@@ -393,6 +436,7 @@ struct SignUpView: View {
                     EmptyView()
                 }
                 Text(SIGN_UP_LABEL)
+                    .navigationBarTitle(Text(""), displayMode: .inline)
                     .padding(10)
                     .padding(.leading, 15)
                     .padding(.trailing, 15)
@@ -412,9 +456,25 @@ struct SignUpView: View {
 
             Spacer()
 
-        } // ScrollView
+        }// Scroll View
+//        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage){
+//            ImagePicker(pickedImage: self.$pickedImage?, showImagePicker: self.$showingImagePicker, imageData: self.$imageData)
+//        }
+//        .actionSheet(isPresented: $showingActionSheet) {
+//            ActionSheet(title: Text(""), buttons: [
+//                .default(Text("Choose A Photo")){
+//                    self.sourceType = .photoLibrary
+//                    self.showingImagePicker = true
+//                },
+//                .default(Text("Take A Photo")){
+//                    self.sourceType = .camera
+//                    self.showingImagePicker = true
+//
+//                }, .cancel()
+//                ])
+//        }
+
     } // View
-    
     func ValidateFields() -> String? {
         if self.firstName.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             self.lastName.trimmingCharacters(in: .whitespacesAndNewlines) ==  "" ||
@@ -529,3 +589,4 @@ func CheckUniqueCode(code: String, _ completion: @escaping (_ data: Bool) -> Voi
         completion(false)
     }
 }
+
