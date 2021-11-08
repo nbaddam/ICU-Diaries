@@ -60,20 +60,3 @@ struct UploadView_Previews: PreviewProvider {
             
     }
 }
-
-
-/*
-let db = Firestore.firestore()
-let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
-db.collection("codes").document(testing as! String).collection("Messages").getDocuments() { (querySnapshot, error) in
-    if let error = error {
-        print("Error getting documents: \(error)")
-    }
-    else {
-        for document in querySnapshot!.documents {
-//                                        print("\(document.documentID): \(document.data())")
-        }//prints all documents in the firebase
-    }//else
-}//get documents
- 
- */
