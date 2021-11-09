@@ -33,6 +33,9 @@
 		B3B1230F2730607D00076A21 /* AccessCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1230E2730607D00076A21 /* AccessCodeGenerator.swift */; };
 		B3B15D0427287A4B00C2F551 /* VerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B15D0327287A4B00C2F551 /* VerificationView.swift */; };
 		B3B9F51F27387F1700064B9F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9F51E27387F1600064B9F /* ImagePicker.swift */; };
+		B3BD4A9A273B1D64005527B6 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BD4A99273B1D64005527B6 /* StorageService.swift */; };
+		B3BD4A9D273B23F4005527B6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BD4A9C273B23F4005527B6 /* UserModel.swift */; };
+		B3BD4A9F273B2823005527B6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BD4A9E273B2823005527B6 /* Extensions.swift */; };
 		B3BFD43F2719DF7C00793D45 /* DoctorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFD43E2719DF7C00793D45 /* DoctorMessageView.swift */; };
 		B3BFD4412719DF8700793D45 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFD4402719DF8700793D45 /* SettingsView.swift */; };
 		B3BFD4432719DF8E00793D45 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFD4422719DF8E00793D45 /* MainView.swift */; };
@@ -91,6 +94,9 @@
 		B3B1230E2730607D00076A21 /* AccessCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessCodeGenerator.swift; sourceTree = "<group>"; };
 		B3B15D0327287A4B00C2F551 /* VerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationView.swift; sourceTree = "<group>"; };
 		B3B9F51E27387F1600064B9F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		B3BD4A99273B1D64005527B6 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		B3BD4A9C273B23F4005527B6 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		B3BD4A9E273B2823005527B6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B3BFD43E2719DF7C00793D45 /* DoctorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorMessageView.swift; sourceTree = "<group>"; };
 		B3BFD4402719DF8700793D45 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3BFD4422719DF8E00793D45 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -139,6 +145,8 @@
 				2CBE06F727305C160066B3AC /* EyeToggleView.swift */,
 				0E04099A270F6A02006CF444 /* Utilities.swift */,
 				B3B9F51E27387F1600064B9F /* ImagePicker.swift */,
+				B3BD4A99273B1D64005527B6 /* StorageService.swift */,
+				B3BD4A9E273B2823005527B6 /* Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -168,6 +176,7 @@
 		AF232EE427076C9000302D47 /* ICU Diaries */ = {
 			isa = PBXGroup;
 			children = (
+				B3BD4A9B273B23DD005527B6 /* Models */,
 				0E0409A2270F87CB006CF444 /* Helpers */,
 				0E04099C270F6F54006CF444 /* GoogleService-Info.plist */,
 				2CA98E65273301A00025E9C8 /* UploadView.swift */,
@@ -215,6 +224,14 @@
 				AF232F0427076C9100302D47 /* Info.plist */,
 			);
 			path = "ICU DiariesUITests";
+			sourceTree = "<group>";
+		};
+		B3BD4A9B273B23DD005527B6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B3BD4A9C273B23F4005527B6 /* UserModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		CD7F4197E7FFB45EF03568B8 /* Pods */ = {
@@ -487,12 +504,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E8118E3272C39F200677C35 /* ImageNameUtil.swift in Sources */,
+				B3BD4A9D273B23F4005527B6 /* UserModel.swift in Sources */,
 				B30904462710B3460001A576 /* LoginView.swift in Sources */,
 				B3BFD4432719DF8E00793D45 /* MainView.swift in Sources */,
 				B3BFD4412719DF8700793D45 /* SettingsView.swift in Sources */,
 				B3B1230F2730607D00076A21 /* AccessCodeGenerator.swift in Sources */,
+				B3BD4A9A273B1D64005527B6 /* StorageService.swift in Sources */,
 				2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */,
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
+				B3BD4A9F273B2823005527B6 /* Extensions.swift in Sources */,
 				B3B9F51F27387F1700064B9F /* ImagePicker.swift in Sources */,
 				B3BFD43F2719DF7C00793D45 /* DoctorMessageView.swift in Sources */,
 				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,

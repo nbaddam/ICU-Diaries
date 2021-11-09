@@ -9,9 +9,10 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 import UIKit
 
-enum User: String, CaseIterable, Identifiable {
+enum UserType: String, CaseIterable, Identifiable {
     case patient
     case clinician
     case friendsandfamily
@@ -27,7 +28,7 @@ struct SignUpView: View {
     @State var passwordConfirm = ""
     @State var isEmailValid = true
     @State var isFormValid: Bool? = false
-    @State var selectedUser = User.patient
+    @State var selectedUser = UserType.patient
     // cursor location
     @State var inEmail: Bool = false
     @State var inFirstName: Bool = false
@@ -65,7 +66,7 @@ struct SignUpView: View {
             }
             .padding(.bottom, 20)
             .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$pickedImage)
+                ImagePicker(image: self.$pickedImage, imageData: self.$imageData)
             }
             
             VStack(alignment: .leading, spacing: 5) {
@@ -100,18 +101,24 @@ struct SignUpView: View {
                                 self.showingActionSheet = true
                             }
                     }
-                    Button(action:  {
-                        self.showingImagePicker = true
-                        
-                    }) {
-                        HStack {
-                            
-                            Text("Upload a Profile Picture")
-//                                .onTapGesture(perform: {
-//                                    self.sourceType = .photoLibrary
-//                            })
+                    Text("Upload a Profile Picture")
+                        .onTapGesture(perform: {
+                            self.showingActionSheet = true
+                        })
+                        .actionSheet(isPresented: $showingActionSheet) {
+                            ActionSheet(title: Text(""), buttons: [
+                                .default(Text("Choose A Photo")){
+                                    self.sourceType = .photoLibrary
+                                    self.showingImagePicker = true
+                                },
+                                .default(Text("Take A Photo")){
+                                    self.sourceType = .camera
+                                    self.showingImagePicker = true
+                
+                                }, .cancel()
+                                ])
                         }
-                    }
+                    
                     HStack {
                         Text("I am a:")
                         Text(ASTERICK_LABEL)
@@ -122,9 +129,9 @@ struct SignUpView: View {
                         Picker(selection: $selectedUser,
                            label: Text("I am a:"),
                                content: {
-                            Text(PATIENT_LABEL).tag(User.patient)
-                            Text(CLINICIAN_LABEL).tag(User.clinician)
-                            Text(FAMILY_FRIEND_LABEL).tag(User.friendsandfamily)
+                            Text(PATIENT_LABEL).tag(UserType.patient)
+                            Text(CLINICIAN_LABEL).tag(UserType.clinician)
+                            Text(FAMILY_FRIEND_LABEL).tag(UserType.friendsandfamily)
                         })
                         .pickerStyle(.segmented)
                 } // Group
@@ -520,8 +527,9 @@ struct SignUpView: View {
                     print("going to create user doc in database")
                     let db = Firestore.firestore()
                     var code = NSString("")
-                    var unique = false
-                    if selectedUser == User.patient {
+                    var profileImageUrl = ""
+                    //var unique = false
+                    if selectedUser == UserType.patient {
                         //while (!unique) {
                             code = randomStringWithLength(len: 6)
                             //CheckUniqueCode(code: String(code)) {(valid) in
@@ -534,12 +542,41 @@ struct SignUpView: View {
                             "patientUID": result!.user.uid])
                     }
                     db.collection("codes").document()
+                    
+                    let storageProfileImageRef = StorageService.storageProfile.child(result!.user.uid)
+                    storageProfileImageRef.putData(imageData, metadata: StorageMetadata()) {
+                        (StorageMetadata, error) in
+                        print("inside storing pic")
+                        if error != nil {
+                            print("error storing pic")
+                            print(error!.localizedDescription)
+                            return
+                        }
+                        
+                        storageProfileImageRef.downloadURL(completion: {
+                            (url, error) in
+                            if (error != nil) {
+                                print("error downloading url")
+                                return
+                            }
+                            profileImageUrl = url!.absoluteString
+                            print("assigned url")
+                            print(url!.absoluteString)
+                            print("\n", profileImageUrl)
+//                            if let metaImageUrl = url?.absoluteString {
+//                                profileImageUrl = metaImageUrl
+//                            }
+                        })
+                    }
+                    
                     db.collection("users").document(result!.user.uid).setData([
                         "firstName": cleanFirst,
                         "lastName": cleanLast,
                         "uid": result!.user.uid,
                         "userType": self.selectedUser.rawValue,
-                        "code": code
+                        "code": code,
+                        "email": cleanEmail,
+                        "profileImageUrl": profileImageUrl
                     ]) {err in
                         if let err = err {
                             print("error writing doc")
@@ -548,6 +585,7 @@ struct SignUpView: View {
                         else {
                             print("doc written succesfully")
                             isFormValid = true
+                            
                             Auth.auth().currentUser?.sendEmailVerification { error in
                               print("sending email verification")
                             }
