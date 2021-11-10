@@ -19,12 +19,11 @@ struct SettingsView: View {
                 .font(.largeTitle)
                 .fontWeight(.semibold)
                 .padding(.bottom, 20)
-            Text("oops we're still working on this page!")
-            
             NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), tag: true, selection: $SignOutSuccess) {
                 EmptyView()
             }
-//Add a code assignemnt button
+            let db = Firestore.firestore()
+            let user_code = db.collection("users").document(Auth.auth().currentUser!.uid)
             Text("Patient Code:")
                 TextField(
                     "Type Here",
@@ -41,8 +40,6 @@ struct SettingsView: View {
                 .cornerRadius(2)
                 .foregroundColor(.white)
                 .onTapGesture {
-                    let db = Firestore.firestore()
-                    let user_code = db.collection("users").document(Auth.auth().currentUser!.uid)
                     db.collection("codes").getDocuments() { (querySnapshot, error) in
                         if let error = error {
                             print("Error getting documents: \(error)")
@@ -61,6 +58,7 @@ struct SettingsView: View {
                         }//else
                     }//getDocuments
                 }//onTap
+            }
             Text("Sign Out")
                 .navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)
@@ -79,12 +77,10 @@ struct SettingsView: View {
                         print("didnt work try again")
                     }
                 }//onTap
-            
             Spacer()
-            
-        }
-    }
-}
+        }//Vstack
+    }//Body View
+}//SettingsView
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
