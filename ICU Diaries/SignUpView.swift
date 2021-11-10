@@ -42,12 +42,15 @@ struct SignUpView: View {
     // secure passwords
     @State var isPasswordSecured: Bool = true
     @State var isConfirmSecured: Bool = true
+    // profile picture
     @State var profileImage: Image? = nil
     @State var pickedImage: Image? = nil
     @State var showingActionSheet = false
     @State var showingImagePicker = false
     @State var imageData: Data = Data()
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    // account exists already
+    @State var accountExists: Bool = false
     
     func loadImage() {
         guard let inputImage = pickedImage else {return}
@@ -436,6 +439,11 @@ struct SignUpView: View {
                         .font(.system(size: 14))
                         .fontWeight(.semibold)
                         .foregroundColor(Color.red)
+                } else if accountExists {
+                    Text(ACCOUNT_EXISTS_ERR)
+                        .font(.system(size: 14))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.red)
                 }
                 
     
@@ -517,6 +525,25 @@ struct SignUpView: View {
             let cleanEmail = self.email.trimmingCharacters(in: .whitespacesAndNewlines)
             let cleanPassword = self.password.trimmingCharacters(in: .whitespacesAndNewlines)
             print("fields were valid")
+            // check if account already exists
+            Auth.auth().fetchSignInMethods(forEmail: cleanEmail, completion: {
+                    (providers, error) in
+
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else if let providers = providers {
+                        if providers == [] {
+                            print("username is NOT taken")
+                            accountExists = false
+                        }
+                        else {
+                            print("username is taken")
+                            accountExists = true
+                        }
+                    }
+                })
+            
+            // this should not work if account exists already
             Auth.auth().createUser(withEmail: cleanEmail, password: cleanPassword) { result, error in
                 if let error = error {
                     print("error creating user")
