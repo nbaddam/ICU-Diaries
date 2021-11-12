@@ -13,6 +13,9 @@ struct SettingsView: View {
     @State private var SignOutSuccess: Bool? = false
     @State var code = ""
     @State var codes: [String] = []
+    @State var isCodeMatch: Bool = false
+    @State var showError: Bool = false
+    @State var typing: Bool = false
     var body: some View {
         VStack {
             Text("Settings")
@@ -27,11 +30,34 @@ struct SettingsView: View {
             Text("Patient Code:")
                 TextField(
                     "Type Here",
-                    text: $code)
-                    .disableAutocorrection(true)
-                    .cornerRadius(5)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.bottom, 10)
+                    text: $code,
+                    onEditingChanged: {(isChanged) in
+                        if self.code.isEmpty {
+                            showError = false
+                        }
+                    })
+                    .padding(8)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .background(RoundedRectangle(cornerRadius: 8)
+                                .strokeBorder(
+                                    showError ? Color.red : Color(UIColor.lightGray),
+                                    lineWidth: typing ? 3 : 1
+                                ))
+                    .onTapGesture {
+                        typing = true
+                        if self.code.isEmpty && showError {
+                            showError = false
+                        }
+                    }
+            
+            
+            if !isCodeMatch && showError {
+                Text(CODE_NOT_FOUND_ERR)
+                    .font(.system(size: 14))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.red)
+            }
+            
             Text("Assign")
                 .padding(10)
                 .padding(.leading, 15)
@@ -40,9 +66,12 @@ struct SettingsView: View {
                 .cornerRadius(2)
                 .foregroundColor(.white)
                 .onTapGesture {
+                    typing = false
                     db.collection("codes").getDocuments() { (querySnapshot, error) in
                         if let error = error {
                             print("Error getting documents: \(error)")
+                            isCodeMatch = false
+                            showError = false
                         }
                         else {
                             for document in querySnapshot!.documents {
@@ -53,7 +82,14 @@ struct SettingsView: View {
                                 }
                             }//prints all documents in the firebase
                             if !codes.contains(code){
-                                print("code not found")
+                                print("code NOT found")
+                                isCodeMatch = false
+                                showError = true
+                            }
+                            else {
+                                print("code found")
+                                isCodeMatch = true
+                                showError = false
                             }
                         }//else
                     }//getDocuments
@@ -79,8 +115,8 @@ struct SettingsView: View {
                 }//onTap
             Spacer()
         }//Vstack
-    }//Body View
-}//SettingsView
+    }// Body View
+//SettingsView
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
