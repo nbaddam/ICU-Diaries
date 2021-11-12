@@ -576,7 +576,7 @@ struct SignUpView: View {
                     db.collection("codes").document()
                     
                     let storageProfileImageRef = StorageService.storageProfile.child(result!.user.uid)
-                    storageProfileImageRef.putData(imageData, metadata: StorageMetadata()) {
+                    storageProfileImageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
                         (StorageMetadata, error) in
                         print("inside storing pic")
                         if error != nil {

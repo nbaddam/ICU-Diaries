@@ -10,6 +10,8 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import AVKit
+import AVFoundation
 
 struct UploadView: View {
     @State var message = ""
@@ -22,10 +24,12 @@ struct UploadView: View {
     @State var showingImagePicker = false
     @State var showingVideoPicker = false
     @State var imageData: Data = Data()
+    @State var videoData: NSData = NSData()
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var imageUrl = ""
-    @State var videoUrl: URL? = nil
-
+    @State var videoUrl = ""
+    @State var videoViewController = AVPlayerViewController();
+    
     func loadImage() {
         guard let inputImage = pickedImage else {return}
         print("assigning upload pic")
@@ -79,7 +83,6 @@ struct UploadView: View {
                 .foregroundColor(.white)
                 .onTapGesture {
                     print("upload clicked")
-                    print(videoUrl?.absoluteString)
                     let db = Firestore.firestore()
                     let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
                     docRef.getDocument { (document, error) in
@@ -88,9 +91,10 @@ struct UploadView: View {
                             let uid = Auth.auth().currentUser!.uid
                             let add_message = message
                             let time = Timestamp().self
+                            let userStorageRef = StorageService.storagePosts.child(Auth.auth().currentUser!.uid)
+                            let storageRef = userStorageRef.child(UUID().uuidString)
                             if (imageData != Data()) {
-                                let storagePostRef = StorageService.storagePosts.child(Auth.auth().currentUser!.uid)
-                                storagePostRef.putData(imageData, metadata: StorageMetadata()) {
+                                storageRef.putData(imageData, metadata: StorageMetadata()) {
                                     (StorageMetadata, error) in
                                     print("inside storing pic")
                                     if error != nil {
@@ -99,7 +103,7 @@ struct UploadView: View {
                                         return
                                     }
                                     
-                                    storagePostRef.downloadURL(completion: {
+                                    storageRef.downloadURL(completion: {
                                         (url, error) in
                                         if (error != nil) {
                                             print("error downloading url")
@@ -110,26 +114,45 @@ struct UploadView: View {
                                                                                                             ["Message": add_message,
                                                                                                             "Time": time,
                                                                                                             "UID": uid,
-                                                                                                            "imageUrl": metaImageUrl])
-                                            message = ""
-                                        }
-                                        else {
-                                            db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
-                                                                                                            ["Message": add_message,
-                                                                                                            "Time": time,
-                                                                                                            "UID": uid,
-                                                                                                            "imageUrl": ""])
+                                                                                                            "imageUrl": metaImageUrl,
+                                                                                                            "videoUrl": ""])
                                             message = ""
                                         }
                                     })
                                 }
                             }
+                            else if (videoUrl != "") {
+                                storageRef.putFile(from: URL(string: videoUrl)!, metadata: StorageMetadata()
+                                    , completion: { (metadata, error) in
+                                        if let error = error {
+                                            print(error)
+                                        }
+                                        
+                                    storageRef.downloadURL(completion: {
+                                        (url, error) in
+                                        if (error != nil) {
+                                            print("error downloading url")
+                                            return
+                                        }
+                                        if let videoUrl = url?.absoluteString {
+                                            db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
+                                                                                                            ["Message": add_message,
+                                                                                                            "Time": time,
+                                                                                                            "UID": uid,
+                                                                                                            "imageUrl": "",
+                                                                                                            "videoUrl": videoUrl])
+                                            message = ""
+                                        }
+                                    }
+                                )}
+                            )}
                             else {
                                 db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
                                                                                                 ["Message": add_message,
                                                                                                 "Time": time,
                                                                                                 "UID": uid,
-                                                                                                "imageUrl": ""])
+                                                                                                "imageUrl": "",
+                                                                                                 "videoUrl": ""])
                                 message = ""
                             }
                         } else {
@@ -195,6 +218,18 @@ struct UploadView: View {
         
     }//body
     
+    func convertVideo(toMPEG4FormatForVideo inputURL: URL, outputURL: URL, handler: @escaping (AVAssetExportSession) -> Void) {
+        try! FileManager.default.removeItem(at: outputURL as URL)
+        let asset = AVURLAsset(url: inputURL as URL, options: nil)
+
+        let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)!
+        exportSession.outputURL = outputURL
+        exportSession.outputFileType = .mp4
+        exportSession.exportAsynchronously(completionHandler: {
+            handler(exportSession)
+        })
+    }
+    
 }//UploadView
 
 struct UploadView_Previews: PreviewProvider {
@@ -202,4 +237,41 @@ struct UploadView_Previews: PreviewProvider {
         UploadView()
             
     }
+}
+
+
+func uploadTOFireBaseVideo(url: URL,
+                                  success : @escaping (String) -> Void,
+                                  failure : @escaping (Error) -> Void) {
+
+    let name = "\(Int(Date().timeIntervalSince1970)).mp4"
+    let path = NSTemporaryDirectory() + name
+
+    let dispatchgroup = DispatchGroup()
+
+    dispatchgroup.enter()
+
+    let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    let outputurl = documentsURL.appendingPathComponent(name)
+    var ur = outputurl
+//    self.convertVideo(toMPEG4FormatForVideo: url as URL, outputURL: outputurl) { (session) in
+//
+//        ur = session.outputURL!
+//        dispatchgroup.leave()
+//
+//    }
+    dispatchgroup.wait()
+
+    let data = NSData(contentsOf: ur as URL)
+
+    do {
+
+        try data?.write(to: URL(fileURLWithPath: path), options: .atomic)
+
+    } catch {
+
+        print(error)
+    }
+
+    
 }

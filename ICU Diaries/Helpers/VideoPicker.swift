@@ -7,11 +7,12 @@
 
 import Foundation
 import SwiftUI
+import MobileCoreServices
 
 struct VideoPicker: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) var presentationMode
-    @Binding var videoUrl: URL?
+    @Binding var videoUrl: String
     @Binding var showVideoPicker: Bool
     @Binding var showActionSheetVideo: Bool
     
@@ -24,7 +25,7 @@ struct VideoPicker: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
-                parent.videoUrl = url
+                parent.videoUrl = url.absoluteString
             }
             parent.showVideoPicker = false
             parent.showActionSheetVideo = false
@@ -38,6 +39,7 @@ struct VideoPicker: UIViewControllerRepresentable {
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<VideoPicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()
+        picker.mediaTypes = [kUTTypeMovie as String]
         picker.delegate = context.coordinator
         return picker
     }
