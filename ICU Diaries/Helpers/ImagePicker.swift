@@ -12,6 +12,8 @@ struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
     @Binding var image: Image?
     @Binding var imageData: Data
+    @Binding var showImagePicker: Bool
+    @Binding var showActionSheetImage: Bool
     
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: ImagePicker
@@ -27,6 +29,9 @@ struct ImagePicker: UIViewControllerRepresentable {
             if let mediaData = uiImage?.jpegData(compressionQuality: 0.5) {
                 parent.imageData = mediaData
             }
+            
+            parent.showImagePicker = false
+            parent.showActionSheetImage = false
             parent.presentationMode.wrappedValue.dismiss()
         }
     }

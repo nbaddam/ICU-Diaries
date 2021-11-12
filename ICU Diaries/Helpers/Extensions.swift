@@ -28,7 +28,7 @@ extension Decodable {
 extension String {
     func splitString() -> [String] {
         var stringArray: [String] = []
-        let trimmed = String(self.filter {!" \n\t\r".contains($0)})
+        let trimmed = String(self.filter {!"\n\t\r".contains($0)})
         
         for (index, _) in trimmed.enumerated(){
             let prefixIndex = index + 1

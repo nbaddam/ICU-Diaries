@@ -29,6 +29,7 @@
 		AF232F0327076C9100302D47 /* ICU_DiariesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F0227076C9100302D47 /* ICU_DiariesUITests.swift */; };
 		AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF232F1027076EFF00302D47 /* SignUpView.swift */; };
 		B30904462710B3460001A576 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30904452710B3460001A576 /* LoginView.swift */; };
+		B3ADAF12273C59C0009B8A24 /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ADAF11273C59C0009B8A24 /* VideoPicker.swift */; };
 		B3B1230D27305E0A00076A21 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1230C27305E0A00076A21 /* ResetPasswordView.swift */; };
 		B3B1230F2730607D00076A21 /* AccessCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1230E2730607D00076A21 /* AccessCodeGenerator.swift */; };
 		B3B15D0427287A4B00C2F551 /* VerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B15D0327287A4B00C2F551 /* VerificationView.swift */; };
@@ -90,6 +91,7 @@
 		AF232F1027076EFF00302D47 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF6FD3FB824C317D60D2C2C7 /* Pods_ICU_DiariesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_DiariesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30904452710B3460001A576 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B3ADAF11273C59C0009B8A24 /* VideoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
 		B3B1230C27305E0A00076A21 /* ResetPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		B3B1230E2730607D00076A21 /* AccessCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessCodeGenerator.swift; sourceTree = "<group>"; };
 		B3B15D0327287A4B00C2F551 /* VerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationView.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				B3B9F51E27387F1600064B9F /* ImagePicker.swift */,
 				B3BD4A99273B1D64005527B6 /* StorageService.swift */,
 				B3BD4A9E273B2823005527B6 /* Extensions.swift */,
+				B3ADAF11273C59C0009B8A24 /* VideoPicker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
 				B3BD4A9F273B2823005527B6 /* Extensions.swift in Sources */,
 				B3B9F51F27387F1700064B9F /* ImagePicker.swift in Sources */,
+				B3ADAF12273C59C0009B8A24 /* VideoPicker.swift in Sources */,
 				B3BFD43F2719DF7C00793D45 /* DoctorMessageView.swift in Sources */,
 				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,
 				2CA98E66273301A00025E9C8 /* UploadView.swift in Sources */,

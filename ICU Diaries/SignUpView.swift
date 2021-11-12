@@ -51,6 +51,7 @@ struct SignUpView: View {
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     // account exists already
     @State var accountExists: Bool = false
+    @State var imageUrl = ""
     
     func loadImage() {
         guard let inputImage = pickedImage else {return}
@@ -69,7 +70,7 @@ struct SignUpView: View {
             }
             .padding(.bottom, 20)
             .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$pickedImage, imageData: self.$imageData)
+                ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet)
             }
             
             VStack(alignment: .leading, spacing: 5) {
@@ -517,6 +518,10 @@ struct SignUpView: View {
     }
     
     func SignUpPressed() { //TODO: add email verification
+        if (imageData == Data()) {
+            print("no image added")
+        }
+        
         let temp = ValidateFields() //validate fields
         print("validated fields")
         if temp == nil { //fields are valid, proceed with account creation
@@ -586,47 +591,73 @@ struct SignUpView: View {
                                 print("error downloading url")
                                 return
                             }
-                            profileImageUrl = url!.absoluteString
-                            print("assigned url")
-                            print(url!.absoluteString)
-                            print("\n", profileImageUrl)
-//                            if let metaImageUrl = url?.absoluteString {
-//                                profileImageUrl = metaImageUrl
-//                            }
+                            if let metaImageUrl = url?.absoluteString {
+                                let fullname = cleanFirst + " " + cleanLast
+                                db.collection("users").document(result!.user.uid).setData([
+                                    "name": fullname,
+                                    "uid": result!.user.uid,
+                                    "userType": self.selectedUser.rawValue,
+                                    "code": code,
+                                    "email": cleanEmail,
+                                    "profileImageUrl": metaImageUrl,
+                                    "searchName": fullname.splitString()
+                                ]) {err in
+                                    if let err = err {
+                                        print("error writing doc")
+                                        isFormValid = false
+                                    }
+                                    else {
+                                        print("doc written succesfully")
+                                        isFormValid = true
+                                        
+                                        Auth.auth().currentUser?.sendEmailVerification { error in
+                                          print("sending email verification")
+                                        }
+                                    }
+                                /*
+                                (data: ["firstName":cleanFirst, "lastName":cleanLast, "uid":result!.user.uid]) { (error) in
+                                    
+                                    if error != nil {
+                                        //user data wasnt saved, try again?
+                                    }
+             */
+                                }
+                            }
                         })
                     }
-                    
-                    db.collection("users").document(result!.user.uid).setData([
-                        "firstName": cleanFirst,
-                        "lastName": cleanLast,
-                        "uid": result!.user.uid,
-                        "userType": self.selectedUser.rawValue,
-                        "code": code,
-                        "email": cleanEmail,
-                        "profileImageUrl": profileImageUrl
-                    ]) {err in
-                        if let err = err {
-                            print("error writing doc")
-                            isFormValid = false
-                        }
-                        else {
-                            print("doc written succesfully")
-                            isFormValid = true
-                            
-                            Auth.auth().currentUser?.sendEmailVerification { error in
-                              print("sending email verification")
-                            }
-                        }
-                    /*
-                    (data: ["firstName":cleanFirst, "lastName":cleanLast, "uid":result!.user.uid]) { (error) in
-                        
-                        if error != nil {
-                            //user data wasnt saved, try again?
-                        }
- */
-                    }
+//
+//                    db.collection("users").document(result!.user.uid).setData([
+//                        "firstName": cleanFirst,
+//                        "lastName": cleanLast,
+//                        "uid": result!.user.uid,
+//                        "userType": self.selectedUser.rawValue,
+//                        "code": code,
+//                        "email": cleanEmail,
+//                        "profileImageUrl": profileImageUrl
+//                    ]) {err in
+//                        if let err = err {
+//                            print("error writing doc")
+//                            isFormValid = false
+//                        }
+//                        else {
+//                            print("doc written succesfully")
+//                            isFormValid = true
+//
+//                            Auth.auth().currentUser?.sendEmailVerification { error in
+//                              print("sending email verification")
+//                            }
+//                        }
+//                    /*
+//                    (data: ["firstName":cleanFirst, "lastName":cleanLast, "uid":result!.user.uid]) { (error) in
+//
+//                        if error != nil {
+//                            //user data wasnt saved, try again?
+//                        }
+// */
+//                    }
                     //TODO: transition screen?
                     print("done adding user doc")
+                    print(self.imageUrl)
                 }
             }
         }
