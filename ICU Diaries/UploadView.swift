@@ -29,6 +29,7 @@ struct UploadView: View {
     @State var imageUrl = ""
     @State var videoUrl = ""
     @State var videoViewController = AVPlayerViewController();
+    @State private var presentAlert = false
     
     func loadImage() {
         guard let inputImage = pickedImage else {return}
@@ -82,6 +83,7 @@ struct UploadView: View {
                 .cornerRadius(2)
                 .foregroundColor(.white)
                 .onTapGesture {
+                    
                     print("upload clicked")
                     let db = Firestore.firestore()
                     let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
@@ -117,6 +119,8 @@ struct UploadView: View {
                                                                                                             "imageUrl": metaImageUrl,
                                                                                                             "videoUrl": ""])
                                             message = ""
+                                            pickedImage = nil
+                                            uploadImage = nil
                                         }
                                     })
                                 }
@@ -142,6 +146,8 @@ struct UploadView: View {
                                                                                                             "imageUrl": "",
                                                                                                             "videoUrl": videoUrl])
                                             message = ""
+                                            pickedImage = nil
+                                            uploadImage = nil
                                         }
                                     }
                                 )}
@@ -154,7 +160,10 @@ struct UploadView: View {
                                                                                                 "imageUrl": "",
                                                                                                  "videoUrl": ""])
                                 message = ""
+                                pickedImage = nil
+                                uploadImage = nil
                             }
+                            presentAlert = true
                         } else {
                             print("Document does not exist")
                         }
@@ -162,6 +171,11 @@ struct UploadView: View {
                 }//onTap
                 
         }//Vstack
+        .alert(isPresented: $presentAlert) {
+                    Alert(
+                        title: Text("Message Posted!")
+                    )
+        }
         .sheet(isPresented: $showingPicker, onDismiss: loadImage) {
             if (showingImagePicker) {
                 ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet)

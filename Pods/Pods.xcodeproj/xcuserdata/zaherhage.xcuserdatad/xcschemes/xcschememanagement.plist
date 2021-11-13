@@ -39,6 +39,11 @@
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
+		<key>FirebaseFirestoreSwift.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>25</integer>
+		</dict>
 		<key>FirebaseInstallations.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
