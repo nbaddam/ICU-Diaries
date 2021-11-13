@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 import MobileCoreServices
+import AVKit
+import AVFoundation
 
 struct VideoPicker: UIViewControllerRepresentable {
     
@@ -15,6 +17,7 @@ struct VideoPicker: UIViewControllerRepresentable {
     @Binding var videoUrl: String
     @Binding var showVideoPicker: Bool
     @Binding var showActionSheetVideo: Bool
+    @Binding var thumbnail: Image?
     
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: VideoPicker
@@ -27,6 +30,16 @@ struct VideoPicker: UIViewControllerRepresentable {
             if let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
                 parent.videoUrl = url.absoluteString
             }
+            do {
+                let asset = AVURLAsset(url: URL(string: parent.videoUrl)! , options: nil)
+                let imgGenerator = AVAssetImageGenerator(asset: asset)
+                imgGenerator.appliesPreferredTrackTransform = true
+                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(value: 0, timescale: 1), actualTime: nil)
+                let thumbnail = UIImage(cgImage: cgImage)
+                parent.thumbnail = Image(uiImage: thumbnail)
+                } catch let error {
+                    print("*** Error generating thumbnail: \(error.localizedDescription)")
+                }
             parent.showVideoPicker = false
             parent.showActionSheetVideo = false
             parent.presentationMode.wrappedValue.dismiss()

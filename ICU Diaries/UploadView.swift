@@ -23,12 +23,13 @@ struct UploadView: View {
     @State var showingPicker = false
     @State var showingImagePicker = false
     @State var showingVideoPicker = false
-    @State var imageData: Data = Data()
+    //@State var imageData: Data = Data()
     @State var videoData: NSData = NSData()
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var imageUrl = ""
     @State var videoUrl = ""
     @State var videoViewController = AVPlayerViewController();
+    @State private var presentAlert = false
     
     func loadImage() {
         guard let inputImage = pickedImage else {return}
@@ -93,8 +94,8 @@ struct UploadView: View {
                             let time = Timestamp().self
                             let userStorageRef = StorageService.storagePosts.child(Auth.auth().currentUser!.uid)
                             let storageRef = userStorageRef.child(UUID().uuidString)
-                            if (imageData != Data()) {
-                                storageRef.putData(imageData, metadata: StorageMetadata()) {
+                            if (imageUrl != "") {
+                                storageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
                                     (StorageMetadata, error) in
                                     print("inside storing pic")
                                     if error != nil {
@@ -117,6 +118,11 @@ struct UploadView: View {
                                                                                                             "imageUrl": metaImageUrl,
                                                                                                             "videoUrl": ""])
                                             message = ""
+                                            presentAlert = true
+                                            imageUrl = ""
+                                            videoUrl = ""
+                                            pickedImage = nil
+                                            uploadImage = nil
                                         }
                                     })
                                 }
@@ -142,6 +148,11 @@ struct UploadView: View {
                                                                                                             "imageUrl": "",
                                                                                                             "videoUrl": videoUrl])
                                             message = ""
+                                            presentAlert = true
+                                            imageUrl = ""
+                                            self.videoUrl = ""
+                                            pickedImage = nil
+                                            uploadImage = nil
                                         }
                                     }
                                 )}
@@ -154,7 +165,13 @@ struct UploadView: View {
                                                                                                 "imageUrl": "",
                                                                                                  "videoUrl": ""])
                                 message = ""
+                                presentAlert = true
+                                imageUrl = ""
+                                videoUrl = ""
+                                pickedImage = nil
+                                uploadImage = nil
                             }
+                            
                         } else {
                             print("Document does not exist")
                         }
@@ -162,12 +179,17 @@ struct UploadView: View {
                 }//onTap
                 
         }//Vstack
+        .alert(isPresented: $presentAlert) {
+             Alert(
+                 title: Text("Message Posted!")
+             )
+         }
         .sheet(isPresented: $showingPicker, onDismiss: loadImage) {
             if (showingImagePicker) {
-                ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet)
+                ImagePicker(image: self.$pickedImage, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl)
             }
             else if (showingVideoPicker) {
-                VideoPicker(videoUrl: self.$videoUrl, showVideoPicker: self.$showingVideoPicker, showActionSheetVideo: self.$showingActionSheet)
+                VideoPicker(videoUrl: self.$videoUrl, showVideoPicker: self.$showingVideoPicker, showActionSheetVideo: self.$showingActionSheet, thumbnail: self.$pickedImage)
             }
         }.actionSheet(isPresented: $showingActionSheet) {
             ActionSheet(title: Text(""), buttons: [	
@@ -175,23 +197,29 @@ struct UploadView: View {
                     self.sourceType = UIImagePickerController.SourceType.savedPhotosAlbum
                     self.showingPicker = true
                     self.showingImagePicker = true
+                    self.videoUrl = ""
+                    self.uploadImage = nil
                 },
                 .default(Text("Take A Photo")){
                     self.sourceType = UIImagePickerController.SourceType.camera
                     self.showingPicker = true
                     self.showingImagePicker = true
-
+                    self.videoUrl = ""
+                    self.uploadImage = nil
                 },
                 .default(Text("Choose A Video")){
                     self.sourceType = UIImagePickerController.SourceType.savedPhotosAlbum
                     self.showingPicker = true
                     self.showingVideoPicker = true
+                    self.imageUrl = ""
+                    self.uploadImage = nil
                 },
                 .default(Text("Take A Video")){
                     self.sourceType = UIImagePickerController.SourceType.camera
                     self.showingPicker = true
                     self.showingVideoPicker = true
-
+                    self.imageUrl = ""
+                    self.uploadImage = nil
                 },.cancel()
                 ])
         }
@@ -239,39 +267,39 @@ struct UploadView_Previews: PreviewProvider {
     }
 }
 
-
-func uploadTOFireBaseVideo(url: URL,
-                                  success : @escaping (String) -> Void,
-                                  failure : @escaping (Error) -> Void) {
-
-    let name = "\(Int(Date().timeIntervalSince1970)).mp4"
-    let path = NSTemporaryDirectory() + name
-
-    let dispatchgroup = DispatchGroup()
-
-    dispatchgroup.enter()
-
-    let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    let outputurl = documentsURL.appendingPathComponent(name)
-    var ur = outputurl
-//    self.convertVideo(toMPEG4FormatForVideo: url as URL, outputURL: outputurl) { (session) in
 //
-//        ur = session.outputURL!
-//        dispatchgroup.leave()
+//func uploadTOFireBaseVideo(url: URL,
+//                                  success : @escaping (String) -> Void,
+//                                  failure : @escaping (Error) -> Void) {
 //
+//    let name = "\(Int(Date().timeIntervalSince1970)).mp4"
+//    let path = NSTemporaryDirectory() + name
+//
+//    let dispatchgroup = DispatchGroup()
+//
+//    dispatchgroup.enter()
+//
+//    let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//    let outputurl = documentsURL.appendingPathComponent(name)
+//    var ur = outputurl
+////    self.convertVideo(toMPEG4FormatForVideo: url as URL, outputURL: outputurl) { (session) in
+////
+////        ur = session.outputURL!
+////        dispatchgroup.leave()
+////
+////    }
+//    dispatchgroup.wait()
+//
+//    let data = NSData(contentsOf: ur as URL)
+//
+//    do {
+//
+//        try data?.write(to: URL(fileURLWithPath: path), options: .atomic)
+//
+//    } catch {
+//
+//        print(error)
 //    }
-    dispatchgroup.wait()
-
-    let data = NSData(contentsOf: ur as URL)
-
-    do {
-
-        try data?.write(to: URL(fileURLWithPath: path), options: .atomic)
-
-    } catch {
-
-        print(error)
-    }
-
-    
-}
+//
+//
+//}

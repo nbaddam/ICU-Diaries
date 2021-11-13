@@ -47,7 +47,7 @@ struct SignUpView: View {
     @State var pickedImage: Image? = nil
     @State var showingActionSheet = false
     @State var showingImagePicker = false
-    @State var imageData: Data = Data()
+    //@State var imageData: Data = Data()
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     // account exists already
     @State var accountExists: Bool = false
@@ -70,7 +70,7 @@ struct SignUpView: View {
             }
             .padding(.bottom, 20)
             .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet)
+                ImagePicker(image: self.$pickedImage, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl)
             }
             
             VStack(alignment: .leading, spacing: 5) {
@@ -518,7 +518,7 @@ struct SignUpView: View {
     }
     
     func SignUpPressed() { //TODO: add email verification
-        if (imageData == Data()) {
+        if (imageUrl == "") {
             print("no image added")
         }
         
@@ -625,36 +625,6 @@ struct SignUpView: View {
                             }
                         })
                     }
-//
-//                    db.collection("users").document(result!.user.uid).setData([
-//                        "firstName": cleanFirst,
-//                        "lastName": cleanLast,
-//                        "uid": result!.user.uid,
-//                        "userType": self.selectedUser.rawValue,
-//                        "code": code,
-//                        "email": cleanEmail,
-//                        "profileImageUrl": profileImageUrl
-//                    ]) {err in
-//                        if let err = err {
-//                            print("error writing doc")
-//                            isFormValid = false
-//                        }
-//                        else {
-//                            print("doc written succesfully")
-//                            isFormValid = true
-//
-//                            Auth.auth().currentUser?.sendEmailVerification { error in
-//                              print("sending email verification")
-//                            }
-//                        }
-//                    /*
-//                    (data: ["firstName":cleanFirst, "lastName":cleanLast, "uid":result!.user.uid]) { (error) in
-//
-//                        if error != nil {
-//                            //user data wasnt saved, try again?
-//                        }
-// */
-//                    }
                     //TODO: transition screen?
                     print("done adding user doc")
                     print(self.imageUrl)

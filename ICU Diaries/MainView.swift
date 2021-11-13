@@ -33,6 +33,7 @@ struct MainView: View {
             UploadView()
                 .tabItem {
                     Label("Upload", systemImage: "gear")
+                    Label("Upload", systemImage: "square.and.pencil")
                 }
                 .tag(3)
             //show this only if user == friends and family

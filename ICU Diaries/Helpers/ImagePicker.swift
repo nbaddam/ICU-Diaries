@@ -11,10 +11,11 @@ import SwiftUI
 struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
     @Binding var image: Image?
-    @Binding var imageData: Data
+    //@Binding var imageData: Data
     @Binding var showImagePicker: Bool
     @Binding var showActionSheetImage: Bool
-//    @Binding var imageUrl: String
+    @Binding var imageUrl: String
+    
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: ImagePicker
 
@@ -25,13 +26,12 @@ struct ImagePicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             let uiImage = info[.originalImage] as? UIImage
             parent.image = Image(uiImage: uiImage!)
-//            if let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
-//                parent.imageUrl = url.absoluteString
-//                print(parent.imageUrl)
-//            }
-            if let mediaData = uiImage?.jpegData(compressionQuality: 0.5) {
-                parent.imageData = mediaData
+            if let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+                parent.imageUrl = url.absoluteString
             }
+//            if let mediaData = uiImage?.jpegData(compressionQuality: 0.5) {
+//                parent.imageData = mediaData
+//            }
             
             parent.showImagePicker = false
             parent.showActionSheetImage = false
