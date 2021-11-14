@@ -33,9 +33,6 @@ struct VerificationView: View {
                     }
                 }
             
-            NavigationLink(destination: MainView().navigationBarBackButtonHidden(true), tag: true, selection: $isVerified) {
-                EmptyView()
-            }
             Text("Click once email is verified (this doesn't work idk how to fix)")
                 .padding(10)
                 .padding(.leading, 15)

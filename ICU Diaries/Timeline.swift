@@ -13,6 +13,7 @@ struct Timeline: View {
     var body: some View {
         NavigationView {
             VStack {
+                
                 Text("Timeline")
                     .font(.largeTitle)
                     .fontWeight(.semibold)

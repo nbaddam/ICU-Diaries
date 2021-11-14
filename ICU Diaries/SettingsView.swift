@@ -16,6 +16,8 @@ struct SettingsView: View {
     @State var isCodeMatch: Bool = false
     @State var showError: Bool = false
     @State var typing: Bool = false
+    @State var isFamily: Bool
+    
     var body: some View {
         VStack {
             Text("Settings")
@@ -25,6 +27,8 @@ struct SettingsView: View {
             NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), tag: true, selection: $SignOutSuccess) {
                 EmptyView()
             }
+            
+            if(isFamily == true){
             let db = Firestore.firestore()
             let user_code = db.collection("users").document(Auth.auth().currentUser!.uid)
             Text("Patient Code:")
@@ -95,6 +99,7 @@ struct SettingsView: View {
                     }//getDocuments
                 }//onTap
             }
+            
             Text("Sign Out")
                 .navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)
@@ -116,10 +121,12 @@ struct SettingsView: View {
             Spacer()
         }//Vstack
     }// Body View
-//SettingsView
+}//SettingsView
 
+/*
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
     }
 }
+*/

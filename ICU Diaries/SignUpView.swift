@@ -614,48 +614,10 @@ struct SignUpView: View {
                                           print("sending email verification")
                                         }
                                     }
-                                /*
-                                (data: ["firstName":cleanFirst, "lastName":cleanLast, "uid":result!.user.uid]) { (error) in
-                                    
-                                    if error != nil {
-                                        //user data wasnt saved, try again?
-                                    }
-             */
                                 }
                             }
                         })
                     }
-//
-//                    db.collection("users").document(result!.user.uid).setData([
-//                        "firstName": cleanFirst,
-//                        "lastName": cleanLast,
-//                        "uid": result!.user.uid,
-//                        "userType": self.selectedUser.rawValue,
-//                        "code": code,
-//                        "email": cleanEmail,
-//                        "profileImageUrl": profileImageUrl
-//                    ]) {err in
-//                        if let err = err {
-//                            print("error writing doc")
-//                            isFormValid = false
-//                        }
-//                        else {
-//                            print("doc written succesfully")
-//                            isFormValid = true
-//
-//                            Auth.auth().currentUser?.sendEmailVerification { error in
-//                              print("sending email verification")
-//                            }
-//                        }
-//                    /*
-//                    (data: ["firstName":cleanFirst, "lastName":cleanLast, "uid":result!.user.uid]) { (error) in
-//
-//                        if error != nil {
-//                            //user data wasnt saved, try again?
-//                        }
-// */
-//                    }
-                    //TODO: transition screen?
                     print("done adding user doc")
                     print(self.imageUrl)
                 }

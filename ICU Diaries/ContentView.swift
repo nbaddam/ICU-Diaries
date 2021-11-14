@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
-import Foundation
+import Firebase
 import FirebaseAuth
+import FirebaseFirestore
 
 
 struct ContentView: View {
@@ -21,6 +22,10 @@ struct ContentView: View {
     @State private var missingField: Bool = false
     @State private var successfulLogin: Bool = true
     @State private var isVerified: Bool = true
+    
+    @State private var isPatient: Bool = false
+    @State private var isFamily: Bool = false
+    @State private var isDoctor: Bool = false
     
     var body: some View {
         NavigationView {
@@ -119,7 +124,7 @@ struct ContentView: View {
                     }
                 }
                 
-                NavigationLink(destination: MainView().navigationBarBackButtonHidden(true), tag: true, selection: $isPresented) {
+                NavigationLink(destination: MainView(isPatient: isPatient, isFamily: isFamily, isDoctor: isDoctor).navigationBarBackButtonHidden(true), tag: true, selection: $isPresented) {
                     EmptyView()
                 }
                 Text(LOGIN_LABEL)
@@ -156,9 +161,25 @@ struct ContentView: View {
                                     print("valid login")
                                     // check if email is verfied
                                     if ((Auth.auth().currentUser?.isEmailVerified ?? false)) {
-                                        self.isPresented = true
                                         successfulLogin = true
                                         isVerified = true
+                                            let db = Firestore.firestore()
+                                            let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
+                                            docRef.getDocument { (document, error) in
+                                                if let document = document, document.exists {
+                                                    let testing = document.get("userType") as! String
+                                                    if(testing=="patient"){
+                                                        self.isPatient = true
+                                                    }
+                                                    else if(testing=="friendsandfamily"){
+                                                        self.isFamily = true
+                                                    }
+                                                    else{
+                                                        self.isDoctor = true
+                                                    }
+                                                }
+                                                self.isPresented = true
+                                            }
                                     } else {
                                         print("email is not verified")
                                         self.isPresented = false
