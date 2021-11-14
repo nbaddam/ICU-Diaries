@@ -91,10 +91,10 @@ struct SettingsView: View {
                                 isCodeMatch = true
                                 showError = false
                             }
-                        }//else
-                    }//getDocuments
-                }//onTap
-            }
+                        } //else
+                    } //getDocuments
+                } //onTap
+            //}
             Text("Sign Out")
                 .navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)
@@ -116,7 +116,7 @@ struct SettingsView: View {
             Spacer()
         }//Vstack
     }// Body View
-//SettingsView
+}//SettingsView
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
