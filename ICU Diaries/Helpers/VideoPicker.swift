@@ -30,6 +30,21 @@ struct VideoPicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
                 parent.videoUrl = url.absoluteString
+                print("videoUrl in picker if:", parent.videoUrl)
+                if (parent.sourceType == .savedPhotosAlbum) {
+                    let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                    /// create a temporary file for us to copy the video to.
+                    let temporaryFileURL = temporaryDirectoryURL.appendingPathComponent(url.lastPathComponent)
+                    /// Attempt the copy.
+                    do {
+                        try FileManager().copyItem(at: url.absoluteURL, to: temporaryFileURL)
+                    } catch {
+                        print("There was an error copying the video file to the temporary location.")
+                    }
+
+                    parent.videoUrl =  temporaryFileURL.absoluteString
+                }
+                
 //                if (parent.sourceType == .camera) {
 //                    let selectorToCall = Selector()
 //                    UISaveVideoAtPathToSavedPhotosAlbum(url.relativePath, self, selectorToCall, nil)
@@ -46,7 +61,9 @@ struct VideoPicker: UIViewControllerRepresentable {
             do {
                 
                 let asset = AVURLAsset(url: URL(string: parent.videoUrl)! , options: nil)
-                print("videoUrl in picker:", parent.videoUrl)
+//                print("videoUrl after picker if:", parent.videoUrl)
+//                parent.videoUrl = asset.url.absoluteString
+//                print("videoUrl after picker change:", parent.videoUrl)
                 let imgGenerator = AVAssetImageGenerator(asset: asset)
                 imgGenerator.appliesPreferredTrackTransform = true
                 let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(value: 0, timescale: 1), actualTime: nil)

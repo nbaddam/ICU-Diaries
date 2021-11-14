@@ -153,7 +153,7 @@ struct UploadView: View {
                             let time = Timestamp().self
                             let userStorageRef = StorageService.storagePosts.child(Auth.auth().currentUser!.uid)
                             let storageRef = userStorageRef.child(UUID().uuidString)
-                            print(imageUrl )
+                            print(imageUrl)
                             if (imageUrl != "") {
                                 storageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
                                     (StorageMetadata, error) in
