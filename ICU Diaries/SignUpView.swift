@@ -47,7 +47,7 @@ struct SignUpView: View {
     @State var pickedImage: Image? = nil
     @State var showingActionSheet = false
     @State var showingImagePicker = false
-    //@State var imageData: Data = Data()
+    @State var imageData: Data = Data()
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     // account exists already
     @State var accountExists: Bool = false
@@ -70,7 +70,7 @@ struct SignUpView: View {
             }
             .padding(.bottom, 20)
             .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$pickedImage, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl)
+                ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl, sourceType: self.$sourceType)
             }
             
             VStack(alignment: .leading, spacing: 5) {
@@ -112,7 +112,7 @@ struct SignUpView: View {
                         .actionSheet(isPresented: $showingActionSheet) {
                             ActionSheet(title: Text(""), buttons: [
                                 .default(Text("Choose A Photo")){
-                                    self.sourceType = .photoLibrary
+                                    self.sourceType = .savedPhotosAlbum
                                     self.showingImagePicker = true
                                 },
                                 .default(Text("Take A Photo")){

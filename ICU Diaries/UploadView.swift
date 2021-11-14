@@ -23,18 +23,35 @@ struct UploadView: View {
     @State var showingPicker = false
     @State var showingImagePicker = false
     @State var showingVideoPicker = false
-    //@State var imageData: Data = Data()
+    @State var imageData: Data = Data()
     @State var videoData: NSData = NSData()
-    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State var sourceType: UIImagePickerController.SourceType = .savedPhotosAlbum
     @State var imageUrl = ""
     @State var videoUrl = ""
     @State var videoViewController = AVPlayerViewController();
     @State private var presentAlert = false
+    @State var recordingSession: AVAudioSession!
+    @State var audioRecorder: AVAudioRecorder!
+    @State var recordButton = UIButton(frame: CGRect(x: 64, y: 64, width: 128, height: 64)).setTitle("Tap Mic to Record", for: .normal)
+    @State var audioUrl = ""
+    @State var micStatus = "mic"
+    @State var recordStatus = "Tap Microphone to Record"
     
     func loadImage() {
         guard let inputImage = pickedImage else {return}
         print("assigning upload pic")
         uploadImage = inputImage
+    }
+    
+//    func loadRecordingUI() {
+//        recordButton = UIButton(frame: CGRect(x: 64, y: 64, width: 128, height: 64))
+//        recordButton.setTitle("Tap to Record", for: .normal)
+//        recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+//        recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
+//    }
+    
+    func getDocumentsDirectory() throws -> URL {
+         return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     }
     
     var body: some View {
@@ -68,6 +85,48 @@ struct UploadView: View {
                         self.showingActionSheet = true
                     })
             }
+            
+            Text(recordStatus)
+            Image(systemName: micStatus).resizable()
+                .frame(width: 50, height: 50)
+                .onTapGesture {
+                    if (audioRecorder == nil) {
+                        let uuid = UUID().uuidString
+                        var audioFileName = ""
+                        do {
+                            audioFileName = try getDocumentsDirectory().appendingPathComponent(uuid + ".m4a").absoluteString
+                            audioUrl = audioFileName
+                        } catch {
+                            print("error getting audio filename")
+                        }
+                        
+                        let settings = [
+                            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                            AVSampleRateKey: 12000,
+                            AVNumberOfChannelsKey: 1,
+                            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+                        ]
+
+                        do {
+                            audioRecorder = try AVAudioRecorder(url: URL(string: audioFileName)!, settings: settings)
+                            audioRecorder.record()
+                            recordStatus = "Tap Microphone to Stop"
+                            micStatus = "mic.fill"
+                        } catch {
+                            audioRecorder.stop()
+                            audioRecorder = nil
+
+                            recordStatus = "Tap Microphone to Record"
+                            micStatus = "mic"
+                                    
+                        }
+                    } else {
+                        audioRecorder.stop()
+                        audioRecorder = nil
+                        recordStatus = "Tap Microphone to Re-record"
+                        micStatus = "mic"
+                    }
+                }
             Text("Message:")
                 TextField(
                     "Type Here",
@@ -94,8 +153,42 @@ struct UploadView: View {
                             let time = Timestamp().self
                             let userStorageRef = StorageService.storagePosts.child(Auth.auth().currentUser!.uid)
                             let storageRef = userStorageRef.child(UUID().uuidString)
+                            print(imageUrl )
                             if (imageUrl != "") {
                                 storageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
+                                    (StorageMetadata, error) in
+                                    print("inside storing pic")
+                                    if error != nil {
+                                        print("error storing pic")
+                                        print(error!.localizedDescription)
+                                        return
+                                    }
+                                    
+                                    storageRef.downloadURL(completion: {
+                                        (url, error) in
+                                        if (error != nil) {
+                                            print("error downloading url")
+                                            return
+                                        }
+                                        if let metaImageUrl = url?.absoluteString {
+                                            db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
+                                                                                                            ["Message": add_message,
+                                                                                                            "Time": time,
+                                                                                                            "UID": uid,
+                                                                                                            "imageUrl": metaImageUrl,
+                                                                                                            "videoUrl": ""])
+                                            message = ""
+                                            presentAlert = true
+                                            imageUrl = ""
+                                            videoUrl = ""
+                                            pickedImage = nil
+                                            uploadImage = nil
+                                        }
+                                    })
+                                }
+                            }
+                            else if (imageData != Data()) {
+                                storageRef.putData(self.imageData, metadata: StorageMetadata()) {
                                     (StorageMetadata, error) in
                                     print("inside storing pic")
                                     if error != nil {
@@ -157,6 +250,37 @@ struct UploadView: View {
                                     }
                                 )}
                             )}
+                            else if (audioUrl != "") {
+                                storageRef.putFile(from: URL(string: audioUrl)!, metadata: StorageMetadata()
+                                    , completion: { (metadata, error) in
+                                        if let error = error {
+                                            print(error)
+                                        }
+                                        
+                                    storageRef.downloadURL(completion: {
+                                        (url, error) in
+                                        if (error != nil) {
+                                            print("error downloading url")
+                                            return
+                                        }
+                                        if let audioUrl = url?.absoluteString {
+                                            db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
+                                                                                                            ["Message": add_message,
+                                                                                                            "Time": time,
+                                                                                                            "UID": uid,
+                                                                                                            "imageUrl": "",
+                                                                                                            "videoUrl": "",
+                                                                                                            "audioUrl": audioUrl])
+                                            message = ""
+                                            presentAlert = true
+                                            imageUrl = ""
+                                            self.videoUrl = ""
+                                            pickedImage = nil
+                                            uploadImage = nil
+                                        }
+                                    }
+                                )}
+                            )}
                             else {
                                 db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
                                                                                                 ["Message": add_message,
@@ -186,10 +310,10 @@ struct UploadView: View {
          }
         .sheet(isPresented: $showingPicker, onDismiss: loadImage) {
             if (showingImagePicker) {
-                ImagePicker(image: self.$pickedImage, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl)
+                ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl, sourceType: self.$sourceType)
             }
             else if (showingVideoPicker) {
-                VideoPicker(videoUrl: self.$videoUrl, showVideoPicker: self.$showingVideoPicker, showActionSheetVideo: self.$showingActionSheet, thumbnail: self.$pickedImage)
+                VideoPicker(videoUrl: self.$videoUrl, showVideoPicker: self.$showingVideoPicker, showActionSheetVideo: self.$showingActionSheet, thumbnail: self.$pickedImage, sourceType: self.$sourceType)
             }
         }.actionSheet(isPresented: $showingActionSheet) {
             ActionSheet(title: Text(""), buttons: [	

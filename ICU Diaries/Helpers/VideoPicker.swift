@@ -18,7 +18,8 @@ struct VideoPicker: UIViewControllerRepresentable {
     @Binding var showVideoPicker: Bool
     @Binding var showActionSheetVideo: Bool
     @Binding var thumbnail: Image?
-    
+    @Binding var sourceType: UIImagePickerController.SourceType
+
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: VideoPicker
 
@@ -29,9 +30,23 @@ struct VideoPicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
                 parent.videoUrl = url.absoluteString
+//                if (parent.sourceType == .camera) {
+//                    let selectorToCall = Selector()
+//                    UISaveVideoAtPathToSavedPhotosAlbum(url.relativePath, self, selectorToCall, nil)
+//                    var uuid = UUID().uuidString + ".mp4"
+//                    let videoData = try? Data(contentsOf: url)
+//                    let paths = NSSearchPathForDirectoriesInDomains(
+//                                    FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+//                    let documentsDirectory: URL = URL(fileURLWithPath: paths[0])
+//                    let dataPath = documentsDirectory.appendingPathComponent(uuid)
+//                    try! videoData?.write(to: dataPath, options: [])
+//                    parent.videoUrl = dataPath.absoluteString
+//                }
             }
             do {
+                
                 let asset = AVURLAsset(url: URL(string: parent.videoUrl)! , options: nil)
+                print("videoUrl in picker:", parent.videoUrl)
                 let imgGenerator = AVAssetImageGenerator(asset: asset)
                 imgGenerator.appliesPreferredTrackTransform = true
                 let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(value: 0, timescale: 1), actualTime: nil)
@@ -53,6 +68,7 @@ struct VideoPicker: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<VideoPicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.mediaTypes = [kUTTypeMovie as String]
+        picker.sourceType = sourceType
         picker.delegate = context.coordinator
         return picker
     }
