@@ -70,7 +70,7 @@ struct SignUpView: View {
             }
             .padding(.bottom, 20)
             .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet)
+                ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl, sourceType: self.$sourceType)
             }
             
             VStack(alignment: .leading, spacing: 5) {
@@ -112,7 +112,7 @@ struct SignUpView: View {
                         .actionSheet(isPresented: $showingActionSheet) {
                             ActionSheet(title: Text(""), buttons: [
                                 .default(Text("Choose A Photo")){
-                                    self.sourceType = .photoLibrary
+                                    self.sourceType = .savedPhotosAlbum
                                     self.showingImagePicker = true
                                 },
                                 .default(Text("Take A Photo")){
@@ -518,7 +518,7 @@ struct SignUpView: View {
     }
     
     func SignUpPressed() { //TODO: add email verification
-        if (imageData == Data()) {
+        if (imageUrl == "") {
             print("no image added")
         }
         
@@ -618,6 +618,7 @@ struct SignUpView: View {
                             }
                         })
                     }
+                    //TODO: transition screen?
                     print("done adding user doc")
                     print(self.imageUrl)
                 }

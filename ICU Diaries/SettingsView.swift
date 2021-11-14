@@ -51,8 +51,8 @@ struct SettingsView: View {
                         typing = true
                         if self.code.isEmpty && showError {
                             showError = false
-                        }
-                    }
+                        }//if
+                    }//ontap
             
             
             if !isCodeMatch && showError {
@@ -60,7 +60,7 @@ struct SettingsView: View {
                     .font(.system(size: 14))
                     .fontWeight(.semibold)
                     .foregroundColor(Color.red)
-            }
+            }//if
             
             Text("Assign")
                 .padding(10)
@@ -99,7 +99,6 @@ struct SettingsView: View {
                     }//getDocuments
                 }//onTap
             }
-            
             Text("Sign Out")
                 .navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)

@@ -39,6 +39,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>ICU Diaries would like to use your camera for you to take photos or videos</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>ICU Diaries would like to use your microphone for videos or recording audio messages</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>ICU Diaries would like to add photos you take in the app to your camera roll</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>ICU Diaries would like to use your Media Library to upload your selected photo(s) and/or video(s)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>ICU Diaries would like to use your Photo Library to upload your selected or taken photos</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
