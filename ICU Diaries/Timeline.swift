@@ -16,6 +16,10 @@ struct Timeline: View {
     var body: some View {
         NavigationView {
             VStack {
+                Text("Timeline")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .padding(.bottom, 10)
                 GeometryReader { geometry in
                     List {
                         ForEach(viewModel.posts, id: \.id) {(post) in
@@ -31,10 +35,8 @@ struct Timeline: View {
                         self.viewModel.getData()
                     }
                 }
-                VStack {
-                    NavigationLink(destination: FilterView().navigationBarBackButtonHidden(false)) {
-                        Text("Filter")
-                    }
+                NavigationLink(destination: FilterView().navigationBarBackButtonHidden(false)) {
+                    Text("Filter")
                 }
             }
         }

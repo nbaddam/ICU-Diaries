@@ -7,7 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
-import Firebase
+import FirebaseFirestore
 
 struct SettingsView: View {
     @State private var SignOutSuccess: Bool? = false
@@ -16,6 +16,9 @@ struct SettingsView: View {
     @State var isCodeMatch: Bool = false
     @State var showError: Bool = false
     @State var typing: Bool = false
+    @State var isFamily: Bool
+    @State var presentAlert: Bool = false
+    
     var body: some View {
         VStack {
             Text("Settings")
@@ -25,6 +28,8 @@ struct SettingsView: View {
             NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), tag: true, selection: $SignOutSuccess) {
                 EmptyView()
             }
+            
+            if(isFamily == true){
             let db = Firestore.firestore()
             let user_code = db.collection("users").document(Auth.auth().currentUser!.uid)
             Text("Patient Code:")
@@ -47,8 +52,8 @@ struct SettingsView: View {
                         typing = true
                         if self.code.isEmpty && showError {
                             showError = false
-                        }
-                    }
+                        }//if
+                    }//ontap
             
             
             if !isCodeMatch && showError {
@@ -56,7 +61,7 @@ struct SettingsView: View {
                     .font(.system(size: 14))
                     .fontWeight(.semibold)
                     .foregroundColor(Color.red)
-            }
+            }//if
             
             Text("Assign")
                 .padding(10)
@@ -72,6 +77,7 @@ struct SettingsView: View {
                             print("Error getting documents: \(error)")
                             isCodeMatch = false
                             showError = false
+                            presentAlert = false
                         }
                         else {
                             for document in querySnapshot!.documents {
@@ -85,11 +91,13 @@ struct SettingsView: View {
                                 print("code NOT found")
                                 isCodeMatch = false
                                 showError = true
+                                presentAlert = false
                             }
                             else {
                                 print("code found")
                                 isCodeMatch = true
                                 showError = false
+                                presentAlert = true
                             }
                         }//else
                     }//getDocuments
@@ -115,11 +123,18 @@ struct SettingsView: View {
                 }//onTap
             Spacer()
         }//Vstack
+        .alert(isPresented: $presentAlert) {
+             Alert(
+                 title: Text("Patient Code Assigned!")
+             )
+         }
     }// Body View
-//SettingsView
+}//SettingsView
 
+/*
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
     }
 }
+*/

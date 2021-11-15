@@ -614,13 +614,6 @@ struct SignUpView: View {
                                           print("sending email verification")
                                         }
                                     }
-                                /*
-                                (data: ["firstName":cleanFirst, "lastName":cleanLast, "uid":result!.user.uid]) { (error) in
-                                    
-                                    if error != nil {
-                                        //user data wasnt saved, try again?
-                                    }
-             */
                                 }
                             }
                         })

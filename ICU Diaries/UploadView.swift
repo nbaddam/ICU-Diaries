@@ -316,7 +316,7 @@ struct UploadView: View {
                 VideoPicker(videoUrl: self.$videoUrl, showVideoPicker: self.$showingVideoPicker, showActionSheetVideo: self.$showingActionSheet, thumbnail: self.$pickedImage, sourceType: self.$sourceType)
             }
         }.actionSheet(isPresented: $showingActionSheet) {
-            ActionSheet(title: Text(""), buttons: [	
+            ActionSheet(title: Text(""), buttons: [
                 .default(Text("Choose A Photo")){
                     self.sourceType = UIImagePickerController.SourceType.savedPhotosAlbum
                     self.showingPicker = true

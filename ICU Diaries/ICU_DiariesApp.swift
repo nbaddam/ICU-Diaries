@@ -6,13 +6,27 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
+import FirebaseFirestore
 @main
 struct ICU_DiariesApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            if (Auth.auth().currentUser?.uid == nil) {
+                ContentView()
+//            }
+//            else {
+//                let user = Auth.auth().currentUser
+//                let db = Firestore.firestore()
+//                let userDoc = db.collection("users").document(user!.uid)
+//                var userType = ""
+//                userDoc.getDocument { (document, error) in
+//                    if let document = document, document.exists {
+//                        document.data
+//                    }
+//                }
+//            }
         }
     }
 }
