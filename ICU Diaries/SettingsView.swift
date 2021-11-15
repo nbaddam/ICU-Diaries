@@ -4,7 +4,6 @@
 //
 //  Created by Nitya Baddam on 10/8/21.
 //
-
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -48,6 +47,8 @@ struct SettingsView: View {
                         print("didnt work try again")
                     }
                 }//onTap
+            Spacer()
+            Spacer()
             
             if(isPatient == true){
                 Text("Patient Code: " + patient_code)
@@ -64,20 +65,20 @@ struct SettingsView: View {
                             }
                         }
                     )
-                        .padding(8)
-                        .textFieldStyle(PlainTextFieldStyle())
-                        .background(RoundedRectangle(cornerRadius: 8)
-                                        .strokeBorder(
-                                            showError ? Color.red : Color(UIColor.lightGray),
-                                            lineWidth: typing ? 3 : 1
-                                )
-                        )
-                        .onTapGesture {
-                            typing = true
-                            if self.code.isEmpty && showError {
-                                showError = false
-                            }//if
-                        }//ontap
+                    .padding(12)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .frame(maxWidth: (UIScreen.screenWidth - 50))
+                    .background(RoundedRectangle(cornerRadius: 8)
+                                .strokeBorder(
+                                    showError ? Color.red : Color(UIColor.lightGray),
+                                    lineWidth: typing ? 3 : 1
+                                ))
+                    .onTapGesture {
+                        typing = true
+                        if self.code.isEmpty && showError {
+                            showError = false
+                        }//if
+                    }//ontap
             
             
             if !isCodeMatch && showError {
@@ -92,7 +93,7 @@ struct SettingsView: View {
                 .padding(.leading, 15)
                 .padding(.trailing, 15)
                 .background(Color.blue)
-                .cornerRadius(2)
+                .cornerRadius(8)
                 .foregroundColor(.white)
                 .onTapGesture {
                     typing = false
@@ -138,7 +139,6 @@ struct SettingsView: View {
          }
     }// Body View
 }//SettingsView
-
 /*
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
