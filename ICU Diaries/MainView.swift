@@ -13,6 +13,7 @@ import FirebaseFirestore
 struct MainView: View {
     @State private var selection = 1
     @State var isPatient: Bool
+    @State var patient_code: String
     @State var isFamily: Bool
     @State var isDoctor: Bool
     
@@ -29,7 +30,7 @@ struct MainView: View {
                         Label("Timeline", systemImage: "house")
                     }
                     .tag(1)
-                SettingsView(isFamily: false)
+                SettingsView(isPatient: true, patient_code: patient_code, isFamily: false)
                     .tabItem {
                         Label("Settings", systemImage: "gear")
                     }
@@ -38,7 +39,7 @@ struct MainView: View {
         }//if
         else if(isFamily == true){
             TabView(selection: $selection) {
-                SettingsView(isFamily: true)
+                SettingsView(isPatient: false, patient_code: patient_code, isFamily: true)
                     .tabItem {
                         Label("Settings", systemImage: "gear")
                     }
@@ -57,7 +58,7 @@ struct MainView: View {
                         Label("Inbox", systemImage: "envelope")
                     }
                     .tag(0)
-                SettingsView(isFamily: false)
+                SettingsView(isPatient: false, patient_code: patient_code, isFamily: false)
                     .tabItem {
                         Label("Settings", systemImage: "gear")
                     }
