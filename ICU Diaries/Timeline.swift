@@ -20,6 +20,7 @@ struct Timeline: View {
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                     .padding(.bottom, 10)
+                Spacer()
                 GeometryReader { geometry in
                     List {
                         ForEach(viewModel.posts, id: \.id) {(post) in
