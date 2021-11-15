@@ -7,7 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
-import Firebase
+import FirebaseFirestore
 
 struct SettingsView: View {
     @State private var SignOutSuccess: Bool? = false
@@ -17,6 +17,7 @@ struct SettingsView: View {
     @State var showError: Bool = false
     @State var typing: Bool = false
     @State var isFamily: Bool
+    @State var presentAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -76,6 +77,7 @@ struct SettingsView: View {
                             print("Error getting documents: \(error)")
                             isCodeMatch = false
                             showError = false
+                            presentAlert = false
                         }
                         else {
                             for document in querySnapshot!.documents {
@@ -89,11 +91,13 @@ struct SettingsView: View {
                                 print("code NOT found")
                                 isCodeMatch = false
                                 showError = true
+                                presentAlert = false
                             }
                             else {
                                 print("code found")
                                 isCodeMatch = true
                                 showError = false
+                                presentAlert = true
                             }
                         }//else
                     }//getDocuments
@@ -119,6 +123,11 @@ struct SettingsView: View {
                 }//onTap
             Spacer()
         }//Vstack
+        .alert(isPresented: $presentAlert) {
+             Alert(
+                 title: Text("Patient Code Assigned!")
+             )
+         }
     }// Body View
 }//SettingsView
 
