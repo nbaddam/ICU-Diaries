@@ -19,13 +19,15 @@ struct Timeline: View {
                 Text("Timeline")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
-                    .padding(.bottom, 10)
                 Spacer()
                 GeometryReader { geometry in
                     List {
                         ForEach(viewModel.posts, id: \.id) {(post) in
                             if !post.imageName.isEmpty {
                                 PostView(hasImage: true, hasVideo: false, hasAudio: false, post: post, screenWidth: geometry.size.width)
+                            }
+                            else if !post.videoName.isEmpty {
+                                PostView(hasImage: false, hasVideo: true, hasAudio: false, post: post, screenWidth: geometry.size.width)
                             }
                             else {
                                 PostView(hasImage: false, hasVideo: false, hasAudio: false, post: post, screenWidth: geometry.size.width)

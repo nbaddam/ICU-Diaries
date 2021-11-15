@@ -37,6 +37,7 @@ class PostViewModel: ObservableObject {
                             let dateFormatter = DateFormatter()
                             let message = data["Message"] as? String ?? ""
                             let imageName = data["imageUrl"] as? String ?? ""
+                            let videoName = data["videoUrl"] as? String ?? ""
                             
                             dateFormatter.dateFormat = "MM/dd/YY 'at' hh:mm aaa"
                             let date = dateFormatter.string(from: stamp.dateValue())
@@ -51,7 +52,7 @@ class PostViewModel: ObservableObject {
                                     let ln = document.get("lastName") as? String ?? ""
                                     let profileImageName = document.get("profileImageUrl") as? String ?? ""
                                     
-                                    let post = Post(id: id, userName: fn + " " + ln, dateCreated: date, text: message, profileImageName: profileImageName, imageName: imageName)
+                                    let post = Post(id: id, userName: fn + " " + ln, dateCreated: date, text: message, profileImageName: profileImageName, imageName: imageName, videoName: videoName)
                                     self.posts.append(post)
                                     
                                 } else {

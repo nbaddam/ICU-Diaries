@@ -8,6 +8,7 @@
 import SwiftUI
 import Foundation
 import URLImage
+import AVKit
 
 struct Post: Identifiable, Hashable {
     let id: String
@@ -16,6 +17,7 @@ struct Post: Identifiable, Hashable {
     let text: String
     let profileImageName: String
     let imageName: String
+    let videoName: String
 }
 
 struct PostView: View {
@@ -24,26 +26,58 @@ struct PostView: View {
     let hasAudio: Bool
     let post: Post
     let screenWidth: CGFloat
-    let defaultProfile = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.business2community.com%2Fwp-content%2Fuploads%2F2017%2F08%2Fblank-profile-picture-973460_640.png&imgrefurl=https%3A%2F%2Fwww.business2community.com%2Fsocial-media%2Fimportance-profile-picture-career-01899604&tbnid=ZbfgeaptF8Y5ZM&vet=12ahUKEwiZ-Jn7ipn0AhUVQa0KHeBtCUMQMygBegUIARDMAQ..i&docid=Smb2EEjVhvpzWM&w=640&h=640&q=profile%20picture&ved=2ahUKEwiZ-Jn7ipn0AhUVQa0KHeBtCUMQMygBegUIARDMAQ"
+    
+    @State var audioPlayer: AVAudioPlayer!
+    @State var videoPlayer: AVPlayer!
+    @State var liked = false
     
     var body: some View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 8) {
-                    URLImage(URL(string: post.profileImageName) ?? URL(string: defaultProfile)!) { image in
-                        image
+                    if let url = URL(string: post.profileImageName) {
+                        URLImage(url) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .clipShape(Circle())
+                                .frame(width: 30, height: 30)
+                        }
+                    }
+                    else{
+                        Image(systemName: "person.crop.circle")
                             .resizable()
                             .scaledToFill()
                             .clipShape(Circle())
-                            .frame(width: 50, height: 50)
+                            .frame(width: 30, height: 30)
                     }
                     Text(post.userName).font(.headline)
                 }.padding(EdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 16))
                 if hasImage {
-                    Image(post.imageName)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: screenWidth, height: 250)
-                        .clipped()
+                    if let url = URL(string: post.imageName) {
+                        URLImage(url) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: screenWidth - 32, height: 250)
+                                .clipped()
+                        }
+                    }
+                    else{
+                        Image(systemName: "exclamationmark.triangle")
+                            .resizable()
+                            .scaledToFill()
+                            .clipShape(Circle())
+                            .frame(width: 30, height: 30)
+                    }
+                }
+                if hasVideo {
+                    if let url = URL(string: post.videoName) {
+                        VideoPlayer(player: AVPlayer(url: url))
+                            .frame(height: 400)
+                    }
+                    else {
+                        Image(systemName: "play.slash")
+                    }
                 }
                 Text(post.text)
                     .lineLimit(nil)
@@ -52,8 +86,13 @@ struct PostView: View {
                     .padding(.trailing, 16)
                     .padding(.bottom, 16)
                 HStack(spacing: 8) {
-                    Image(systemName: "heart")
-                        .frame(width: 20, height: 20)
+                    Button {
+                        print("liked")
+                        liked = !liked
+                    } label: {
+                        Image(systemName: liked ? "heart.fill" : "heart")
+                            .frame(width: 20, height: 20)
+                    }
                     Spacer()
                     Text(post.dateCreated)
                         .foregroundColor(.gray)
