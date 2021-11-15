@@ -10,29 +10,32 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct Timeline: View {
+    
+   @ObservedObject private var viewModel = PostViewModel()
+
     var body: some View {
         NavigationView {
             VStack {
-                Text("Timeline")
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                    .padding(.bottom, 10)
-                Divider()
-                
-                NavigationLink(destination: FilterView().navigationBarBackButtonHidden(false)) {
-                    Text("Filter")
+                GeometryReader { geometry in
+                    List {
+                        ForEach(viewModel.posts, id: \.id) {(post) in
+                            if !post.imageName.isEmpty {
+                                PostView(hasImage: true, hasVideo: false, hasAudio: false, post: post, screenWidth: geometry.size.width)
+                            }
+                            else {
+                                PostView(hasImage: false, hasVideo: false, hasAudio: false, post: post, screenWidth: geometry.size.width)
+                            }
+                        }
+                    }.onAppear() {
+                        self.viewModel.posts.removeAll()
+                        self.viewModel.getData()
+                    }
                 }
-                Divider()
-                Spacer()
-                GroupBox(
-                    label: Label("Mom", systemImage: "heart.fill")
-                        .foregroundColor(.red)
-                    ) {
-                    Text("Can't wait to see you next week!")
-                    }.padding()
-                
-                Spacer()
-                Spacer()
+                VStack {
+                    NavigationLink(destination: FilterView().navigationBarBackButtonHidden(false)) {
+                        Text("Filter")
+                    }
+                }
             }
         }
     }
@@ -47,11 +50,11 @@ struct PlainGroupBoxStyle: GroupBoxStyle {
     }
 }
 
-struct Timeline_Previews: PreviewProvider {
-    static var previews: some View {
-        Timeline()
-    }
-}
+//struct Timeline_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Timeline()
+//    }
+//}
 
 
 /*   Code to read message data for a specific patient
