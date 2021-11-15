@@ -4,7 +4,6 @@
 //
 //  Created by Nitya Baddam on 10/8/21.
 //
-
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -16,8 +15,11 @@ struct SettingsView: View {
     @State var isCodeMatch: Bool = false
     @State var showError: Bool = false
     @State var typing: Bool = false
+    @State var isPatient: Bool
+    @State var patient_code: String
     @State var isFamily: Bool
     @State var presentAlert: Bool = false
+    @State var copiedToClip: Bool = false
     
     var body: some View {
         VStack {
@@ -28,21 +30,54 @@ struct SettingsView: View {
             NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), tag: true, selection: $SignOutSuccess) {
                 EmptyView()
             }
+            Text("Sign Out")
+                .navigationBarTitle(Text(""), displayMode: .inline)
+                .navigationBarHidden(true)
+                .padding(10)
+                .padding(.leading, 15)
+                .padding(.trailing, 15)
+                .background(Color.blue)
+                .cornerRadius(8)
+                .foregroundColor(.white)
+                .onTapGesture {
+                    do {
+                        try Auth.auth().signOut()
+                        SignOutSuccess = true;
+                    }
+                    catch {
+                        print("didnt work try again")
+                    }
+                }//onTap
+            Spacer()
+            Spacer()
+            
+            if(isPatient == true){
+                HStack {
+                    Text("Patient Code: " + patient_code)
+                    Button(action: {
+                        UIPasteboard.general.string = self.patient_code
+                        print("Copied to clipboard")
+                        copiedToClip = true
+                    }) {
+                        Image(systemName: "doc.on.doc")
+                        }
+                }
+            }//if isPatient
             
             if(isFamily == true){
-            let db = Firestore.firestore()
-            let user_code = db.collection("users").document(Auth.auth().currentUser!.uid)
-            Text("Patient Code:")
-                TextField(
-                    "Type Here",
-                    text: $code,
-                    onEditingChanged: {(isChanged) in
-                        if self.code.isEmpty {
-                            showError = false
+                Text("Patient Code:")
+                    TextField(
+                        "Type Here",
+                        text: $code,
+                        onEditingChanged: {(isChanged) in
+                            if self.code.isEmpty {
+                                showError = false
+                            }
                         }
-                    })
-                    .padding(8)
+                    )
+                    .padding(12)
                     .textFieldStyle(PlainTextFieldStyle())
+                    .frame(maxWidth: (UIScreen.screenWidth - 50))
                     .background(RoundedRectangle(cornerRadius: 8)
                                 .strokeBorder(
                                     showError ? Color.red : Color(UIColor.lightGray),
@@ -68,10 +103,12 @@ struct SettingsView: View {
                 .padding(.leading, 15)
                 .padding(.trailing, 15)
                 .background(Color.blue)
-                .cornerRadius(2)
+                .cornerRadius(8)
                 .foregroundColor(.white)
                 .onTapGesture {
                     typing = false
+                    let db = Firestore.firestore()
+                    let user_code = db.collection("users").document(Auth.auth().currentUser!.uid)
                     db.collection("codes").getDocuments() { (querySnapshot, error) in
                         if let error = error {
                             print("Error getting documents: \(error)")
@@ -102,25 +139,7 @@ struct SettingsView: View {
                         }//else
                     }//getDocuments
                 }//onTap
-            }
-            Text("Sign Out")
-                .navigationBarTitle(Text(""), displayMode: .inline)
-                .navigationBarHidden(true)
-                .padding(10)
-                .padding(.leading, 15)
-                .padding(.trailing, 15)
-                .background(Color.blue)
-                .cornerRadius(8)
-                .foregroundColor(.white)
-                .onTapGesture {
-                    do {
-                        try Auth.auth().signOut()
-                        SignOutSuccess = true;
-                    }
-                    catch {
-                        print("didnt work try again")
-                    }
-                }//onTap
+            }//if is family
             Spacer()
         }//Vstack
         .alert(isPresented: $presentAlert) {
@@ -128,9 +147,13 @@ struct SettingsView: View {
                  title: Text("Patient Code Assigned!")
              )
          }
+        .alert(isPresented: $copiedToClip) {
+            Alert(
+                title: Text("Code Copied to Clipboard!")
+            )
+        }
     }// Body View
 }//SettingsView
-
 /*
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

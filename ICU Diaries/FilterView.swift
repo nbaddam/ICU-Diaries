@@ -7,17 +7,21 @@
 
 import SwiftUI
 
+//idea is have 2 arrays in timeline. One store all the posts in firestore. the other holds only the ones applicable with the filter
+//time line will print array 2
+//filter will read in the first array and add only the posts that fit the filter and output that as the second array
+
 struct FilterView: View {
-    var body: some View {
-        VStack {
-            Text("Filter")
-                .font(.largeTitle)
-                .fontWeight(.semibold)
-                .padding(.bottom, 20)
+    //array of posts
     
-            Text("Filter Page")
-            Spacer()
-        }
+    @State private var date = Date()
+    
+    var body: some View {
+        
+        DatePicker("Choose Date", selection: $date, in: ...Date(), displayedComponents: .date)
+        
+        //maybe make 2 and will show all in between
+        
     }
 }
 

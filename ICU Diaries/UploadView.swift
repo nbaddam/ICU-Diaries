@@ -13,6 +13,12 @@ import FirebaseFirestoreSwift
 import AVKit
 import AVFoundation
 
+extension UIScreen{
+   static let screenWidth = UIScreen.main.bounds.size.width
+   static let screenHeight = UIScreen.main.bounds.size.height
+   static let screenSize = UIScreen.main.bounds.size
+}
+
 struct UploadView: View {
     @State var message = ""
     @State var uploadImage: Image? = nil
@@ -36,6 +42,7 @@ struct UploadView: View {
     @State var audioUrl = ""
     @State var micStatus = "mic"
     @State var recordStatus = "Tap Microphone to Record"
+    @State var typing: Bool = false
     
     func loadImage() {
         guard let inputImage = pickedImage else {return}
@@ -56,267 +63,288 @@ struct UploadView: View {
     
     var body: some View {
         VStack{
-            if uploadImage != nil {
-                uploadImage!.resizable()
-                    .frame(width: 200, height: 200)
-                    .padding(.top, 20)
+            Text("Create Message")
+                .font(.system(size: 24))
+                .fontWeight(.semibold)
+            VStack(alignment: .trailing, spacing: 8) {
+                TextEditor(text: $message)
+                    .foregroundColor(Color.black)
+                    .font(.system(size: 20))
+                    .lineSpacing(5)
+                    .frame(maxWidth: (UIScreen.screenWidth - 50), minHeight: 10, maxHeight: 400)
+                    .padding(8)
+                    .cornerRadius(16)
+                    .border(Color(UIColor.gray), width: typing ? 3 : 1)
                     .onTapGesture {
-                        self.showingActionSheet = true
+                        typing = true
                     }
-            } else {
-                Image(systemName: "plus.rectangle").resizable()
-                    .frame(width: 200, height: 150)
-                    .padding(.top, 20)
-                    .onTapGesture {
-                        self.showingActionSheet = true
-                    }
-            }
-            HStack {
-                Image(systemName: "photo.fill").resizable()
-                    .frame(width: 30, height: 30)
-                    .onTapGesture(perform: {
-                        self.showingActionSheet = true
-                    })
-                Image(systemName: "video.square").resizable()
-                    .frame(width: 30, height: 30)
-                    .onTapGesture(perform: {
-                        print("insert video clicked")
-                        print(self.showingActionSheetVideo)
-                        self.showingActionSheet = true
-                    })
-            }
-            
-            Text(recordStatus)
-            Image(systemName: micStatus).resizable()
-                .frame(width: 50, height: 50)
-                .onTapGesture {
-                    if (audioRecorder == nil) {
-                        let uuid = UUID().uuidString
-                        var audioFileName = ""
-                        do {
-                            audioFileName = try getDocumentsDirectory().appendingPathComponent(uuid + ".m4a").absoluteString
-                            audioUrl = audioFileName
-                        } catch {
-                            print("error getting audio filename")
-                        }
-                        
-                        let settings = [
-                            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                            AVSampleRateKey: 12000,
-                            AVNumberOfChannelsKey: 1,
-                            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-                        ]
-
-                        do {
-                            audioRecorder = try AVAudioRecorder(url: URL(string: audioFileName)!, settings: settings)
-                            audioRecorder.record()
-                            recordStatus = "Tap Microphone to Stop"
-                            micStatus = "mic.fill"
-                        } catch {
-                            audioRecorder.stop()
-                            audioRecorder = nil
-
-                            recordStatus = "Tap Microphone to Record"
-                            micStatus = "mic"
-                                    
-                        }
+                
+                VStack {
+                    if uploadImage != nil {
+                        uploadImage!.resizable()
+                            .frame(width: 150, height: 150)
+                            .padding(.top, 20)
+                            .onTapGesture {
+                                self.showingActionSheet = true
+                                typing = false
+                            }
                     } else {
-                        audioRecorder.stop()
-                        audioRecorder = nil
-                        recordStatus = "Tap Microphone to Re-record"
-                        micStatus = "mic"
+                        //Image(systemName: "plus.rectangle").resizable()
+                          //  .frame(width: 40, height: 40)
+                            //.padding(.top, 20)
+                            //.onTapGesture {
+                              //  self.showingActionSheet = true
+                                //typing = false
+                            //}
                     }
                 }
-            Text("Message:")
-                TextField(
-                    "Type Here",
-                    text: $message)
-                    .cornerRadius(5)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.bottom, 10)
-            Text("Upload")
-                .padding(10)
-                .padding(.leading, 15)
-                .padding(.trailing, 15)
-                .background(Color.blue)
-                .cornerRadius(2)
-                .foregroundColor(.white)
-                .onTapGesture {
-                    print("upload clicked")
-                    let db = Firestore.firestore()
-                    let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
-                    docRef.getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            let testing = document.get("code")
-                            let uid = Auth.auth().currentUser!.uid
-                            let add_message = message
-                            let time = Timestamp().self
-                            let userStorageRef = StorageService.storagePosts.child(Auth.auth().currentUser!.uid)
-                            let storageRef = userStorageRef.child(UUID().uuidString)
-                            print(imageUrl)
-                            if (imageUrl != "") {
-                                storageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
-                                    (StorageMetadata, error) in
-                                    print("inside storing pic")
-                                    if error != nil {
-                                        print("error storing pic")
-                                        print(error!.localizedDescription)
-                                        return
-                                    }
-                                    
-                                    storageRef.downloadURL(completion: {
-                                        (url, error) in
-                                        if (error != nil) {
-                                            print("error downloading url")
-                                            return
-                                        }
-                                        if let metaImageUrl = url?.absoluteString {
-                                            db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
-                                                                                                            ["Message": add_message,
-                                                                                                            "Time": time,
-                                                                                                            "UID": uid,
-                                                                                                            "imageUrl": metaImageUrl,
-                                                                                                            "videoUrl": ""])
-                                            message = ""
-                                            presentAlert = true
-                                            imageUrl = ""
-                                            videoUrl = ""
-                                            pickedImage = nil
-                                            uploadImage = nil
-                                        }
-                                    })
-                                }
-                            }
-                            else if (imageData != Data()) {
-                                storageRef.putData(self.imageData, metadata: StorageMetadata()) {
-                                    (StorageMetadata, error) in
-                                    print("inside storing pic")
-                                    if error != nil {
-                                        print("error storing pic")
-                                        print(error!.localizedDescription)
-                                        return
-                                    }
-                                    
-                                    storageRef.downloadURL(completion: {
-                                        (url, error) in
-                                        if (error != nil) {
-                                            print("error downloading url")
-                                            return
-                                        }
-                                        if let metaImageUrl = url?.absoluteString {
-                                            db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
-                                                                                                            ["Message": add_message,
-                                                                                                            "Time": time,
-                                                                                                            "UID": uid,
-                                                                                                            "imageUrl": metaImageUrl,
-                                                                                                            "videoUrl": ""])
-                                            message = ""
-                                            presentAlert = true
-                                            imageUrl = ""
-                                            videoUrl = ""
-                                            pickedImage = nil
-                                            uploadImage = nil
-                                        }
-                                    })
-                                }
-                            }
-                            else if (videoUrl != "") {
-                                storageRef.putFile(from: URL(string: videoUrl)!, metadata: StorageMetadata()
-                                    , completion: { (metadata, error) in
-                                        if let error = error {
-                                            print(error)
-                                        }
-                                        
-                                    storageRef.downloadURL(completion: {
-                                        (url, error) in
-                                        if (error != nil) {
-                                            print("error downloading url")
-                                            return
-                                        }
-                                        if let videoUrl = url?.absoluteString {
-                                            db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
-                                                                                                            ["Message": add_message,
-                                                                                                            "Time": time,
-                                                                                                            "UID": uid,
-                                                                                                            "imageUrl": "",
-                                                                                                            "videoUrl": videoUrl])
-                                            message = ""
-                                            presentAlert = true
-                                            imageUrl = ""
-                                            self.videoUrl = ""
-                                            pickedImage = nil
-                                            uploadImage = nil
-                                        }
-                                    }
-                                )}
-                            )}
-                            else if (audioUrl != "") {
-                                storageRef.putFile(from: URL(string: audioUrl)!, metadata: StorageMetadata()
-                                    , completion: { (metadata, error) in
-                                        if let error = error {
-                                            print(error)
-                                        }
-                                        
-                                    storageRef.downloadURL(completion: {
-                                        (url, error) in
-                                        if (error != nil) {
-                                            print("error downloading url")
-                                            return
-                                        }
-                                        if let audioUrl = url?.absoluteString {
-                                            db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
-                                                                                                            ["Message": add_message,
-                                                                                                            "Time": time,
-                                                                                                            "UID": uid,
-                                                                                                            "imageUrl": "",
-                                                                                                            "videoUrl": "",
-                                                                                                            "audioUrl": audioUrl])
-                                            message = ""
-                                            presentAlert = true
-                                            imageUrl = ""
-                                            self.videoUrl = ""
-                                            pickedImage = nil
-                                            uploadImage = nil
-                                        }
-                                    }
-                                )}
-                            )}
-                            else {
-                                db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
-                                                                                                ["Message": add_message,
-                                                                                                "Time": time,
-                                                                                                "UID": uid,
-                                                                                                "imageUrl": "",
-                                                                                                 "videoUrl": ""])
-                                message = ""
-                                presentAlert = true
-                                imageUrl = ""
-                                videoUrl = ""
-                                pickedImage = nil
-                                uploadImage = nil
-                            }
-                            
-                        } else {
-                            print("Document does not exist")
-                        }
-                    }//get document
-                }//onTap
                 
-        }//Vstack
-        .alert(isPresented: $presentAlert) {
-             Alert(
-                 title: Text("Message Posted!")
-             )
-         }
-        .sheet(isPresented: $showingPicker, onDismiss: loadImage) {
-            if (showingImagePicker) {
-                ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl, sourceType: self.$sourceType)
+                HStack(spacing: 5) {
+                        Image(systemName: "photo.fill").resizable()
+                            .frame(width: 40, height: 40)
+                            .onTapGesture(perform: {
+                                self.showingActionSheet = true
+                                typing = false
+                            })
+                        Image(systemName: "video.square").resizable()
+                            .frame(width: 40, height: 40)
+                            .onTapGesture(perform: {
+                                print("insert video clicked")
+                                print(self.showingActionSheetVideo)
+                                self.showingActionSheet = true
+                                typing = false
+                            })
+                        Image(systemName: micStatus).resizable()
+                            .frame(width: 40, height: 40)
+                            .onTapGesture {
+                                typing = false
+                                if (audioRecorder == nil) {
+                                    let uuid = UUID().uuidString
+                                    var audioFileName = ""
+                                    do {
+                                        audioFileName = try getDocumentsDirectory().appendingPathComponent(uuid + ".m4a").absoluteString
+                                        audioUrl = audioFileName
+                                    } catch {
+                                        print("error getting audio filename")
+                                    }
+                                    
+                                    let settings = [
+                                        AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                                        AVSampleRateKey: 12000,
+                                        AVNumberOfChannelsKey: 1,
+                                        AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+                                    ]
+
+                                    do {
+                                        audioRecorder = try AVAudioRecorder(url: URL(string: audioFileName)!, settings: settings)
+                                        audioRecorder.record()
+                                        recordStatus = "Tap Microphone to Stop"
+                                        micStatus = "mic.fill"
+                                    } catch {
+                                        audioRecorder.stop()
+                                        audioRecorder = nil
+
+                                        recordStatus = "Tap Microphone to Record"
+                                        micStatus = "mic"
+                                                
+                                    }
+                                } else {
+                                    audioRecorder.stop()
+                                    audioRecorder = nil
+                                    recordStatus = "Tap Microphone to Re-record"
+                                    micStatus = "mic"
+                                }
+                            }
+                    
+                } // HStack
+                Text(recordStatus)
             }
-            else if (showingVideoPicker) {
-                VideoPicker(videoUrl: self.$videoUrl, showVideoPicker: self.$showingVideoPicker, showActionSheetVideo: self.$showingActionSheet, thumbnail: self.$pickedImage, sourceType: self.$sourceType)
+            
+            
+            VStack {
+                Text("Upload")
+                    .padding(10)
+                    .padding(.leading, 15)
+                    .padding(.trailing, 15)
+                    .background(Color.blue)
+                    .cornerRadius(8)
+                    .foregroundColor(.white)
+                    .onTapGesture {
+                        typing = false
+                        print("upload clicked")
+                        let db = Firestore.firestore()
+                        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
+                        docRef.getDocument { (document, error) in
+                            if let document = document, document.exists {
+                                let testing = document.get("code")
+                                let uid = Auth.auth().currentUser!.uid
+                                let add_message = message
+                                let time = Timestamp().self
+                                let userStorageRef = StorageService.storagePosts.child(Auth.auth().currentUser!.uid)
+                                let storageRef = userStorageRef.child(UUID().uuidString)
+                                print(imageUrl)
+                                if (imageUrl != "") {
+                                    storageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
+                                        (StorageMetadata, error) in
+                                        print("inside storing pic")
+                                        if error != nil {
+                                            print("error storing pic")
+                                            print(error!.localizedDescription)
+                                            return
+                                        }
+                                        
+                                        storageRef.downloadURL(completion: {
+                                            (url, error) in
+                                            if (error != nil) {
+                                                print("error downloading url")
+                                                return
+                                            }
+                                            if let metaImageUrl = url?.absoluteString {
+                                                db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
+                                                                                                                ["Message": add_message,
+                                                                                                                "Time": time,
+                                                                                                                "UID": uid,
+                                                                                                                "imageUrl": metaImageUrl,
+                                                                                                                "videoUrl": ""])
+                                                message = ""
+                                                presentAlert = true
+                                                imageUrl = ""
+                                                videoUrl = ""
+                                                pickedImage = nil
+                                                uploadImage = nil
+                                            }
+                                        })
+                                    }
+                                }
+                                else if (imageData != Data()) {
+                                    storageRef.putData(self.imageData, metadata: StorageMetadata()) {
+                                        (StorageMetadata, error) in
+                                        print("inside storing pic")
+                                        if error != nil {
+                                            print("error storing pic")
+                                            print(error!.localizedDescription)
+                                            return
+                                        }
+                                        
+                                        storageRef.downloadURL(completion: {
+                                            (url, error) in
+                                            if (error != nil) {
+                                                print("error downloading url")
+                                                return
+                                            }
+                                            if let metaImageUrl = url?.absoluteString {
+                                                db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
+                                                                                                                ["Message": add_message,
+                                                                                                                "Time": time,
+                                                                                                                "UID": uid,
+                                                                                                                "imageUrl": metaImageUrl,
+                                                                                                                "videoUrl": ""])
+                                                message = ""
+                                                presentAlert = true
+                                                imageUrl = ""
+                                                videoUrl = ""
+                                                pickedImage = nil
+                                                uploadImage = nil
+                                            }
+                                        })
+                                    }
+                                }
+                                else if (videoUrl != "") {
+                                    storageRef.putFile(from: URL(string: videoUrl)!, metadata: StorageMetadata()
+                                        , completion: { (metadata, error) in
+                                            if let error = error {
+                                                print(error)
+                                            }
+                                            
+                                        storageRef.downloadURL(completion: {
+                                            (url, error) in
+                                            if (error != nil) {
+                                                print("error downloading url")
+                                                return
+                                            }
+                                            if let videoUrl = url?.absoluteString {
+                                                db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
+                                                                                                                ["Message": add_message,
+                                                                                                                "Time": time,
+                                                                                                                "UID": uid,
+                                                                                                                "imageUrl": "",
+                                                                                                                "videoUrl": videoUrl])
+                                                message = ""
+                                                presentAlert = true
+                                                imageUrl = ""
+                                                self.videoUrl = ""
+                                                pickedImage = nil
+                                                uploadImage = nil
+                                            }
+                                        }
+                                    )}
+                                )}
+                                else if (audioUrl != "") {
+                                    storageRef.putFile(from: URL(string: audioUrl)!, metadata: StorageMetadata()
+                                        , completion: { (metadata, error) in
+                                            if let error = error {
+                                                print(error)
+                                            }
+                                            
+                                        storageRef.downloadURL(completion: {
+                                            (url, error) in
+                                            if (error != nil) {
+                                                print("error downloading url")
+                                                return
+                                            }
+                                            if let audioUrl = url?.absoluteString {
+                                                db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
+                                                                                                                ["Message": add_message,
+                                                                                                                "Time": time,
+                                                                                                                "UID": uid,
+                                                                                                                "imageUrl": "",
+                                                                                                                "videoUrl": "",
+                                                                                                                "audioUrl": audioUrl])
+                                                message = ""
+                                                presentAlert = true
+                                                imageUrl = ""
+                                                self.videoUrl = ""
+                                                pickedImage = nil
+                                                uploadImage = nil
+                                            }
+                                        }
+                                    )}
+                                )}
+                                else {
+                                    db.collection("codes").document(testing as! String).collection("Messages").addDocument(data:
+                                                                                                    ["Message": add_message,
+                                                                                                    "Time": time,
+                                                                                                    "UID": uid,
+                                                                                                    "imageUrl": "",
+                                                                                                     "videoUrl": ""])
+                                    message = ""
+                                    presentAlert = true
+                                    imageUrl = ""
+                                    videoUrl = ""
+                                    pickedImage = nil
+                                    uploadImage = nil
+                                }
+                                
+                            } else {
+                                print("Document does not exist")
+                            }
+                        }//get document
+                    }//onTap
+            } // VStack
+            .alert(isPresented: $presentAlert) {
+                Alert(
+                    title: Text("Message Posted!")
+                )
             }
-        }.actionSheet(isPresented: $showingActionSheet) {
-            ActionSheet(title: Text(""), buttons: [
+            .sheet(isPresented: $showingPicker, onDismiss: loadImage) {
+                if (showingImagePicker) {
+                    ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl, sourceType: self.$sourceType)
+                }
+                else if (showingVideoPicker) {
+                    VideoPicker(videoUrl: self.$videoUrl, showVideoPicker: self.$showingVideoPicker, showActionSheetVideo: self.$showingActionSheet, thumbnail: self.$pickedImage, sourceType: self.$sourceType)
+                }
+            }.actionSheet(isPresented: $showingActionSheet) {
+                ActionSheet(title: Text(""), buttons: [
                 .default(Text("Choose A Photo")){
                     self.sourceType = UIImagePickerController.SourceType.savedPhotosAlbum
                     self.showingPicker = true
@@ -367,7 +395,7 @@ struct UploadView: View {
         
         
         
-        
+        }
     }//body
     
     func convertVideo(toMPEG4FormatForVideo inputURL: URL, outputURL: URL, handler: @escaping (AVAssetExportSession) -> Void) {

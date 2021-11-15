@@ -24,6 +24,7 @@ struct ContentView: View {
     @State private var isVerified: Bool = true
     
     @State private var isPatient: Bool = false
+    @State private var patient_code = ""
     @State private var isFamily: Bool = false
     @State private var isDoctor: Bool = false
     
@@ -124,7 +125,7 @@ struct ContentView: View {
                     }
                 }
                 
-                NavigationLink(destination: MainView(isPatient: isPatient, isFamily: isFamily, isDoctor: isDoctor).navigationBarBackButtonHidden(true), tag: true, selection: $isPresented) {
+                NavigationLink(destination: MainView(isPatient: isPatient, patient_code: patient_code, isFamily: isFamily, isDoctor: isDoctor).navigationBarBackButtonHidden(true), tag: true, selection: $isPresented) {
                     EmptyView()
                 }
                 Text(LOGIN_LABEL)
@@ -170,6 +171,7 @@ struct ContentView: View {
                                                     let testing = document.get("userType") as! String
                                                     if(testing=="patient"){
                                                         self.isPatient = true
+                                                        self.patient_code = document.get("code") as! String
                                                     }
                                                     else if(testing=="friendsandfamily"){
                                                         self.isFamily = true
