@@ -19,6 +19,7 @@ struct SettingsView: View {
     @State var patient_code: String
     @State var isFamily: Bool
     @State var presentAlert: Bool = false
+    @State var copiedToClip: Bool = false
     
     var body: some View {
         VStack {
@@ -51,7 +52,16 @@ struct SettingsView: View {
             Spacer()
             
             if(isPatient == true){
-                Text("Patient Code: " + patient_code)
+                HStack {
+                    Text("Patient Code: " + patient_code)
+                    Button(action: {
+                        UIPasteboard.general.string = self.patient_code
+                        print("Copied to clipboard")
+                        copiedToClip = true
+                    }) {
+                        Image(systemName: "doc.on.doc")
+                        }
+                }
             }//if isPatient
             
             if(isFamily == true){
@@ -137,6 +147,11 @@ struct SettingsView: View {
                  title: Text("Patient Code Assigned!")
              )
          }
+        .alert(isPresented: $copiedToClip) {
+            Alert(
+                title: Text("Code Copied to Clipboard!")
+            )
+        }
     }// Body View
 }//SettingsView
 /*
