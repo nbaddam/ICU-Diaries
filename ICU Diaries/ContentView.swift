@@ -171,7 +171,7 @@ struct ContentView: View {
                                                     let testing = document.get("userType") as! String
                                                     if(testing=="patient"){
                                                         self.isPatient = true
-                                                        let patient_code = document.get("code") as! String
+                                                        self.patient_code = document.get("code") as! String
                                                     }
                                                     else if(testing=="friendsandfamily"){
                                                         self.isFamily = true
