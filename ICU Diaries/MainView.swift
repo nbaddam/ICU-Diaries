@@ -63,7 +63,7 @@ struct MainView: View {
                         Label("Settings", systemImage: "gear")
                     }
                     .tag(2)
-                UploadView()
+                DoctorUploadView(patient: Patient(id: "", name: "", profileImageUrl: ""))
                     .tabItem {
                         Label("Upload", systemImage: "square.and.pencil")
                     }

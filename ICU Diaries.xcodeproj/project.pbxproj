@@ -32,6 +32,10 @@
 		AF44479F2741BAA80046754E /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44479E2741BAA80046754E /* PostViewModel.swift */; };
 		AF4447A42741DC320046754E /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF4447A32741DC320046754E /* URLImage */; };
 		AF4447A62741DC320046754E /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = AF4447A52741DC320046754E /* URLImageStore */; };
+		AF4447A82742C3350046754E /* PatientProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4447A72742C3350046754E /* PatientProfiles.swift */; };
+		AF4447AA2742C33A0046754E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4447A92742C33A0046754E /* SearchBar.swift */; };
+		AF4447AC2742C33E0046754E /* DoctorUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4447AB2742C33E0046754E /* DoctorUploadView.swift */; };
+		AF4447AE2742C40C0046754E /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4447AD2742C40C0046754E /* SearchService.swift */; };
 		B30904462710B3460001A576 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30904452710B3460001A576 /* LoginView.swift */; };
 		B3ADAF12273C59C0009B8A24 /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ADAF11273C59C0009B8A24 /* VideoPicker.swift */; };
 		B3B1230D27305E0A00076A21 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1230C27305E0A00076A21 /* ResetPasswordView.swift */; };
@@ -95,6 +99,10 @@
 		AF232F1027076EFF00302D47 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF44479A27417E080046754E /* PostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		AF44479E2741BAA80046754E /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		AF4447A72742C3350046754E /* PatientProfiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientProfiles.swift; sourceTree = "<group>"; };
+		AF4447A92742C33A0046754E /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		AF4447AB2742C33E0046754E /* DoctorUploadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorUploadView.swift; sourceTree = "<group>"; };
+		AF4447AD2742C40C0046754E /* SearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		AF6FD3FB824C317D60D2C2C7 /* Pods_ICU_DiariesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_DiariesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30904452710B3460001A576 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B3ADAF11273C59C0009B8A24 /* VideoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
@@ -157,6 +165,7 @@
 				B3B9F51E27387F1600064B9F /* ImagePicker.swift */,
 				B3BD4A99273B1D64005527B6 /* StorageService.swift */,
 				B3BD4A9E273B2823005527B6 /* Extensions.swift */,
+				AF4447AD2742C40C0046754E /* SearchService.swift */,
 				B3ADAF11273C59C0009B8A24 /* VideoPicker.swift */,
 			);
 			path = Helpers;
@@ -200,7 +209,10 @@
 				B3BFD43E2719DF7C00793D45 /* DoctorMessageView.swift */,
 				B3BFD4402719DF8700793D45 /* SettingsView.swift */,
 				B3BFD4422719DF8E00793D45 /* MainView.swift */,
+				AF4447A72742C3350046754E /* PatientProfiles.swift */,
 				AF44479A27417E080046754E /* PostView.swift */,
+				AF4447AB2742C33E0046754E /* DoctorUploadView.swift */,
+				AF4447A92742C33A0046754E /* SearchBar.swift */,
 				2C0395C52708D8EB00680E12 /* Timeline.swift */,
 				AF44479E2741BAA80046754E /* PostViewModel.swift */,
 				B3BFD4442719DFB500793D45 /* FilterView.swift */,
@@ -533,15 +545,19 @@
 				B3BD4A9F273B2823005527B6 /* Extensions.swift in Sources */,
 				B3B9F51F27387F1700064B9F /* ImagePicker.swift in Sources */,
 				B3ADAF12273C59C0009B8A24 /* VideoPicker.swift in Sources */,
+				AF4447AA2742C33A0046754E /* SearchBar.swift in Sources */,
 				B3BFD43F2719DF7C00793D45 /* DoctorMessageView.swift in Sources */,
 				AF232F1127076EFF00302D47 /* SignUpView.swift in Sources */,
 				2CA98E66273301A00025E9C8 /* UploadView.swift in Sources */,
 				0E04099B270F6A02006CF444 /* Utilities.swift in Sources */,
 				B3B15D0427287A4B00C2F551 /* VerificationView.swift in Sources */,
+				AF4447AC2742C33E0046754E /* DoctorUploadView.swift in Sources */,
 				2CBE06F827305C160066B3AC /* EyeToggleView.swift in Sources */,
 				B3BFD4452719DFB500793D45 /* FilterView.swift in Sources */,
 				0E8118DF272C39DD00677C35 /* ButtonNameUtil.swift in Sources */,
 				0E8118E1272C39E600677C35 /* ErrorMessageUtil.swift in Sources */,
+				AF4447A82742C3350046754E /* PatientProfiles.swift in Sources */,
+				AF4447AE2742C40C0046754E /* SearchService.swift in Sources */,
 				AF232EE627076C9000302D47 /* ICU_DiariesApp.swift in Sources */,
 				B3B1230D27305E0A00076A21 /* ResetPasswordView.swift in Sources */,
 			);
