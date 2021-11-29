@@ -13,7 +13,10 @@ import FirebaseFirestore
 
 struct VerificationView: View {
     @State private var isVerified: Bool? = false
-    
+    @State private var patient_code = ""
+    @State private var isPatient: Bool = false
+    @State private var isFamily: Bool = false
+    @State private var isDoctor: Bool = false
     var body: some View {
         VStack{
             VerificationText()
@@ -41,17 +44,52 @@ struct VerificationView: View {
                 .cornerRadius(2)
                 .foregroundColor(.white)
                 .onTapGesture {
-                    if (Auth.auth().currentUser?.isEmailVerified != true) {
-                        Auth.auth().currentUser?.sendEmailVerification { error in
-                          print("sending email verification")
+                    let user = Auth.auth().currentUser
+                    if (user != nil) {
+                        user?.reload { error in
+                            if error == nil {
+                                if (Auth.auth().currentUser?.isEmailVerified != true) {
+                                    print("email isnt verified")
+                                }
+                                else {
+                                    print("email is verified")
+                                    let db = Firestore.firestore()
+                                    let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
+                                    docRef.getDocument { (document, error) in
+                                        if let document = document, document.exists {
+                                            let testing = document.get("userType") as! String
+                                            if(testing=="patient"){
+                                                self.isPatient = true
+                                                self.patient_code = document.get("code") as! String
+                                            }
+                                            else if(testing=="friendsandfamily"){
+                                                self.isFamily = true
+                                            }
+                                            else{
+                                                self.isDoctor = true
+                                            }
+                                        }
+                                        self.isVerified = true;
+                                    }
+                                    
+                                }
+                            }
                         }
                     }
-                    else {
-                        isVerified = true;
-                    }
+//                    if (Auth.auth().currentUser?.isEmailVerified != true) {
+//                        Auth.auth().currentUser?.sendEmailVerification { error in
+//                          print("sending email verification")
+//                        }
+//                    }
+//                    else {
+//                        isVerified = true;
+//                    }
                 }
             NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
                 Text("go back to login")
+            }
+            NavigationLink(destination: MainView(isPatient: self.isPatient, patient_code: self.patient_code, isFamily: self.isFamily, isDoctor: self.isDoctor).navigationBarBackButtonHidden(true), tag: true, selection: $isVerified) {
+                EmptyView()
             }
 
         }

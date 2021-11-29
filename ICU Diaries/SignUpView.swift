@@ -574,49 +574,104 @@ struct SignUpView: View {
                             "patientUID": result!.user.uid])
                     }
                     db.collection("codes").document()
-                    
-                    let storageProfileImageRef = StorageService.storageProfile.child(result!.user.uid)
-                    storageProfileImageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
-                        (StorageMetadata, error) in
-                        print("inside storing pic")
-                        if error != nil {
-                            print("error storing pic")
-                            print(error!.localizedDescription)
-                            return
-                        }
-                        
-                        storageProfileImageRef.downloadURL(completion: {
-                            (url, error) in
-                            if (error != nil) {
-                                print("error downloading url")
+                    if (imageUrl != "") {
+                        let storageProfileImageRef = StorageService.storageProfile.child(result!.user.uid)
+                        storageProfileImageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
+                            (StorageMetadata, error) in
+                            print("inside storing pic")
+                            if error != nil {
+                                print("error storing pic")
+                                print(error!.localizedDescription)
                                 return
                             }
-                            if let metaImageUrl = url?.absoluteString {
-                                let fullname = cleanFirst + " " + cleanLast
-                                db.collection("users").document(result!.user.uid).setData([
-                                    "name": fullname,
-                                    "uid": result!.user.uid,
-                                    "userType": self.selectedUser.rawValue,
-                                    "code": code,
-                                    "email": cleanEmail,
-                                    "profileImageUrl": metaImageUrl,
-                                    "searchName": fullname.splitString()
-                                ]) {err in
-                                    if let err = err {
-                                        print("error writing doc")
-                                        isFormValid = false
+                            
+                            storageProfileImageRef.downloadURL(completion: {
+                                (url, error) in
+                                if (error != nil) {
+                                    print("error downloading url")
+                                    return
+                                }
+                                if let metaImageUrl = url?.absoluteString {
+                                    let fullname = cleanFirst + " " + cleanLast
+                                    db.collection("users").document(result!.user.uid).setData([
+                                        "name": fullname,
+                                        "uid": result!.user.uid,
+                                        "userType": self.selectedUser.rawValue,
+                                        "code": code,
+                                        "email": cleanEmail,
+                                        "profileImageUrl": metaImageUrl,
+                                        "searchName": fullname.splitString()
+                                    ]) {err in
+                                        if let err = err {
+                                            print("error writing doc")
+                                            isFormValid = false
+                                        }
+                                        else {
+                                            print("doc written succesfully")
+                                            
+                                            Auth.auth().currentUser?.sendEmailVerification { error in
+                                                if error == nil {
+                                                    print("sending email verification")
+                                                    isFormValid = true
+                                                }
+                                                else {
+                                                    db.collection("users").document(result!.user.uid).delete()
+                                                    Auth.auth().currentUser?.delete { (error) in
+                                                        if error == nil {
+                                                            print("user and doc deleted because email was not real")
+                                                            self.isEmailValid = false
+                                                            isFormValid = false
+                                                        }
+                                                    }
+                                                    isFormValid = false
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            })
+                        }
+                    }
+                    else {
+                        let fullname = cleanFirst + " " + cleanLast
+                        db.collection("users").document(result!.user.uid).setData([
+                            "name": fullname,
+                            "uid": result!.user.uid,
+                            "userType": self.selectedUser.rawValue,
+                            "code": code,
+                            "email": cleanEmail,
+                            "profileImageUrl": "",
+                            "searchName": fullname.splitString()
+                        ]) {err in
+                            if let err = err {
+                                print("error writing doc")
+                                isFormValid = false
+                            }
+                            else {
+                                print(email)
+                                print("doc written succesfully")
+                                Auth.auth().currentUser?.sendEmailVerification { (error) in
+                                    if error == nil {
+                                        print("sending email verification")
+                                        isFormValid = true
                                     }
                                     else {
-                                        print("doc written succesfully")
-                                        isFormValid = true
-                                        
-                                        Auth.auth().currentUser?.sendEmailVerification { error in
-                                          print("sending email verification")
+                                        print(error?.localizedDescription)
+                                        print(error.debugDescription)
+                                        print(Auth.auth().currentUser?.email)
+
+                                        db.collection("users").document(result!.user.uid).delete()
+                                        Auth.auth().currentUser?.delete { (error) in
+                                            if error == nil {
+                                                print("user and doc deleted because email was not real")
+                                                self.isEmailValid = false
+                                                isFormValid = false
+                                            }
                                         }
                                     }
                                 }
                             }
-                        })
+                        }
                     }
                     //TODO: transition screen?
                     print("done adding user doc")
