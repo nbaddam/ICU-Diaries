@@ -52,6 +52,8 @@ struct SignUpView: View {
     // account exists already
     @State var accountExists: Bool = false
     @State var imageUrl = ""
+    @State var processingRequest: Bool = false
+    @State var failedRequest: Bool = false
     
     func loadImage() {
         guard let inputImage = pickedImage else {return}
@@ -445,10 +447,21 @@ struct SignUpView: View {
                         .font(.system(size: 14))
                         .fontWeight(.semibold)
                         .foregroundColor(Color.red)
+                } else if failedRequest {
+                    Text(FAILED_REQUEST_ERR)
+                    .font(.system(size: 14))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.red)
+                } else if processingRequest {
+                    Text(PROCESSING_REQUEST)
+                    .font(.system(size: 14))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.gray)
+                    .italic()
                 }
                 
     
-                NavigationLink(destination: VerificationView().navigationBarBackButtonHidden(true), tag: true, selection: $isFormValid) {
+                NavigationLink(destination: AccountCreatedView().navigationBarBackButtonHidden(true), tag: true, selection: $isFormValid) {
                     EmptyView()
                 }
                 Text(SIGN_UP_LABEL)
@@ -461,6 +474,7 @@ struct SignUpView: View {
                     .foregroundColor(.white)
                     .onTapGesture {
                         print("sign up clicked")
+                        processingRequest = true
                         SignUpPressed()
                     }
                 
@@ -551,11 +565,15 @@ struct SignUpView: View {
             // this should not work if account exists already
             Auth.auth().createUser(withEmail: cleanEmail, password: cleanPassword) { result, error in
                 if let error = error {
+                    processingRequest = false
+                    failedRequest = true
                     print("error creating user")
                     isFormValid = false
                     //TODO: add code for displaying "error creating user"
                 }
                 else {
+                    processingRequest = true
+                    failedRequest = false
                     print("going to create user doc in database")
                     let db = Firestore.firestore()
                     var code = NSString("")

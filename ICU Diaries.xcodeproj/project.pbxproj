@@ -14,6 +14,7 @@
 		0E8118DF272C39DD00677C35 /* ButtonNameUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8118DE272C39DD00677C35 /* ButtonNameUtil.swift */; };
 		0E8118E1272C39E600677C35 /* ErrorMessageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8118E0272C39E600677C35 /* ErrorMessageUtil.swift */; };
 		0E8118E3272C39F200677C35 /* ImageNameUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8118E2272C39F200677C35 /* ImageNameUtil.swift */; };
+		0EB6007C2756AEF600A0E73A /* AccountCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB6007B2756AEF600A0E73A /* AccountCreatedView.swift */; };
 		2C0395C42708D63000680E12 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2C0395C32708D63000680E12 /* GoogleSignIn */; };
 		2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0395C52708D8EB00680E12 /* Timeline.swift */; };
 		2CA98E66273301A00025E9C8 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA98E65273301A00025E9C8 /* UploadView.swift */; };
@@ -77,6 +78,7 @@
 		0E8118DE272C39DD00677C35 /* ButtonNameUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNameUtil.swift; sourceTree = "<group>"; };
 		0E8118E0272C39E600677C35 /* ErrorMessageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageUtil.swift; sourceTree = "<group>"; };
 		0E8118E2272C39F200677C35 /* ImageNameUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageNameUtil.swift; sourceTree = "<group>"; };
+		0EB6007B2756AEF600A0E73A /* AccountCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreatedView.swift; sourceTree = "<group>"; };
 		26729F0EA491069DB1DDA800 /* Pods-ICU Diaries-ICU DiariesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ICU Diaries-ICU DiariesUITests.debug.xcconfig"; path = "Target Support Files/Pods-ICU Diaries-ICU DiariesUITests/Pods-ICU Diaries-ICU DiariesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C0395C52708D8EB00680E12 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		2CA98E65273301A00025E9C8 /* UploadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				AF232EE927076C9100302D47 /* Assets.xcassets */,
 				AF232EEE27076C9100302D47 /* Info.plist */,
 				AF232EEB27076C9100302D47 /* Preview Content */,
+				0EB6007B2756AEF600A0E73A /* AccountCreatedView.swift */,
 			);
 			path = "ICU Diaries";
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				AF44479B27417E080046754E /* PostView.swift in Sources */,
 				B30904462710B3460001A576 /* LoginView.swift in Sources */,
 				B3BFD4432719DF8E00793D45 /* MainView.swift in Sources */,
+				0EB6007C2756AEF600A0E73A /* AccountCreatedView.swift in Sources */,
 				B3BFD4412719DF8700793D45 /* SettingsView.swift in Sources */,
 				B3B1230F2730607D00076A21 /* AccessCodeGenerator.swift in Sources */,
 				B3BD4A9A273B1D64005527B6 /* StorageService.swift in Sources */,
