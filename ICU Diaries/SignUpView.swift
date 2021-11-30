@@ -410,7 +410,7 @@ struct SignUpView: View {
                     .textFieldStyle(PlainTextFieldStyle())
                     .background(RoundedRectangle(cornerRadius: 8)
                                     .strokeBorder(
-                                        Color(UIColor.lightGray),
+                                        !isPasswordMatch ? Color.red : Color(UIColor.lightGray),
                                         lineWidth: inConfirmPassword ? 3 : 1
                                     ))
                     .onTapGesture {
