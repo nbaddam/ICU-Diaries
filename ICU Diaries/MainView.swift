@@ -53,11 +53,11 @@ struct MainView: View {
         }//elif
         else{
             TabView(selection: $selection) {
-                DoctorMessageView()
-                    .tabItem {
-                        Label("Inbox", systemImage: "envelope")
-                    }
-                    .tag(0)
+//                DoctorMessageView()
+//                    .tabItem {
+//                        Label("Inbox", systemImage: "envelope")
+//                    }
+//                    .tag(0)
                 SettingsView(isPatient: false, patient_code: patient_code, isFamily: false)
                     .tabItem {
                         Label("Settings", systemImage: "gear")
