@@ -135,6 +135,7 @@ struct SettingsView: View {
                                 isCodeMatch = true
                                 showError = false
                                 presentAlert = true
+                                code = ""
                             }
                         }//else
                     }//getDocuments

@@ -36,7 +36,7 @@ struct VerificationView: View {
                     }
                 }
             
-            Text("Click once email is verified (this doesn't work idk how to fix)")
+            Text("Continue to Home Page After Login")
                 .padding(10)
                 .padding(.leading, 15)
                 .padding(.trailing, 15)
@@ -86,7 +86,7 @@ struct VerificationView: View {
 //                    }
                 }
             NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
-                Text("go back to login")
+                Text("Go Back to Login")
             }
             NavigationLink(destination: MainView(isPatient: self.isPatient, patient_code: self.patient_code, isFamily: self.isFamily, isDoctor: self.isDoctor).navigationBarBackButtonHidden(true), tag: true, selection: $isVerified) {
                 EmptyView()
