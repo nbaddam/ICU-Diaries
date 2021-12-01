@@ -52,6 +52,23 @@ struct ResetPasswordView: View {
                         }
                     }
                 }
+            TextField(
+                "New Password",
+                text: $email,
+                onEditingChanged: { (isChanged) in
+                    if !isChanged {
+                        if Utilities.isEmailValid(self.email) {
+                            self.isEmailValid = true
+                        } else {
+                            print("Invalid email entered: \(email)")
+                            self.isEmailValid = false
+                            self.email = ""
+                        }
+                    }
+                })
+                .disableAutocorrection(true)
+                .cornerRadius(5)
+                .padding(.bottom, 10)
         }
         .padding()
         .textFieldStyle(RoundedBorderTextFieldStyle())

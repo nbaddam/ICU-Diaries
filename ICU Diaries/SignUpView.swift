@@ -61,6 +61,7 @@ struct SignUpView: View {
         profileImage = inputImage
     }
     
+    
     var body: some View {
         ScrollView {
             HStack {
@@ -668,6 +669,33 @@ struct SignUpView: View {
                             else {
                                 print(email)
                                 print("doc written succesfully")
+//                                var actionCodeSettings =  ActionCodeSettings.init()
+//                                actionCodeSettings.handleCodeInApp = true
+//                                actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+//                                let user = Auth.auth().currentUser
+//                                user?.sendEmailVerification(with: actionCodeSettings) { error in
+//                                    if error != nil {
+//                                        print(error?.localizedDescription)
+//                                        print(error.debugDescription)
+//                                        print(Auth.auth().currentUser?.email)
+//
+//                                        db.collection("users").document(result!.user.uid).delete()
+//                                        Auth.auth().currentUser?.delete { (error) in
+//                                            if error == nil {
+//                                                print("user and doc deleted because email was not real")
+//                                                self.isEmailValid = false
+//                                                isFormValid = false
+//                                            }
+//                                        }
+//                                      // Error occurred. Inspect error.code and handle error.
+//                                      return
+//                                    }
+//                                    else {
+//                                        print("sending email verification")
+//                                        isFormValid = true
+//                                    }
+//                                }
+                                
                                 Auth.auth().currentUser?.sendEmailVerification { (error) in
                                     if error == nil {
                                         print("sending email verification")

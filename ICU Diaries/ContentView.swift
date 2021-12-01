@@ -189,7 +189,7 @@ struct ContentView: View {
                                         isVerified = false
                                     }
                                 }
-                                print(password)
+//                                print(password)
                                 
                             } // Auth() end
                         } // else

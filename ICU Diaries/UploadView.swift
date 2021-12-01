@@ -140,10 +140,11 @@ struct UploadView: View {
                                         audioRecorder.record()
                                         recordStatus = "Tap Microphone to Stop"
                                         micStatus = "mic.fill"
+                                        imageUrl = ""
+                                        videoUrl = ""
                                     } catch {
                                         audioRecorder.stop()
                                         audioRecorder = nil
-
                                         recordStatus = "Tap Microphone to Record"
                                         micStatus = "mic"
                                                 
@@ -151,6 +152,8 @@ struct UploadView: View {
                                 } else {
                                     audioRecorder.stop()
                                     audioRecorder = nil
+                                    imageUrl = ""
+                                    videoUrl = ""
                                     recordStatus = "Tap Microphone to Re-record"
                                     micStatus = "mic"
                                 }
@@ -183,6 +186,7 @@ struct UploadView: View {
                                 let userStorageRef = StorageService.storagePosts.child(Auth.auth().currentUser!.uid)
                                 let storageRef = userStorageRef.child(UUID().uuidString)
                                 print(imageUrl)
+                                
                                 if (imageUrl != "") {
                                     storageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
                                         (StorageMetadata, error) in
@@ -205,11 +209,13 @@ struct UploadView: View {
                                                                                                                 "Time": time,
                                                                                                                 "UID": uid,
                                                                                                                 "imageUrl": metaImageUrl,
-                                                                                                                "videoUrl": ""])
+                                                                                                                "videoUrl": "",
+                                                                                                                "audioUrl": ""])
                                                 message = ""
                                                 presentAlert = true
                                                 imageUrl = ""
                                                 videoUrl = ""
+                                                audioUrl = ""
                                                 pickedImage = nil
                                                 uploadImage = nil
                                             }
@@ -238,11 +244,13 @@ struct UploadView: View {
                                                                                                                 "Time": time,
                                                                                                                 "UID": uid,
                                                                                                                 "imageUrl": metaImageUrl,
-                                                                                                                "videoUrl": ""])
+                                                                                                                "videoUrl": "",
+                                                                                                                "audioUrl": ""])
                                                 message = ""
                                                 presentAlert = true
                                                 imageUrl = ""
                                                 videoUrl = ""
+                                                audioUrl = ""
                                                 pickedImage = nil
                                                 uploadImage = nil
                                             }
@@ -268,11 +276,13 @@ struct UploadView: View {
                                                                                                                 "Time": time,
                                                                                                                 "UID": uid,
                                                                                                                 "imageUrl": "",
-                                                                                                                "videoUrl": videoUrl])
+                                                                                                                "videoUrl": videoUrl,
+                                                                                                                "audioUrl": ""])
                                                 message = ""
                                                 presentAlert = true
                                                 imageUrl = ""
                                                 self.videoUrl = ""
+                                                audioUrl = ""
                                                 pickedImage = nil
                                                 uploadImage = nil
                                             }
@@ -303,7 +313,8 @@ struct UploadView: View {
                                                 message = ""
                                                 presentAlert = true
                                                 imageUrl = ""
-                                                self.videoUrl = ""
+                                                videoUrl = ""
+                                                self.audioUrl = ""
                                                 pickedImage = nil
                                                 uploadImage = nil
                                             }
@@ -316,11 +327,13 @@ struct UploadView: View {
                                                                                                     "Time": time,
                                                                                                     "UID": uid,
                                                                                                     "imageUrl": "",
-                                                                                                     "videoUrl": ""])
+                                                                                                    "videoUrl": "",
+                                                                                                    "audioUrl": ""])
                                     message = ""
                                     presentAlert = true
                                     imageUrl = ""
                                     videoUrl = ""
+                                    audioUrl = ""
                                     pickedImage = nil
                                     uploadImage = nil
                                 }
@@ -350,6 +363,7 @@ struct UploadView: View {
                     self.showingPicker = true
                     self.showingImagePicker = true
                     self.videoUrl = ""
+                    self.audioUrl = ""
                     self.uploadImage = nil
                 },
                 .default(Text("Take A Photo")){
@@ -357,6 +371,7 @@ struct UploadView: View {
                     self.showingPicker = true
                     self.showingImagePicker = true
                     self.videoUrl = ""
+                    self.audioUrl = ""
                     self.uploadImage = nil
                 },
                 .default(Text("Choose A Video")){
@@ -364,6 +379,7 @@ struct UploadView: View {
                     self.showingPicker = true
                     self.showingVideoPicker = true
                     self.imageUrl = ""
+                    self.audioUrl = ""
                     self.uploadImage = nil
                 },
                 .default(Text("Take A Video")){
@@ -371,6 +387,7 @@ struct UploadView: View {
                     self.showingPicker = true
                     self.showingVideoPicker = true
                     self.imageUrl = ""
+                    self.audioUrl = ""
                     self.uploadImage = nil
                 },.cancel()
                 ])

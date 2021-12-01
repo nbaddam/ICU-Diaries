@@ -52,6 +52,7 @@ struct DoctorUploadView: View {
     @State var value = ""
     @State var patients: [Patient] = []
     @State var isLoading = false
+    @State var typing: Bool = false
     let defaultProfile = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.business2community.com%2Fwp-content%2Fuploads%2F2017%2F08%2Fblank-profile-picture-973460_640.png&imgrefurl=https%3A%2F%2Fwww.business2community.com%2Fsocial-media%2Fimportance-profile-picture-career-01899604&tbnid=ZbfgeaptF8Y5ZM&vet=12ahUKEwiZ-Jn7ipn0AhUVQa0KHeBtCUMQMygBegUIARDMAQ..i&docid=Smb2EEjVhvpzWM&w=640&h=640&q=profile%20picture&ved=2ahUKEwiZ-Jn7ipn0AhUVQa0KHeBtCUMQMygBegUIARDMAQ"
     
     @ObservedObject private var patientModel = PostViewModel()
@@ -136,90 +137,111 @@ struct DoctorUploadView: View {
 //                PatientProfile()
 //            }
             
-            if uploadImage != nil {
-                uploadImage!.resizable()
-                    .frame(width: 150, height: 150)
-                    .padding(.top, 20)
+            Text("Create Message")
+                .font(.system(size: 24))
+                .fontWeight(.semibold)
+            VStack(alignment: .trailing, spacing: 8) {
+                TextEditor(text: $message)
+                    .foregroundColor(Color.black)
+                    .font(.system(size: 20))
+                    .lineSpacing(5)
+                    .frame(maxWidth: (UIScreen.screenWidth - 50), minHeight: 10, maxHeight: 400)
+                    .padding(8)
+                    .cornerRadius(16)
+                    .border(Color(UIColor.gray), width: typing ? 3 : 1)
                     .onTapGesture {
-                        self.showingActionSheet = true   
+                        typing = true
                     }
-            } else {
-                Image(systemName: "plus.rectangle").resizable()
-                    .frame(width: 150, height: 100)
-                    .padding(.top, 20)
-                    .onTapGesture {
-                        self.showingActionSheet = true
-                    }
-            }
-            HStack {
-                Image(systemName: "photo.fill").resizable()
-                    .frame(width: 30, height: 30)
-                    .onTapGesture(perform: {
-                        self.showingActionSheet = true
-                    })
-                Image(systemName: "video.square").resizable()
-                    .frame(width: 30, height: 30)
-                    .onTapGesture(perform: {
-                        print("insert video clicked")
-                        print(self.showingActionSheetVideo)
-                        self.showingActionSheet = true
-                    })
-            }
-            
-            Text(recordStatus)
-            Image(systemName: micStatus).resizable()
-                .frame(width: 50, height: 50)
-                .onTapGesture {
-                    if (audioRecorder == nil) {
-                        let uuid = UUID().uuidString
-                        var audioFileName = ""
-                        do {
-                            audioFileName = try getDocumentsDirectory().appendingPathComponent(uuid + ".m4a").absoluteString
-                            audioUrl = audioFileName
-                        } catch {
-                            print("error getting audio filename")
-                        }
-                        
-                        let settings = [
-                            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                            AVSampleRateKey: 12000,
-                            AVNumberOfChannelsKey: 1,
-                            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-                        ]
-
-                        do {
-                            audioRecorder = try AVAudioRecorder(url: URL(string: audioFileName)!, settings: settings)
-                            audioRecorder.record()
-                            recordStatus = "Tap Microphone to Stop"
-                            micStatus = "mic.fill"
-                        } catch {
-                            audioRecorder.stop()
-                            audioRecorder = nil
-
-                            recordStatus = "Tap Microphone to Record"
-                            micStatus = "mic"
-                                    
-                        }
+                
+                VStack {
+                    if uploadImage != nil {
+                        uploadImage!.resizable()
+                            .frame(width: 150, height: 150)
+                            .padding(.top, 20)
+                            .onTapGesture {
+                                self.showingActionSheet = true
+                                typing = false
+                            }
                     } else {
-                        audioRecorder.stop()
-                        audioRecorder = nil
-                        recordStatus = "Tap Microphone to Re-record"
-                        micStatus = "mic"
+                        //Image(systemName: "plus.rectangle").resizable()
+                          //  .frame(width: 40, height: 40)
+                            //.padding(.top, 20)
+                            //.onTapGesture {
+                              //  self.showingActionSheet = true
+                                //typing = false
+                            //}
                     }
                 }
-            Text("Message:")
-                TextField(
-                    "Type Here",
-                    text: $message)
-                    .cornerRadius(5)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.bottom, 10)
+                
+                HStack(spacing: 5) {
+                        Image(systemName: "photo.fill").resizable()
+                            .frame(width: 40, height: 40)
+                            .onTapGesture(perform: {
+                                self.showingActionSheet = true
+                                typing = false
+                            })
+                        Image(systemName: "video.square").resizable()
+                            .frame(width: 40, height: 40)
+                            .onTapGesture(perform: {
+                                print("insert video clicked")
+                                print(self.showingActionSheetVideo)
+                                self.showingActionSheet = true
+                                typing = false
+                            })
+                        Image(systemName: micStatus).resizable()
+                            .frame(width: 40, height: 40)
+                            .onTapGesture {
+                                typing = false
+                                if (audioRecorder == nil) {
+                                    let uuid = UUID().uuidString
+                                    var audioFileName = ""
+                                    do {
+                                        audioFileName = try getDocumentsDirectory().appendingPathComponent(uuid + ".m4a").absoluteString
+                                        audioUrl = audioFileName
+                                    } catch {
+                                        print("error getting audio filename")
+                                    }
+                                    
+                                    let settings = [
+                                        AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                                        AVSampleRateKey: 12000,
+                                        AVNumberOfChannelsKey: 1,
+                                        AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+                                    ]
+
+                                    do {
+                                        audioRecorder = try AVAudioRecorder(url: URL(string: audioFileName)!, settings: settings)
+                                        audioRecorder.record()
+                                        recordStatus = "Tap Microphone to Stop"
+                                        micStatus = "mic.fill"
+                                        imageUrl = ""
+                                        videoUrl = ""
+                                    } catch {
+                                        audioRecorder.stop()
+                                        audioRecorder = nil
+                                        recordStatus = "Tap Microphone to Record"
+                                        micStatus = "mic"
+                                                
+                                    }
+                                } else {
+                                    audioRecorder.stop()
+                                    audioRecorder = nil
+                                    imageUrl = ""
+                                    videoUrl = ""
+                                    recordStatus = "Tap Microphone to Re-record"
+                                    micStatus = "mic"
+                                }
+                            }
+                    
+                } // HStack
+                Text(recordStatus)
+            }
             Text("Upload")
                 .padding(10)
                 .padding(.leading, 15)
                 .padding(.trailing, 15)
                 .background(Color.blue)
-                .cornerRadius(2)
+                .cornerRadius(8)
                 .foregroundColor(.white)
                 .onTapGesture {
                     print("upload clicked")
@@ -256,7 +278,8 @@ struct DoctorUploadView: View {
                                                                                                             "Time": time,
                                                                                                             "UID": uid,
                                                                                                             "imageUrl": metaImageUrl,
-                                                                                                            "videoUrl": ""])
+                                                                                                            "videoUrl": "",
+                                                                                                            "audioUrl": ""])
                                             message = ""
                                             presentAlert = true
                                             imageUrl = ""
@@ -289,11 +312,13 @@ struct DoctorUploadView: View {
                                                                                                             "Time": time,
                                                                                                             "UID": uid,
                                                                                                             "imageUrl": metaImageUrl,
-                                                                                                            "videoUrl": ""])
+                                                                                                            "videoUrl": "",
+                                                                                                            "audioUrl": ""])
                                             message = ""
                                             presentAlert = true
                                             imageUrl = ""
                                             videoUrl = ""
+                                            audioUrl = ""
                                             pickedImage = nil
                                             uploadImage = nil
                                         }
@@ -319,11 +344,13 @@ struct DoctorUploadView: View {
                                                                                                             "Time": time,
                                                                                                             "UID": uid,
                                                                                                             "imageUrl": "",
-                                                                                                            "videoUrl": videoUrl])
+                                                                                                            "videoUrl": videoUrl,
+                                                                                                            "audioUrl": ""])
                                             message = ""
                                             presentAlert = true
                                             imageUrl = ""
                                             self.videoUrl = ""
+                                            audioUrl = ""
                                             pickedImage = nil
                                             uploadImage = nil
                                         }
@@ -354,7 +381,8 @@ struct DoctorUploadView: View {
                                             message = ""
                                             presentAlert = true
                                             imageUrl = ""
-                                            self.videoUrl = ""
+                                            videoUrl = ""
+                                            self.audioUrl = ""
                                             pickedImage = nil
                                             uploadImage = nil
                                         }
@@ -367,11 +395,13 @@ struct DoctorUploadView: View {
                                                                                                 "Time": time,
                                                                                                 "UID": uid,
                                                                                                 "imageUrl": "",
-                                                                                                 "videoUrl": ""])
+                                                                                                "videoUrl": "",
+                                                                                                "audioUrl": ""])
                                 message = ""
                                 presentAlert = true
                                 imageUrl = ""
                                 videoUrl = ""
+                                audioUrl = ""
                                 pickedImage = nil
                                 uploadImage = nil
                             }
