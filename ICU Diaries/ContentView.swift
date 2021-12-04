@@ -209,8 +209,7 @@ struct ContentView: View {
             }
             .padding()
             .textFieldStyle(RoundedBorderTextFieldStyle())
-        }
-        
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 
     func getUserInfo() -> String {
