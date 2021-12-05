@@ -20,8 +20,6 @@ struct FilterView: View {
         
         DatePicker("Choose Date", selection: $date, in: ...Date(), displayedComponents: .date)
         
-        //maybe make 2 and will show all in between
-        
     }
 }
 

@@ -36,7 +36,7 @@ struct VerificationView: View {
                     }
                 }
             
-            Text("Continue to Home Page After Login")
+            Text("Continue to Home Page After Verification")
                 .padding(10)
                 .padding(.leading, 15)
                 .padding(.trailing, 15)
