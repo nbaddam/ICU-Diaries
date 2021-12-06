@@ -82,7 +82,7 @@ struct SignUpView: View {
                         .fontWeight(.medium)
                     HStack {
                         Text(REQUIRED_FIELD_LABEL)
-                            .font(.system(size: 14))
+                            .font(.caption)
                             .foregroundColor(Color(UIColor.lightGray))
                         Text(ASTERICK_LABEL)
                             .foregroundColor(Color.red)
@@ -251,30 +251,30 @@ struct SignUpView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Image(systemName: CHECKMARK)
-                                .font(.system(size: 10))
+                                .font(.caption)
                             Text("At least 6 characters")
-                                .font(.system(size: 12))
+                                .font(.caption)
                         }
                         .foregroundColor(Utilities.isAtLeastSixCharacters(self.password) ?   Color.green : Color(UIColor.gray))
                         HStack {
                             Image(systemName: CHECKMARK)
-                                .font(.system(size: 10))
+                                .font(.caption)
                             Text("Contains a lowercase letter [a-z]")
-                                .font(.system(size: 12))
+                                .font(.caption)
                         }
                         .foregroundColor(Utilities.containsLowercaseLetter(self.password) ?   Color.green : Color(UIColor.gray))
                         HStack {
                             Image(systemName: CHECKMARK)
-                                .font(.system(size: 10))
+                                .font(.caption)
                             Text("Contains a uppercase letter [A-Z]")
-                                .font(.system(size: 12))
+                                .font(.caption)
                         }
                         .foregroundColor(Utilities.containsCapitalLetter(self.password) ?   Color.green : Color(UIColor.gray))
                         HStack {
                             Image(systemName: CHECKMARK)
-                                .font(.system(size: 10))
+                                .font(.caption)
                             Text("Contains a digit [0-9]")
-                                .font(.system(size: 12))
+                                .font(.caption)
                         }
                         .foregroundColor(Utilities.containsDigit(self.password) ? Color.green : Color(UIColor.gray))
                     }
