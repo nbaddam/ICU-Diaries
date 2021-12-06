@@ -108,30 +108,22 @@ struct SignUpView: View {
                                 self.showingActionSheet = true
                             }
                     }
-                    HStack {
-                        Text("Upload a Profile Picture")
-                            .onTapGesture(perform: {
-                                self.showingActionSheet = true
-                            })
-                            .actionSheet(isPresented: $showingActionSheet) {
-                                ActionSheet(title: Text(""), buttons: [
-                                    .default(Text("Choose A Photo")){
-                                        self.sourceType = .savedPhotosAlbum
-                                        self.showingImagePicker = true
-                                    },
-                                    .default(Text("Take A Photo")){
-                                        self.sourceType = .camera
-                                        self.showingImagePicker = true
-                
-                                    }, .cancel()
-                                    ])
-                            }
-                        Text(ASTERICK_LABEL)
-                            .foregroundColor(Color.red)
-                            .font(.system(size: 20))
-                            .offset(x: -5)
-                    }//HStack
-                    
+                    Text("Upload a Profile Picture")
+                        .onTapGesture(perform: {
+                            self.showingActionSheet = true
+                        })
+                        .actionSheet(isPresented: $showingActionSheet) {
+                            ActionSheet(title: Text(""), buttons: [
+                                .default(Text("Choose A Photo")){
+                                    self.sourceType = .savedPhotosAlbum
+                                    self.showingImagePicker = true
+                                },
+                                .default(Text("Take A Photo")){
+                                    self.sourceType = .camera
+                                    self.showingImagePicker = true
+                                }, .cancel()
+                                ])
+                        }
                     HStack {
                         Text("I am a:")
                         Text(ASTERICK_LABEL)
