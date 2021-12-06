@@ -593,6 +593,13 @@ struct SignUpView: View {
                                 }
                                 if let metaImageUrl = url?.absoluteString {
                                     let fullname = cleanFirst + " " + cleanLast
+                                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                                    changeRequest?.photoURL = URL(string: metaImageUrl)
+                                    changeRequest?.commitChanges{ error in
+                                        if error != nil {
+                                            print("error storing profile picture")
+                                        }
+                                    }
                                     db.collection("users").document(result!.user.uid).setData([
                                         "name": fullname,
                                         "uid": result!.user.uid,
@@ -634,6 +641,13 @@ struct SignUpView: View {
                     }
                     else {
                         let fullname = cleanFirst + " " + cleanLast
+                        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                        changeRequest?.photoURL = URL(string: "")
+                        changeRequest?.commitChanges{ error in
+                            if error != nil {
+                                print("error storing profile picture")
+                            }
+                        }
                         db.collection("users").document(result!.user.uid).setData([
                             "name": fullname,
                             "uid": result!.user.uid,
