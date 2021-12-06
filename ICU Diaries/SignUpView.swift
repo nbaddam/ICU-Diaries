@@ -108,23 +108,29 @@ struct SignUpView: View {
                                 self.showingActionSheet = true
                             }
                     }
-                    Text("Upload a Profile Picture")
-                        .onTapGesture(perform: {
-                            self.showingActionSheet = true
-                        })
-                        .actionSheet(isPresented: $showingActionSheet) {
-                            ActionSheet(title: Text(""), buttons: [
-                                .default(Text("Choose A Photo")){
-                                    self.sourceType = .savedPhotosAlbum
-                                    self.showingImagePicker = true
-                                },
-                                .default(Text("Take A Photo")){
-                                    self.sourceType = .camera
-                                    self.showingImagePicker = true
+                    HStack {
+                        Text("Upload a Profile Picture")
+                            .onTapGesture(perform: {
+                                self.showingActionSheet = true
+                            })
+                            .actionSheet(isPresented: $showingActionSheet) {
+                                ActionSheet(title: Text(""), buttons: [
+                                    .default(Text("Choose A Photo")){
+                                        self.sourceType = .savedPhotosAlbum
+                                        self.showingImagePicker = true
+                                    },
+                                    .default(Text("Take A Photo")){
+                                        self.sourceType = .camera
+                                        self.showingImagePicker = true
                 
-                                }, .cancel()
-                                ])
-                        }
+                                    }, .cancel()
+                                    ])
+                            }
+                        Text(ASTERICK_LABEL)
+                            .foregroundColor(Color.red)
+                            .font(.system(size: 20))
+                            .offset(x: -5)
+                    }//HStack
                     
                     HStack {
                         Text("I am a:")
@@ -488,23 +494,6 @@ struct SignUpView: View {
             Spacer()
 
         }// Scroll View
-//        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage){
-//            ImagePicker(pickedImage: self.$pickedImage?, showImagePicker: self.$showingImagePicker, imageData: self.$imageData)
-//        }
-//        .actionSheet(isPresented: $showingActionSheet) {
-//            ActionSheet(title: Text(""), buttons: [
-//                .default(Text("Choose A Photo")){
-//                    self.sourceType = .photoLibrary
-//                    self.showingImagePicker = true
-//                },
-//                .default(Text("Take A Photo")){
-//                    self.sourceType = .camera
-//                    self.showingImagePicker = true
-//
-//                }, .cancel()
-//                ])
-//        }
-
     } // View
     func ValidateFields() -> String? {
         if self.firstName.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
@@ -669,33 +658,6 @@ struct SignUpView: View {
                             else {
                                 print(email)
                                 print("doc written succesfully")
-//                                var actionCodeSettings =  ActionCodeSettings.init()
-//                                actionCodeSettings.handleCodeInApp = true
-//                                actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-//                                let user = Auth.auth().currentUser
-//                                user?.sendEmailVerification(with: actionCodeSettings) { error in
-//                                    if error != nil {
-//                                        print(error?.localizedDescription)
-//                                        print(error.debugDescription)
-//                                        print(Auth.auth().currentUser?.email)
-//
-//                                        db.collection("users").document(result!.user.uid).delete()
-//                                        Auth.auth().currentUser?.delete { (error) in
-//                                            if error == nil {
-//                                                print("user and doc deleted because email was not real")
-//                                                self.isEmailValid = false
-//                                                isFormValid = false
-//                                            }
-//                                        }
-//                                      // Error occurred. Inspect error.code and handle error.
-//                                      return
-//                                    }
-//                                    else {
-//                                        print("sending email verification")
-//                                        isFormValid = true
-//                                    }
-//                                }
-                                
                                 Auth.auth().currentUser?.sendEmailVerification { (error) in
                                     if error == nil {
                                         print("sending email verification")
