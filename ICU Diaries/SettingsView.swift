@@ -54,6 +54,11 @@ struct SettingsView: View {
             if(isPatient == true){
                 HStack {
                     Text("Patient Code: " + patient_code)
+                        .alert(isPresented: $copiedToClip) {
+                            Alert(
+                                title: Text("Code Copied to Clipboard!")
+                            )
+                        }
                     Button(action: {
                         UIPasteboard.general.string = self.patient_code
                         print("Copied to clipboard")
@@ -75,6 +80,8 @@ struct SettingsView: View {
                             }
                         }
                     )
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
                     .padding(12)
                     .textFieldStyle(PlainTextFieldStyle())
                     .frame(maxWidth: (UIScreen.screenWidth - 50))
@@ -140,19 +147,14 @@ struct SettingsView: View {
                         }//else
                     }//getDocuments
                 }//onTap
+                .alert(isPresented: $presentAlert) {
+                     Alert(
+                         title: Text("Patient Code Assigned!")
+                     )
+                 }
             }//if is family
             Spacer()
         }//Vstack
-        .alert(isPresented: $presentAlert) {
-             Alert(
-                 title: Text("Patient Code Assigned!")
-             )
-         }
-        .alert(isPresented: $copiedToClip) {
-            Alert(
-                title: Text("Code Copied to Clipboard!")
-            )
-        }
     }// Body View
 }//SettingsView
 /*
