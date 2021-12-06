@@ -31,6 +31,7 @@ struct SettingsView: View {
     @State var imageUrl = ""
     @State var displayUrl = Auth.auth().currentUser?.photoURL?.absoluteString
     @State var changedPic: Bool = false
+    @Binding var isPresented: Bool
     
     func loadImage() {
         guard let inputImage = pickedImage else {return}
@@ -101,9 +102,9 @@ struct SettingsView: View {
                 .font(.largeTitle)
                 .fontWeight(.semibold)
                 .padding(.bottom, 20)
-            NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), tag: true, selection: $SignOutSuccess) {
-                EmptyView()
-            }
+//            NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), tag: true, selection: $SignOutSuccess) {
+//                EmptyView()
+//            }
             Text("Sign Out")
                 .navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)
@@ -116,7 +117,8 @@ struct SettingsView: View {
                 .onTapGesture {
                     do {
                         try Auth.auth().signOut()
-                        SignOutSuccess = true;
+//                        SignOutSuccess = true
+                        isPresented = false
                     }
                     catch {
                         print("didnt work try again")

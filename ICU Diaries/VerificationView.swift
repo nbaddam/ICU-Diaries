@@ -13,12 +13,16 @@ import FirebaseFirestore
 
 struct VerificationView: View {
     var userEmail: String
-    @State private var isVerified: Bool? = false
+    @State private var isVerified: Bool = false
     @State private var patient_code = ""
     @State private var isPatient: Bool = false
     @State private var isFamily: Bool = false
     @State private var isDoctor: Bool = false
     @State private var sentAgain: Bool = false
+    @Binding var isPresented1: Bool
+    @Binding var isPresented2: Bool
+    @Binding var isPresented3: Bool
+
     var body: some View {
         VStack(spacing: 20){
             VerificationText(email: self.userEmail)
@@ -83,7 +87,10 @@ struct VerificationView: View {
                                                     self.isDoctor = true
                                                 }
                                             }
-                                            self.isVerified = true;
+                                            self.isVerified = true
+//                                            self.isPresented1 = false
+//                                            self.isPresented2 = false
+//                                            self.isPresented3 = false
                                         }
                                     
                                     }
@@ -103,7 +110,7 @@ struct VerificationView: View {
             NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
                 Text("Go Back to Login")
             }
-            NavigationLink(destination: MainView(isPatient: self.isPatient, patient_code: self.patient_code, isFamily: self.isFamily, isDoctor: self.isDoctor).navigationBarBackButtonHidden(true), tag: true, selection: $isVerified) {
+            NavigationLink(destination: MainView(isPatient: self.isPatient, patient_code: self.patient_code, isFamily: self.isFamily, isDoctor: self.isDoctor, isPresented: $isPresented1).navigationBarBackButtonHidden(true), isActive: $isVerified) {
                 EmptyView()
             }
 
