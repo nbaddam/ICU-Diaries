@@ -50,10 +50,14 @@ class PostViewModel: ObservableObject {
                                 if let document = document {
                                     let fn = document.get("firstName") as? String ?? ""
                                     let ln = document.get("lastName") as? String ?? ""
+                                    let type = document.get("userType") as? String ?? ""
                                     let profileImageName = document.get("profileImageUrl") as? String ?? ""
                                     
                                     let post = Post(id: id, userName: fn + " " + ln, dateCreated: date, text: message, profileImageName: profileImageName, imageName: imageName, videoName: videoName)
-                                    self.posts.append(post)
+                                    //if user is family
+                                    if type == "friends and family"{
+                                        self.posts.append(post)
+                                    }
                                     
                                 } else {
                                     print("Document does not exist")
