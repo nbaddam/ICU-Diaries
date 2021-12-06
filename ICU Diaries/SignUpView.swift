@@ -468,7 +468,7 @@ struct SignUpView: View {
                 }
                 
     
-                NavigationLink(destination: AccountCreatedView().navigationBarBackButtonHidden(true), tag: true, selection: $isFormValid) {
+                NavigationLink(destination: AccountCreatedView(userEmail: self.email.trimmingCharacters(in: .whitespacesAndNewlines)).navigationBarBackButtonHidden(true), tag: true, selection: $isFormValid) {
                     EmptyView()
                 }
                 Text(SIGN_UP_LABEL)
