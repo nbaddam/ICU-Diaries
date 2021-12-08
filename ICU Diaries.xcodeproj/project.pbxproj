@@ -37,6 +37,9 @@
 		AF4447AA2742C33A0046754E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4447A92742C33A0046754E /* SearchBar.swift */; };
 		AF4447AC2742C33E0046754E /* DoctorUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4447AB2742C33E0046754E /* DoctorUploadView.swift */; };
 		AF4447AE2742C40C0046754E /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4447AD2742C40C0046754E /* SearchService.swift */; };
+		AFEBBA48275E844900346EDD /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEBBA47275E844900346EDD /* MessageViewModel.swift */; };
+		AFEBBA4A275E848600346EDD /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEBBA49275E848600346EDD /* MessageView.swift */; };
+		AFEBBA4C27601D5C00346EDD /* MessageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEBBA4B27601D5C00346EDD /* MessageDetailView.swift */; };
 		B30904462710B3460001A576 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30904452710B3460001A576 /* LoginView.swift */; };
 		B3ADAF12273C59C0009B8A24 /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ADAF11273C59C0009B8A24 /* VideoPicker.swift */; };
 		B3B1230D27305E0A00076A21 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1230C27305E0A00076A21 /* ResetPasswordView.swift */; };
@@ -106,6 +109,9 @@
 		AF4447AB2742C33E0046754E /* DoctorUploadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorUploadView.swift; sourceTree = "<group>"; };
 		AF4447AD2742C40C0046754E /* SearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		AF6FD3FB824C317D60D2C2C7 /* Pods_ICU_DiariesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ICU_DiariesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFEBBA47275E844900346EDD /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		AFEBBA49275E848600346EDD /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		AFEBBA4B27601D5C00346EDD /* MessageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailView.swift; sourceTree = "<group>"; };
 		B30904452710B3460001A576 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B3ADAF11273C59C0009B8A24 /* VideoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
 		B3B1230C27305E0A00076A21 /* ResetPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -213,10 +219,13 @@
 				B3BFD4422719DF8E00793D45 /* MainView.swift */,
 				AF4447A72742C3350046754E /* PatientProfiles.swift */,
 				AF44479A27417E080046754E /* PostView.swift */,
+				AFEBBA49275E848600346EDD /* MessageView.swift */,
+				AFEBBA4B27601D5C00346EDD /* MessageDetailView.swift */,
 				AF4447AB2742C33E0046754E /* DoctorUploadView.swift */,
 				AF4447A92742C33A0046754E /* SearchBar.swift */,
 				2C0395C52708D8EB00680E12 /* Timeline.swift */,
 				AF44479E2741BAA80046754E /* PostViewModel.swift */,
+				AFEBBA47275E844900346EDD /* MessageViewModel.swift */,
 				B3BFD4442719DFB500793D45 /* FilterView.swift */,
 				AF232EE927076C9100302D47 /* Assets.xcassets */,
 				AF232EEE27076C9100302D47 /* Info.plist */,
@@ -541,10 +550,13 @@
 				B3BFD4432719DF8E00793D45 /* MainView.swift in Sources */,
 				0EB6007C2756AEF600A0E73A /* AccountCreatedView.swift in Sources */,
 				B3BFD4412719DF8700793D45 /* SettingsView.swift in Sources */,
+				AFEBBA4C27601D5C00346EDD /* MessageDetailView.swift in Sources */,
 				B3B1230F2730607D00076A21 /* AccessCodeGenerator.swift in Sources */,
 				B3BD4A9A273B1D64005527B6 /* StorageService.swift in Sources */,
+				AFEBBA48275E844900346EDD /* MessageViewModel.swift in Sources */,
 				2C0395C62708D8EB00680E12 /* Timeline.swift in Sources */,
 				AF232EE827076C9000302D47 /* ContentView.swift in Sources */,
+				AFEBBA4A275E848600346EDD /* MessageView.swift in Sources */,
 				AF44479F2741BAA80046754E /* PostViewModel.swift in Sources */,
 				B3BD4A9F273B2823005527B6 /* Extensions.swift in Sources */,
 				B3B9F51F27387F1700064B9F /* ImagePicker.swift in Sources */,

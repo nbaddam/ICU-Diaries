@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DoctorMessageView: View {
-    @ObservedObject private var viewModel = PostViewModel()
+    @ObservedObject private var viewModel = MessageViewModel()
 
      var body: some View {
          VStack {
@@ -18,24 +18,25 @@ struct DoctorMessageView: View {
              Spacer()
              GeometryReader { geometry in
                  List {
-                     ForEach(viewModel.posts, id: \.id) {(post) in
-                         if !post.imageName.isEmpty {
-                             PostView(hasImage: true, hasVideo: false, hasAudio: false, post: post, screenWidth: geometry.size.width)
-                         }
-                         else if !post.videoName.isEmpty {
-                             PostView(hasImage: false, hasVideo: true, hasAudio: false, post: post, screenWidth: geometry.size.width)
-                         }
-                         else {
-                             PostView(hasImage: false, hasVideo: false, hasAudio: false, post: post, screenWidth: geometry.size.width)
-                         }
+                     ForEach(viewModel.messages, id: \.id) {(message) in
+                         NavigationLink {
+                             if !message.imageName.isEmpty {
+                                 MessageDetailView(hasImage: true, hasVideo: false, hasAudio: false, message: message, screenWidth: geometry.size.width)
+                             }
+                             else if !message.videoName.isEmpty {
+                                 MessageDetailView(hasImage: false, hasVideo: true, hasAudio: false, message: message, screenWidth: geometry.size.width)
+                             }
+                             else {
+                                 MessageDetailView(hasImage: false, hasVideo: false, hasAudio: false, message: message, screenWidth: geometry.size.width)
+                             }
+                            } label: {
+                                MessageView(message: message, screenWidth: geometry.size.width)
+                            }
                      }
                  }.onAppear() {
-                     self.viewModel.posts.removeAll()
+                     self.viewModel.messages.removeAll()
                      self.viewModel.getData()
                  }
-             }
-             NavigationLink(destination: FilterView().navigationBarBackButtonHidden(false)) {
-                 Text("Filter")
              }
          }
      }

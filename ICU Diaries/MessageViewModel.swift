@@ -1,8 +1,8 @@
 //
-//  PostsViewModel.swift
+//  MessageViewModel.swift
 //  ICU Diaries
 //
-//  Created by Nitya Baddam on 11/14/21.
+//  Created by Nitya Baddam on 12/06/21.
 //
 
 import Foundation
@@ -10,12 +10,16 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-class PostViewModel: ObservableObject {
-    @Published var posts = [Post]()
+class MessageViewModel: ObservableObject {
+    @Published var messages = [Message]()
     private var db = Firestore.firestore()
+    
+    func sortData() {
+        messages.sorted(by: { $0.time > $1.fileID })
+    }
    
     func getData() {
-        posts.removeAll()
+        messages.removeAll()
         let doc = Auth.auth().currentUser!.uid
         let docRef = db.collection("users").document(doc)
     
@@ -51,15 +55,15 @@ class PostViewModel: ObservableObject {
                                     
                                     let type = document.get("userType") as? String ?? ""
                                     
-                                    //only continue if user is family
-                                    if type == "friends and family" {
+                                    //only continue if user is a clinician
+                                    if type == "clinician" {
                                         let name = document.get("name") as? String ?? "username"
-                                        
+                                          
                                         let profileImageName = document.get("profileImageUrl") as? String ?? ""
                                         
-                                        let post = Post(id: id, userName: name, dateCreated: date, text: message, profileImageName: profileImageName, imageName: imageName, videoName: videoName)
+                                        let message = Message(id: id, userName: name, dateCreated: date, text: message, profileImageName: profileImageName, imageName: imageName, videoName: videoName)
                                         
-                                        self.posts.append(post)
+                                        self.messages.append(message)
                                     }
                                     
                                 } else {
