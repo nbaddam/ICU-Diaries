@@ -7,6 +7,8 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
+import URLImage
 
 struct SettingsView: View {
     @State private var SignOutSuccess: Bool? = false
@@ -20,6 +22,79 @@ struct SettingsView: View {
     @State var isFamily: Bool
     @State var presentAlert: Bool = false
     @State var copiedToClip: Bool = false
+    @State var showingActionSheet = false
+    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State var showingImagePicker = false
+    @State var profileImage: Image? = nil
+    @State var pickedImage: Image? = nil
+    @State var imageData: Data = Data()
+    @State var imageUrl = ""
+    @State var displayUrl = Auth.auth().currentUser?.photoURL?.absoluteString
+    @State var changedPic: Bool = false
+    @Binding var isPresented: Bool
+    
+    func loadImage() {
+        guard let inputImage = pickedImage else {return}
+        print("assigning profile pic")
+        profileImage = inputImage
+        let user = Auth.auth().currentUser
+        let storageProfileImageRef = StorageService.storageProfile.child(user!.uid)
+        storageProfileImageRef.putFile(from: URL(string: imageUrl)!, metadata: StorageMetadata()) {
+            (StorageMetadata, error) in
+            print("inside storing pic")
+            if error != nil {
+                print("error storing pic")
+                print(error!.localizedDescription)
+                return
+            }
+            
+            storageProfileImageRef.downloadURL(completion: {
+                (url, error) in
+                if (error != nil) {
+                    print("error downloading url")
+                    return
+                }
+                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                changeRequest?.photoURL = url
+                changeRequest?.commitChanges{ error in
+                    if error != nil {
+                        print("error storing profile picture")
+                    }
+                    let db = Firestore.firestore();
+                    db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
+                        "profileImageUrl": url?.absoluteString
+                    ]) { error in
+                        if error != nil {
+                            print("error updating profile picture URL in database")
+                        }
+                        displayUrl = url?.absoluteString
+                        changedPic = true
+                        Auth.auth().currentUser?.reload(completion: { error in
+                            if error != nil {
+                                print("error reloading user")
+                            }
+                        })
+                    }
+                }
+            })
+        }
+//        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+//        changeRequest?.photoURL = URL(string: imageUrl)
+//        changeRequest?.commitChanges{ error in
+//            if error != nil {
+//                print("error storing profile picture")
+//            }
+//        }
+//        Auth.auth().currentUser?.reload(completion: { error in
+//            if error != nil {
+//                print("error reloading user")
+//            }
+//        })
+//        let db = Firestore.firestore();
+//        db.collection("users").document(Auth.auth().currentUser!.uid).updateData([
+//            "profileImageUrl": imageUrl
+//        ])
+    }
     
     var body: some View {
         VStack {
@@ -27,9 +102,9 @@ struct SettingsView: View {
                 .font(.largeTitle)
                 .fontWeight(.semibold)
                 .padding(.bottom, 20)
-            NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), tag: true, selection: $SignOutSuccess) {
-                EmptyView()
-            }
+//            NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), tag: true, selection: $SignOutSuccess) {
+//                EmptyView()
+//            }
             Text("Sign Out")
                 .navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)
@@ -42,12 +117,77 @@ struct SettingsView: View {
                 .onTapGesture {
                     do {
                         try Auth.auth().signOut()
-                        SignOutSuccess = true;
+//                        SignOutSuccess = true
+                        isPresented = false
                     }
                     catch {
                         print("didnt work try again")
                     }
                 }//onTap
+            if (displayUrl != nil && !changedPic) {
+                URLImage(URL(string: displayUrl!)!) { image in
+                    image
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .padding(.top, 20)
+                        .onTapGesture {
+                            print("changing from urlimage")
+                            print("changedPic status: ", changedPic)
+                            self.showingActionSheet = true
+                        }
+                }
+            }
+            else if (profileImage != nil) {
+                profileImage!.resizable()
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .padding(.top, 20)
+                    .onTapGesture {
+                        print("changing from profileImage")
+                        print("changedPic status: ", changedPic)
+                        self.showingActionSheet = true
+                    }
+            }
+//            if let imageUrl = Auth.auth().currentUser?.photoURL?.absoluteString, imageUrl != ""  {
+//                URLImage(URL(string: imageUrl)!) { image in
+//                    image
+//                        .resizable()
+//                        .frame(width: 100, height: 100)
+//                        .clipShape(Circle())
+//                        .padding(.top, 20)
+//                        .onTapGesture {
+//                            self.showingActionSheet = true
+//                        }
+//                }
+//            }
+            else {
+                Image(systemName: "person.circle.fill").resizable()
+                    .clipShape(Circle())
+                    .frame(width: 100, height: 100)
+                    .padding(.top, 20)
+                    .onTapGesture {
+                        print("changing from no image")
+                        print("changedPic status: ", changedPic)
+                        self.showingActionSheet = true
+                    }
+            }
+            Text("Change your Profile Picture")
+                .onTapGesture(perform: {
+                    self.showingActionSheet = true
+                })
+                .actionSheet(isPresented: $showingActionSheet) {
+                    ActionSheet(title: Text(""), buttons: [
+                        .default(Text("Choose A Photo")){
+                            self.sourceType = .savedPhotosAlbum
+                            self.showingImagePicker = true
+                        },
+                        .default(Text("Take A Photo")){
+                            self.sourceType = .camera
+                            self.showingImagePicker = true
+                        }, .cancel()
+                        ])
+                }
             Spacer()
             Spacer()
             
@@ -155,6 +295,9 @@ struct SettingsView: View {
             }//if is family
             Spacer()
         }//Vstack
+        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+            ImagePicker(image: self.$pickedImage, imageData: self.$imageData, showImagePicker: self.$showingImagePicker, showActionSheetImage: self.$showingActionSheet, imageUrl: self.$imageUrl, sourceType: self.$sourceType)
+        }
     }// Body View
 }//SettingsView
 /*

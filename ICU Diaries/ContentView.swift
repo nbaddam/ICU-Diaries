@@ -15,7 +15,8 @@ struct ContentView: View {
     @State private var username = ""
     @State private var password = ""
     @State private var isEmailValid = true
-    @State private var isPresented: Bool? = false
+    @State var isPresented: Bool = false
+    @State var isPresentedSignUp: Bool = false
     @State private var isSecured: Bool = true // NEW
     @State private var inEmailBox: Bool = false
     @State private var inPasswordBox: Bool = false
@@ -125,7 +126,7 @@ struct ContentView: View {
                     }
                 }
                 
-                NavigationLink(destination: MainView(isPatient: isPatient, patient_code: patient_code, isFamily: isFamily, isDoctor: isDoctor).navigationBarBackButtonHidden(true), tag: true, selection: $isPresented) {
+                NavigationLink(destination: MainView(isPatient: isPatient, patient_code: patient_code, isFamily: isFamily, isDoctor: isDoctor, isPresented: $isPresented).navigationBarBackButtonHidden(true), isActive: $isPresented) {
                     EmptyView()
                 }
                 Text(LOGIN_LABEL)
@@ -197,7 +198,10 @@ struct ContentView: View {
                 
                 HStack {
                     Text("Don't have an account yet?")
-                    NavigationLink(destination: SignUpView()) {
+                        .onTapGesture {
+                            isPresentedSignUp = true
+                        }
+                    NavigationLink(destination: SignUpView(isOldPresented: $isPresentedSignUp), isActive: $isPresentedSignUp) {
                         Text(SIGN_UP_LABEL)
                     }
                 }

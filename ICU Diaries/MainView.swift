@@ -16,6 +16,7 @@ struct MainView: View {
     @State var patient_code: String
     @State var isFamily: Bool
     @State var isDoctor: Bool
+    @Binding var isPresented: Bool
     
     var body: some View {
         if(isPatient == true){
@@ -30,7 +31,7 @@ struct MainView: View {
                         Label("Timeline", systemImage: "house")
                     }
                     .tag(1)
-                SettingsView(isPatient: true, patient_code: patient_code, isFamily: false)
+                SettingsView(isPatient: true, patient_code: patient_code, isFamily: false, isPresented: $isPresented)
                     .tabItem {
                         Label("Settings", systemImage: "gear")
                     }
@@ -39,7 +40,7 @@ struct MainView: View {
         }//if
         else if(isFamily == true){
             TabView(selection: $selection) {
-                SettingsView(isPatient: false, patient_code: patient_code, isFamily: true)
+                SettingsView(isPatient: false, patient_code: patient_code, isFamily: true, isPresented: $isPresented)
                     .tabItem {
                         Label("Settings", systemImage: "gear")
                     }
@@ -58,7 +59,7 @@ struct MainView: View {
 //                        Label("Inbox", systemImage: "envelope")
 //                    }
 //                    .tag(0)
-                SettingsView(isPatient: false, patient_code: patient_code, isFamily: false)
+                SettingsView(isPatient: false, patient_code: patient_code, isFamily: false, isPresented: $isPresented)
                     .tabItem {
                         Label("Settings", systemImage: "gear")
                     }

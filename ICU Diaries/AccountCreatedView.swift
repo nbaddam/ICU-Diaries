@@ -10,8 +10,11 @@ import SwiftUI
 
 struct AccountCreatedView : View {
     var userEmail: String
-    @State var isOkayClicked: Bool? = false
-    
+    @State var isOkayClicked: Bool = false
+    @Binding var isPresented1: Bool
+    @Binding var isPresented2: Bool
+
+
     var body : some View {
         VStack(alignment: .center, spacing: 20) {
             Image(systemName: "checkmark.circle")
@@ -27,7 +30,7 @@ struct AccountCreatedView : View {
                 .font(.system(size: 24))
                 .fontWeight(.semibold)
             
-            NavigationLink(destination: VerificationView(userEmail: userEmail).navigationBarBackButtonHidden(true), tag: true, selection: $isOkayClicked) {
+            NavigationLink(destination: VerificationView(userEmail: userEmail, isPresented1: $isPresented1, isPresented2: $isPresented2, isPresented3: $isOkayClicked).navigationBarBackButtonHidden(true), isActive: $isOkayClicked) {
                 EmptyView()
             }
             Text("Continue")

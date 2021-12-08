@@ -27,7 +27,7 @@ struct SignUpView: View {
     @State var password = ""
     @State var passwordConfirm = ""
     @State var isEmailValid = true
-    @State var isFormValid: Bool? = false
+    @State var isFormValid: Bool = false
     @State var selectedUser = UserType.patient
     // cursor location
     @State var inEmail: Bool = false
@@ -54,7 +54,8 @@ struct SignUpView: View {
     @State var imageUrl = ""
     @State var processingRequest: Bool = false
     @State var failedRequest: Bool = false
-    
+    @Binding var isOldPresented: Bool
+
     func loadImage() {
         guard let inputImage = pickedImage else {return}
         print("assigning profile pic")
@@ -460,7 +461,7 @@ struct SignUpView: View {
                 }
                 
     
-                NavigationLink(destination: AccountCreatedView(userEmail: self.email.trimmingCharacters(in: .whitespacesAndNewlines)).navigationBarBackButtonHidden(true), tag: true, selection: $isFormValid) {
+                NavigationLink(destination: AccountCreatedView(userEmail: self.email.trimmingCharacters(in: .whitespacesAndNewlines), isPresented1: $isOldPresented, isPresented2: $isFormValid).navigationBarBackButtonHidden(true), isActive: $isFormValid) {
                     EmptyView()
                 }
                 Text(SIGN_UP_LABEL)
@@ -593,6 +594,13 @@ struct SignUpView: View {
                                 }
                                 if let metaImageUrl = url?.absoluteString {
                                     let fullname = cleanFirst + " " + cleanLast
+                                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                                    changeRequest?.photoURL = URL(string: metaImageUrl)
+                                    changeRequest?.commitChanges{ error in
+                                        if error != nil {
+                                            print("error storing profile picture")
+                                        }
+                                    }
                                     db.collection("users").document(result!.user.uid).setData([
                                         "name": fullname,
                                         "uid": result!.user.uid,
@@ -634,6 +642,13 @@ struct SignUpView: View {
                     }
                     else {
                         let fullname = cleanFirst + " " + cleanLast
+                        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                        changeRequest?.photoURL = URL(string: "")
+                        changeRequest?.commitChanges{ error in
+                            if error != nil {
+                                print("error storing profile picture")
+                            }
+                        }
                         db.collection("users").document(result!.user.uid).setData([
                             "name": fullname,
                             "uid": result!.user.uid,
@@ -685,11 +700,11 @@ struct SignUpView: View {
     }
 }
 
-struct SignUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUpView()
-    }
-}
+//struct SignUpView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SignUpView()
+//    }
+//}
 
 func CheckUniqueCode(code: String, _ completion: @escaping (_ data: Bool) -> Void ) {
     let dbRef = Firestore.firestore().collection("codes")
