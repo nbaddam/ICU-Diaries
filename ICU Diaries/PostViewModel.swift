@@ -52,7 +52,7 @@ class PostViewModel: ObservableObject {
                                     let type = document.get("userType") as? String ?? ""
                                     
                                     //only continue if user is family
-                                    if type == "friends and family" {
+                                    if type == "friendsandfamily" {
                                         let name = document.get("name") as? String ?? "username"
                                         
                                         let profileImageName = document.get("profileImageUrl") as? String ?? ""
