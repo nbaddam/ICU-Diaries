@@ -13,10 +13,6 @@ import FirebaseFirestore
 class MessageViewModel: ObservableObject {
     @Published var messages = [Message]()
     private var db = Firestore.firestore()
-    
-    func sortData() {
-        messages.sorted(by: { $0.time > $1.fileID })
-    }
    
     func getData() {
         messages.removeAll()

@@ -81,7 +81,7 @@ struct PostView: View {
                 }
                 Text(post.text)
                     .lineLimit(nil)
-                    .font(.system(size: 15))
+                    .font(.body)
                     .padding(.leading, 16)
                     .padding(.trailing, 16)
                     .padding(.bottom, 16)
@@ -95,6 +95,7 @@ struct PostView: View {
                     }
                     Spacer()
                     Text(post.dateCreated)
+                        .font(.footnote)
                         .foregroundColor(.gray)
                 }.padding(EdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16))
             }.listRowInsets(EdgeInsets())
