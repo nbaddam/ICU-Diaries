@@ -100,17 +100,9 @@ struct UploadView: View {
                 }
                 
                 HStack(spacing: 5) {
-                        Image(systemName: "photo.fill").resizable()
+                        Image(systemName: "square.and.arrow.down.on.square").resizable()
                             .frame(width: 40, height: 40)
                             .onTapGesture(perform: {
-                                self.showingActionSheet = true
-                                typing = false
-                            })
-                        Image(systemName: "video.square").resizable()
-                            .frame(width: 40, height: 40)
-                            .onTapGesture(perform: {
-                                print("insert video clicked")
-                                print(self.showingActionSheetVideo)
                                 self.showingActionSheet = true
                                 typing = false
                             })

@@ -89,53 +89,14 @@ struct DoctorUploadView: View {
         
         
         VStack{
-//            ScrollView {
-//                VStack {
-//                    SearchBar(searchUsers: self.$value).padding()
-//                        .onChange(of: value, perform: {
-//                            new in
-//                            searchPatients()
-//                        })
-//                    if !isLoading {
-//                        ForEach(patients, id: \.id) {
-//                            (patient) in
-//
-//                            HStack {
-//                                URLImage(URL(string: patient.profileImageUrl) ?? URL(string: defaultProfile)!) { image in
-//                                    image
-//                                        .resizable()
-//                                        .scaledToFill()
-//                                        .clipShape(Circle())
-//                                        .frame(width: 50, height: 50)
-//                                }
-//                                Text(patient.name)
-//                                    .onTapGesture {
-//                                        self.patient = patient
-//                                        //DoctorUploadView(patient: self.selectedPatient)
-//                                        //presentationMode.wrappedValue.dismiss()
-//                                    }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            Spacer()
             ZStack {
             Button("Search for a Patient") {
-//                .onTapGesture(perform: {
-//                PatientProfile(selectedPatient: self.$patient)
                 self.showingPatientPicker = true
             }
                 NavigationLink(destination: PatientProfile(selectedPatient: self.$patient, showingPatientPicker: self.$showingPatientPicker), isActive: self.$showingPatientPicker) {
                     EmptyView()
                 }.navigationBarBackButtonHidden(true)
             }
-            
-            
-//
-//            fullScreenCover(isPresented: $presentSearch, onDismiss: didDismiss) {
-//                PatientProfile()
-//            }
             
             Text("Create Message")
                 .font(.system(size: 24))
@@ -174,17 +135,9 @@ struct DoctorUploadView: View {
                 }
                 
                 HStack(spacing: 5) {
-                        Image(systemName: "photo.fill").resizable()
+                        Image(systemName: "square.and.arrow.down.on.square").resizable()
                             .frame(width: 40, height: 40)
                             .onTapGesture(perform: {
-                                self.showingActionSheet = true
-                                typing = false
-                            })
-                        Image(systemName: "video.square").resizable()
-                            .frame(width: 40, height: 40)
-                            .onTapGesture(perform: {
-                                print("insert video clicked")
-                                print(self.showingActionSheetVideo)
                                 self.showingActionSheet = true
                                 typing = false
                             })
