@@ -25,7 +25,7 @@ struct MessageView: View {
     let screenWidth: CGFloat
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack(spacing: 8) {
                 if let url = URL(string: message.profileImageName) {
                     URLImage(url) { image in
